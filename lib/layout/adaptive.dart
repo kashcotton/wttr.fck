@@ -9,10 +9,10 @@ enum WindowClass { compact, medium, expanded, large }
 WindowClass windowClassOf(double width) => width < 600
     ? WindowClass.compact
     : width < 840
-        ? WindowClass.medium
-        : width < 1200
-            ? WindowClass.expanded
-            : WindowClass.large;
+    ? WindowClass.medium
+    : width < 1200
+    ? WindowClass.expanded
+    : WindowClass.large;
 
 /// Foldable awareness. A "book" fold splits the screen left/right; a
 /// "tabletop" fold (half-open, horizontal hinge) splits it top/bottom.
@@ -26,7 +26,8 @@ class Fold {
     final mq = MediaQuery.of(context);
     final size = mq.size;
     for (final f in mq.displayFeatures) {
-      if (f.type != DisplayFeatureType.hinge && f.type != DisplayFeatureType.fold) {
+      if (f.type != DisplayFeatureType.hinge &&
+          f.type != DisplayFeatureType.fold) {
         continue;
       }
       var b = f.bounds;
@@ -58,50 +59,49 @@ class TwoPane extends StatelessWidget {
     super.key,
     required this.start,
     required this.end,
+    required this.width,
+    required this.left,
     this.fold,
     this.gap = 16,
-    this.startFraction = 0.5,
   });
   final Widget start;
   final Widget end;
+
+  /// The width the panes get, and where they start on screen. Passed in
+  /// rather than measured with a LayoutBuilder: a LayoutBuilder here would
+  /// re-lay-out the whole page whenever any card animates.
+  final double width;
+  final double left;
   final Fold? fold;
   final double gap;
-  final double startFraction;
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, box) {
-      final f = fold;
-      if (f != null && f.vertical) {
-        // Panes are always horizontally centred on screen, so the fold's
-        // local position is its screen position minus the side margin.
-        final margin = (MediaQuery.sizeOf(context).width - box.maxWidth) / 2;
-        final left = (f.bounds.left - margin).clamp(0.0, box.maxWidth);
-        final right = (f.bounds.right - margin).clamp(0.0, box.maxWidth);
-        final pad = gap / 2;
-        final startW = left - pad;
-        final endW = box.maxWidth - right - pad;
-        // Only follow the hinge if both sides are usable.
-        if (startW >= 280 && endW >= 280) {
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(width: startW, child: start),
-              SizedBox(width: (right - left) + gap),
-              Expanded(child: end),
-            ],
-          );
-        }
+    final f = fold;
+    if (f != null && f.vertical) {
+      final l = (f.bounds.left - left).clamp(0.0, width);
+      final r = (f.bounds.right - left).clamp(0.0, width);
+      final startW = l - gap / 2;
+      final endW = width - r - gap / 2;
+      // Only follow the hinge if both sides are usable.
+      if (startW >= 280 && endW >= 280) {
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(width: startW, child: start),
+            SizedBox(width: (r - l) + gap),
+            Expanded(child: end),
+          ],
+        );
       }
-      final w = (box.maxWidth - gap) * startFraction;
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(width: w, child: start),
-          SizedBox(width: gap),
-          Expanded(child: end),
-        ],
-      );
-    });
+    }
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(child: start),
+        SizedBox(width: gap),
+        Expanded(child: end),
+      ],
+    );
   }
 }

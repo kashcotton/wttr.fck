@@ -70,11 +70,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   }
 }
 
-void openSearch(BuildContext context) => Navigator.of(context)
-    .push(MaterialPageRoute(builder: (_) => const SearchScreen()));
+void openSearch(BuildContext context) =>
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => const SearchScreen()));
 
-void openSettings(BuildContext context) => Navigator.of(context)
-    .push(MaterialPageRoute(builder: (_) => const SettingsScreen()));
+void openSettings(BuildContext context) =>
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => const SettingsScreen()));
 
 class _TopBar extends StatelessWidget {
   const _TopBar({required this.state, this.showSettings = true});
@@ -108,17 +110,23 @@ class _TopBar extends StatelessWidget {
                         Icon(Icons.search_rounded, color: cs.onSurfaceVariant),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: Text('Search for a place',
-                              style: t.bodyLarge
-                                  ?.copyWith(color: cs.onSurfaceVariant)),
+                          child: Text(
+                            'Search for a place',
+                            style: t.bodyLarge?.copyWith(
+                              color: cs.onSurfaceVariant,
+                            ),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(right: 16),
                           child: state.state == LoadState.loading
                               ? ShapeLoader(size: 22, color: cs.primary)
-                              : Text('wttr.fck',
-                                  style:
-                                      t.labelLarge?.copyWith(color: cs.primary)),
+                              : Text(
+                                  'wttr.fck',
+                                  style: t.labelLarge?.copyWith(
+                                    color: cs.primary,
+                                  ),
+                                ),
                         ),
                       ],
                     ),
@@ -153,27 +161,36 @@ class _AdaptiveHome extends StatelessWidget {
     final e = s.engine!;
     const gap = SizedBox(height: 12);
 
+    // Every card paints into its own layer, so an animation in one card
+    // (a new roast, a morphing shape) never repaints the rest of the page.
+    Widget card(Widget w) => RepaintBoundary(child: w);
+
     final hero = <Widget>[
-      HeroBlock(forecast: f, state: s),
+      card(HeroBlock(forecast: f, state: s)),
       gap,
-      RoastCard(engine: e, state: s),
+      card(RoastCard(engine: e, state: s)),
     ];
     final primaryRest = <Widget>[
       gap,
-      VerdictRow(engine: e),
+      card(VerdictRow(engine: e)),
       gap,
-      HourlyCard(forecast: f, units: s.units, h24: s.h24, level: s.profanity),
+      card(
+        HourlyCard(forecast: f, units: s.units, h24: s.h24, level: s.profanity),
+      ),
       gap,
-      OutfitCard(engine: e),
+      card(OutfitCard(engine: e)),
     ];
     final secondary = <Widget>[
-      DailyCard(forecast: f, units: s.units),
-      if (s.showElection) ...[gap, ElectionCard(engine: e, seed: s.roastSeed)],
-      if (s.showPanel) ...[gap, PanelCard(engine: e, seed: s.roastSeed)],
+      card(DailyCard(forecast: f, units: s.units)),
+      if (s.showElection) ...[
+        gap,
+        card(ElectionCard(engine: e, seed: s.roastSeed)),
+      ],
+      if (s.showPanel) ...[gap, card(PanelCard(engine: e, seed: s.roastSeed))],
       gap,
-      DetailsGrid(engine: e, units: s.units, h24: s.h24),
+      card(DetailsGrid(engine: e, units: s.units, h24: s.h24)),
       gap,
-      CommunityCard(content: s.content),
+      card(CommunityCard(content: s.content)),
     ];
     final footer = <Widget>[
       const SizedBox(height: 16),
@@ -201,82 +218,92 @@ class _AdaptiveHome extends StatelessWidget {
           ),
         );
 
-    return LayoutBuilder(builder: (context, box) {
-      final fold = Fold.of(context);
-      final cls = windowClassOf(box.maxWidth);
-
-      // Tabletop: half-folded with a horizontal hinge. Weather on the top
-      // half like a little screen, everything else scrolls on the bottom.
-      if (fold != null && !fold.vertical && fold.halfOpen) {
-        final top = MediaQuery.paddingOf(context).top;
-        final topH = (fold.bounds.top - top).clamp(0.0, box.maxHeight);
-        return Column(
-          children: [
-            SizedBox(
-              height: topH,
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                child: Column(children: hero),
-              ),
+    // Sized from MediaQuery instead of a LayoutBuilder on purpose: with a
+    // LayoutBuilder at the root, every animating card would force the whole
+    // page to lay out again on every frame.
+    final mq = MediaQuery.of(context);
+    final box = BoxConstraints.tight(
+      Size(
+        mq.size.width - mq.padding.left - mq.padding.right,
+        mq.size.height - mq.padding.top,
+      ),
+    );
+    final fold = Fold.of(context);
+    final cls = windowClassOf(box.maxWidth);
+    // Tabletop: half-folded with a horizontal hinge. Weather on the top
+    // half like a little screen, everything else scrolls on the bottom.
+    if (fold != null && !fold.vertical && fold.halfOpen) {
+      final top = MediaQuery.paddingOf(context).top;
+      final topH = (fold.bounds.top - top).clamp(0.0, box.maxHeight);
+      return Column(
+        children: [
+          SizedBox(
+            height: topH,
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              child: Column(children: hero),
             ),
-            SizedBox(height: fold.bounds.height),
-            Expanded(
-              child: scroll([
-                _TopBar(state: s),
-                banner,
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(children: [...primaryRest, gap, ...secondary]),
-                ),
-                ...footer,
-              ]),
-            ),
-          ],
-        );
-      }
-
-      final twoPane = cls.index >= WindowClass.expanded.index ||
-          (fold != null && fold.vertical && box.maxWidth >= 600);
-
-      if (!twoPane) {
-        return scroll([
-          _TopBar(state: s),
-          banner,
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-            child: Column(children: [...hero, ...primaryRest, gap, ...secondary]),
           ),
-          ...footer,
-        ], maxWidth: cls == WindowClass.medium ? 720 : 640);
-      }
-
-      final panes = TwoPane(
-        fold: fold,
-        gap: 24,
-        start: Column(children: [...hero, ...primaryRest]),
-        end: Column(children: secondary),
+          SizedBox(height: fold.bounds.height),
+          Expanded(
+            child: scroll([
+              _TopBar(state: s),
+              banner,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(children: [...primaryRest, gap, ...secondary]),
+              ),
+              ...footer,
+            ]),
+          ),
+        ],
       );
+    }
 
-      final main = scroll([
-        _TopBar(state: s, showSettings: cls != WindowClass.large),
+    final twoPane =
+        cls.index >= WindowClass.expanded.index ||
+        (fold != null && fold.vertical && box.maxWidth >= 600);
+
+    if (!twoPane) {
+      return scroll([
+        _TopBar(state: s),
         banner,
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-          child: panes,
+          child: Column(children: [...hero, ...primaryRest, gap, ...secondary]),
         ),
         ...footer,
-      ]);
+      ], maxWidth: cls == WindowClass.medium ? 720 : 640);
+    }
 
-      if (cls == WindowClass.large && fold == null) {
-        return Row(
-          children: [
-            SizedBox(width: 300, child: _PlacesPane(state: s)),
-            Expanded(child: main),
-          ],
-        );
-      }
-      return main;
-    });
+    final large = cls == WindowClass.large && fold == null;
+    final contentW = box.maxWidth - (large ? 300 : 0);
+    final scrollW = contentW < 1400 ? contentW : 1400.0;
+    final panes = TwoPane(
+      fold: fold,
+      gap: 24,
+      width: scrollW - 32,
+      left: mq.padding.left + (large ? 300 : 0) + (contentW - scrollW) / 2 + 16,
+      start: Column(children: [...hero, ...primaryRest]),
+      end: Column(children: secondary),
+    );
+
+    final main = scroll([
+      _TopBar(state: s, showSettings: cls != WindowClass.large),
+      banner,
+      Padding(padding: const EdgeInsets.fromLTRB(16, 4, 16, 0), child: panes),
+      ...footer,
+    ]);
+
+    if (large) {
+      return Row(
+        children: [
+          SizedBox(width: 300, child: _PlacesPane(state: s)),
+          Expanded(child: main),
+        ],
+      );
+    }
+    return main;
   }
 }
 
@@ -298,30 +325,36 @@ class _PlacesPane extends StatelessWidget {
       required bool selected,
       required VoidCallback onTap,
       Widget? trailing,
-    }) =>
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-          child: Material(
-            color: selected ? cs.secondaryContainer : Colors.transparent,
-            shape: const StadiumBorder(),
-            clipBehavior: Clip.antiAlias,
-            child: ListTile(
-              leading: Icon(icon,
-                  color: selected ? cs.onSecondaryContainer : cs.onSurfaceVariant),
-              title: Text(title,
-                  style: t.labelLarge?.copyWith(
-                      color: selected ? cs.onSecondaryContainer : cs.onSurface)),
-              subtitle: subtitle == null || subtitle.isEmpty
-                  ? null
-                  : Text(subtitle,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: t.bodySmall),
-              trailing: trailing,
-              onTap: onTap,
+    }) => Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+      child: Material(
+        color: selected ? cs.secondaryContainer : Colors.transparent,
+        shape: const StadiumBorder(),
+        clipBehavior: Clip.antiAlias,
+        child: ListTile(
+          leading: Icon(
+            icon,
+            color: selected ? cs.onSecondaryContainer : cs.onSurfaceVariant,
+          ),
+          title: Text(
+            title,
+            style: t.labelLarge?.copyWith(
+              color: selected ? cs.onSecondaryContainer : cs.onSurface,
             ),
           ),
-        );
+          subtitle: subtitle == null || subtitle.isEmpty
+              ? null
+              : Text(
+                  subtitle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: t.bodySmall,
+                ),
+          trailing: trailing,
+          onTap: onTap,
+        ),
+      ),
+    );
 
     return Material(
       color: cs.surfaceContainerLow,
@@ -361,8 +394,10 @@ class _PlacesPane extends StatelessWidget {
             if (state.saved.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.fromLTRB(28, 16, 16, 8),
-                child: Text('Saved places',
-                    style: t.titleSmall?.copyWith(color: cs.onSurfaceVariant)),
+                child: Text(
+                  'Saved places',
+                  style: t.titleSmall?.copyWith(color: cs.onSurfaceVariant),
+                ),
               ),
             Expanded(
               child: ListView(
@@ -401,8 +436,10 @@ class _EmptyState extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
     final failed = state.state == LoadState.error;
     final lines = state.content.loading;
-    final line =
-        censor(lines[DateTime.now().second % lines.length], state.profanity);
+    final line = censor(
+      lines[DateTime.now().second % lines.length],
+      state.profanity,
+    );
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32),
@@ -414,9 +451,11 @@ class _EmptyState extends StatelessWidget {
               if (!failed) ...[
                 const ShapeLoader(size: 64),
                 const SizedBox(height: 28),
-                Text(line,
-                    style: t.bodyLarge?.copyWith(color: cs.onSurfaceVariant),
-                    textAlign: TextAlign.center),
+                Text(
+                  line,
+                  style: t.bodyLarge?.copyWith(color: cs.onSurfaceVariant),
+                  textAlign: TextAlign.center,
+                ),
               ] else ...[
                 SizedBox.square(
                   dimension: 96,
@@ -425,17 +464,25 @@ class _EmptyState extends StatelessWidget {
                       color: cs.errorContainer,
                       shape: MaterialShapeBorder(shape: MaterialShapes.puffy),
                     ),
-                    child: Icon(Icons.cloud_off_rounded,
-                        size: 40, color: cs.onErrorContainer),
+                    child: Icon(
+                      Icons.cloud_off_rounded,
+                      size: 40,
+                      color: cs.onErrorContainer,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
-                Text(censor('Well, shit.', state.profanity),
-                    style: t.headlineMedium, textAlign: TextAlign.center),
+                Text(
+                  censor('Well, shit.', state.profanity),
+                  style: t.headlineMedium,
+                  textAlign: TextAlign.center,
+                ),
                 const SizedBox(height: 8),
-                Text(state.error ?? 'Something broke.',
-                    style: t.bodyLarge?.copyWith(color: cs.onSurfaceVariant),
-                    textAlign: TextAlign.center),
+                Text(
+                  state.error ?? 'Something broke.',
+                  style: t.bodyLarge?.copyWith(color: cs.onSurfaceVariant),
+                  textAlign: TextAlign.center,
+                ),
                 const SizedBox(height: 24),
                 Wrap(
                   spacing: 8,

@@ -28,4 +28,4 @@ jobs:
       - name: All tests
         run: flutter test --exclude-tags screenshots
       - name: Web build smoke test
-        run: flutter build web --release
+        run: flutter build web --release --wasm

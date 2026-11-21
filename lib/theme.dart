@@ -65,7 +65,16 @@ TextTheme _textTheme(TextTheme t) => t.copyWith(
       labelSmall: flex(t.labelSmall, weight: 560),
     );
 
-ThemeData buildTheme(Color seed, Brightness b) {
+final _themeCache = <(Color, Brightness), ThemeData>{};
+
+/// Themes are cached per (sky colour, brightness). Returning the *same*
+/// ThemeData object when nothing changed matters: a new-but-equal theme can
+/// make MaterialApp run its 600ms theme animation and rebuild every widget
+/// on every frame, which is what made the web version lag.
+ThemeData buildTheme(Color seed, Brightness b) =>
+    _themeCache.putIfAbsent((seed, b), () => _buildTheme(seed, b));
+
+ThemeData _buildTheme(Color seed, Brightness b) {
   final scheme = ColorScheme.fromSeed(
     seedColor: seed,
     brightness: b,

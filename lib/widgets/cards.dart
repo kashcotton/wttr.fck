@@ -225,7 +225,7 @@ class HeroBlock extends StatelessWidget {
                 icon: iconFor(c.code, c.isDay),
                 iconColor: iconTint(c.code, c.isDay, cs),
                 fill: cs.surfaceContainerHigh,
-                spin: c.sky == Sky.clear && c.isDay,
+                twist: c.sky == Sky.clear && c.isDay,
               ),
             ],
           ),
