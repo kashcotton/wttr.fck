@@ -1,0 +1,48 @@
+{
+  "id": "uncle",
+  "name": "Conspiracy Uncle",
+  "description": "Has done his own research. Will not elaborate.",
+  "political": false,
+  "lines": {
+    "storm": [
+      {"head": "They're testing the weather machine again.", "sub": "Don't ask me who 'they' are. Just stay inside and unplug the router."}
+    ],
+    "snow": [
+      {"head": "Snow is just cold rain that's hiding something.", "sub": "Taste it. That's not water. That's cover-up."}
+    ],
+    "rain": [
+      {"head": "Big Umbrella did this.", "sub": "{pop}% chance of rain, right when umbrella stock goes up? Wake up."},
+      {"head": "Rain is the sky's way of saying it knows.", "sub": "It knows what you did. Bring a hood."}
+    ],
+    "drizzle": [
+      {"head": "That's not drizzle. That's surveillance mist.", "sub": "Every droplet is a tiny camera. Smile, I guess."}
+    ],
+    "fog": [
+      {"head": "Fog is just clouds that got too close.", "sub": "Ask yourself why. Then turn your headlights on."}
+    ],
+    "windy": [
+      {"head": "Birds aren't flying today. Interesting.", "sub": "Gusts to {gusts}. Because birds run on batteries and wind drains them. Look it up."}
+    ],
+    "scorching": [
+      {"head": "The sun is closer today. I measured.", "sub": "{temp}. Mainstream thermometers won't tell you the real number."}
+    ],
+    "hot": [
+      {"head": "{temp}? That's what they want you to think.", "sub": "It's hotter. Drink water anyway. Water is one of the good ones."}
+    ],
+    "freezing": [
+      {"head": "Global warming, huh? Then explain THIS.", "sub": "Feels like {feels}. (That's called weather. Uncle won't listen. Wear gloves.)"}
+    ],
+    "cold": [
+      {"head": "Cold front? More like cold FRONT ORGANIZATION.", "sub": "High of {high}. Wear a jacket. They can't track you through wool."}
+    ],
+    "nice": [
+      {"head": "Nice weather. Suspicious.", "sub": "Nothing is ever this nice for free. Go outside and keep your eyes open."}
+    ],
+    "meh": [
+      {"head": "Clouds are just sky curtains.", "sub": "What are they hiding up there? Nobody knows. {temp} down here."}
+    ],
+    "clearNight": [
+      {"head": "Count the stars. Now count again.", "sub": "Different number? Exactly. Go to bed, I'll keep watch."}
+    ]
+  }
+}

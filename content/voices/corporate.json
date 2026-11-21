@@ -1,0 +1,98 @@
+{
+  "id": "corporate",
+  "name": "Middle Manager",
+  "description": "Per my last forecast, please advise.",
+  "political": false,
+  "lines": {
+    "storm": [
+      {
+        "head": "Mandatory all-hands from the sky.",
+        "sub": "Attendance is required. Lightning is optional. Please work from home."
+      },
+      {
+        "head": "Let's take this offline. Fully offline.",
+        "sub": "Thunderstorm in progress. Unplug and circle back later."
+      }
+    ],
+    "snow": [
+      {
+        "head": "The sky has unilaterally decided to work from home.",
+        "sub": "You should too. Roads are a shitshow."
+      }
+    ],
+    "rain": [
+      {
+        "head": "Per my last forecast: it is raining.",
+        "sub": "{pop}% chance. Please advise on your umbrella strategy."
+      },
+      {
+        "head": "Quick sync: rain.",
+        "sub": "Let's align on bringing a jacket going forward."
+      }
+    ],
+    "drizzle": [
+      {
+        "head": "Light drizzle. Low-impact, high-annoyance.",
+        "sub": "Not a blocker, but let's flag it."
+      }
+    ],
+    "fog": [
+      {
+        "head": "Limited visibility into Q4. And the road.",
+        "sub": "Foggy out. Let's proceed with caution and lower our KPIs."
+      }
+    ],
+    "windy": [
+      {
+        "head": "Strong headwinds this quarter.",
+        "sub": "Gusts to {gusts}. Secure your deliverables. And your hat."
+      }
+    ],
+    "scorching": [
+      {
+        "head": "We're running hot today.",
+        "sub": "{temp}. Let's take this offline. Offline meaning inside, with AC."
+      }
+    ],
+    "hot": [
+      {
+        "head": "Let's leverage some shade.",
+        "sub": "{temp}. Hydration is a core value at this company."
+      }
+    ],
+    "freezing": [
+      {
+        "head": "Let's circle back when it's above freezing.",
+        "sub": "Feels like {feels}. This is fucking unacceptable. Sorry. Per policy."
+      }
+    ],
+    "cold": [
+      {
+        "head": "Cold today. Let's touch base on jackets.",
+        "sub": "High of {high}. That's the stretch goal, people."
+      }
+    ],
+    "nice": [
+      {
+        "head": "A great opportunity for synergy with the sun.",
+        "sub": "{temp} and nice. Let's call it a mental health day."
+      },
+      {
+        "head": "Weather is exceeding expectations.",
+        "sub": "Please don't spend it in a meeting that could've been an email."
+      }
+    ],
+    "meh": [
+      {
+        "head": "Weather is meeting expectations. Barely.",
+        "sub": "Gray. Neutral. A solid 'needs improvement.'"
+      }
+    ],
+    "clearNight": [
+      {
+        "head": "It's after hours. Log off.",
+        "sub": "Clear night, {temp}. Nobody's reading your email right now."
+      }
+    ]
+  }
+}

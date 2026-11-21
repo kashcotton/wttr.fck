@@ -1,0 +1,54 @@
+name: Submit a roast
+description: Got a line? Drop it here and we'll add it to the app.
+title: "Roast: "
+labels: [roast]
+body:
+  - type: dropdown
+    id: mood
+    attributes:
+      label: What weather is it for?
+      options: [storm, snow, rain, drizzle, fog, windy, scorching, hot, freezing, cold, nice, meh, clearNight]
+    validations:
+      required: true
+  - type: dropdown
+    id: voice
+    attributes:
+      label: Which voice?
+      options:
+        - Classic Jerk
+        - Cable News Pundit (political)
+        - Campaign Ad (political)
+        - Disappointed Parent
+        - Middle Manager
+        - Conspiracy Uncle
+        - Pundit Panel
+        - Election Night
+        - New voice (describe below)
+    validations:
+      required: true
+  - type: input
+    id: head
+    attributes:
+      label: Headline
+      description: The big punchline. 80 characters max.
+      placeholder: "It's fucking raining."
+    validations:
+      required: true
+  - type: textarea
+    id: sub
+    attributes:
+      label: Follow-up line
+      description: "180 characters max. Placeholders work: {temp} {feels} {high} {low} {wind} {gusts} {pop} {city}"
+    validations:
+      required: true
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: House rules
+      options:
+        - label: It roasts the weather (or the user), not a group of people.
+          required: true
+        - label: If it's political, it doesn't take sides or name real people.
+          required: true
+        - label: I wrote it myself.
+          required: true

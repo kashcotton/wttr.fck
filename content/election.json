@@ -1,0 +1,43 @@
+{
+  "candidates": {
+    "sun": {"name": "Sun", "party": "Clear Skies Party"},
+    "rain": {"name": "Rain", "party": "Wet Coalition"},
+    "clouds": {"name": "Clouds", "party": "Grey Caucus"},
+    "wind": {"name": "Wind", "party": "Gust Front"},
+    "snow": {"name": "Snow", "party": "Flake Alliance"}
+  },
+  "winner": {
+    "sun": [
+      "Sun wins in a landslide. Clouds demand a recount.",
+      "Sun takes it. Victory speech is just a long, hot stare.",
+      "Sun projected winner. Sunscreen stocks surge."
+    ],
+    "rain": [
+      "Rain wins. Umbrellas declare a national holiday.",
+      "Rain takes {city}. Sun refuses to concede, sulks behind clouds.",
+      "Rain sweeps the district. Literally. Everything is wet."
+    ],
+    "clouds": [
+      "Clouds win by default. Nobody turned out.",
+      "Clouds take it. Victory party is gray and quiet.",
+      "Clouds projected winner. Nobody is excited. Very on brand."
+    ],
+    "wind": [
+      "Wind wins. Promptly changes position on every issue.",
+      "Wind blows away the competition. And your recycling bin.",
+      "Wind takes {city}. Hair everywhere demands an investigation."
+    ],
+    "snow": [
+      "Snow wins. Schools close in celebration.",
+      "Snow takes it in a white-out. Turnout was low because nobody could drive.",
+      "Snow projected winner. Shovels mobilize."
+    ]
+  },
+  "approval": [
+    {"max": 25, "text": "Worst approval rating in recorded history. Impeach the sky."},
+    {"max": 45, "text": "Underwater. Fitting."},
+    {"max": 65, "text": "Middling. Like every politician you've ever had."},
+    {"max": 85, "text": "Strong numbers. Weather is considering a second term."},
+    {"max": 100, "text": "Beloved by all. Suspicious, honestly."}
+  ]
+}

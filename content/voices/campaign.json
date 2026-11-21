@@ -1,0 +1,52 @@
+{
+  "id": "campaign",
+  "name": "Campaign Ad",
+  "description": "I'm the Weather, and I approve this message.",
+  "political": true,
+  "lines": {
+    "storm": [
+      {"head": "The Storm: Tough. Loud. Wrong for {city}.", "sub": "Paid for by Citizens for Staying the Hell Inside."},
+      {"head": "Thunder says it's fighting for you.", "sub": "Thunder has never fought for you. Thunder fights everyone. Stay in."}
+    ],
+    "snow": [
+      {"head": "Snow promised you a white Christmas.", "sub": "Now it's {temp} and slushy. Snow: all flake, no follow-through."},
+      {"head": "Four more inches!", "sub": "I'm the Snow, and I approve this message. You will not approve of your commute."}
+    ],
+    "rain": [
+      {"head": "Rain: soaking taxpayers since forever.", "sub": "{pop}% chance. Can {city} really afford four more hours of this?"},
+      {"head": "What is Rain hiding?", "sub": "Rain won't release its forecast. We did. It's {pop}%. Bring an umbrella."}
+    ],
+    "drizzle": [
+      {"head": "Drizzle: weak on rain.", "sub": "Can't even commit to a real downpour. Is that who you want leading your afternoon?"}
+    ],
+    "fog": [
+      {"head": "Fog won't answer the tough questions.", "sub": "Where are the roads? Where's the horizon? Fog has no plan. Headlights on."}
+    ],
+    "windy": [
+      {"head": "Wind keeps changing direction.", "sub": "North on Monday, southwest today. Gusts to {gusts}. You can't trust the Wind."}
+    ],
+    "scorching": [
+      {"head": "The Sun says it's on your side.", "sub": "It's {temp}. Feels like {feels}. The Sun is lying to you. Get in the shade."},
+      {"head": "Heat: extreme. Dangerous. Out of touch.", "sub": "Paid for by the Committee to Re-Elect Air Conditioning."}
+    ],
+    "hot": [
+      {"head": "Sunscreen. It's not partisan.", "sub": "{temp} today. A message from Americans for Not Getting Burned."}
+    ],
+    "freezing": [
+      {"head": "Winter wants another term.", "sub": "Feels like {feels}. Winter's record speaks for itself: frozen pipes, dead batteries, misery."}
+    ],
+    "cold": [
+      {"head": "Cold: wrong on jackets, wrong for you.", "sub": "High of {high}. Vote with your outerwear."}
+    ],
+    "nice": [
+      {"head": "It's morning in {city}.", "sub": "{temp}, sunny, perfect. I'm the Weather, and I approve this message."},
+      {"head": "Four more hours of this!", "sub": "Real results for real people. Go outside, it's a mandate."}
+    ],
+    "meh": [
+      {"head": "Clouds: no vision. No plan. Just gray.", "sub": "{temp} and nothing happening. Is this the leadership {city} deserves?"}
+    ],
+    "clearNight": [
+      {"head": "Tonight, the stars are out.", "sub": "Unlike your candidate, they show up when they say they will. {temp}, clear."}
+    ]
+  }
+}

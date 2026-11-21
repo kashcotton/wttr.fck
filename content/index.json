@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "voices": [
+    "voices/classic.json",
+    "voices/pundit.json",
+    "voices/parent.json",
+    "voices/corporate.json",
+    "voices/campaign.json",
+    "voices/uncle.json"
+  ],
+  "panels": "panels.json",
+  "election": "election.json",
+  "loading": "loading.json"
+}

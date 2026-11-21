@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=wttr.fck
+Comment=Free weather that swears at you
+Exec=wttr_fck
+Icon=icon
+Categories=Utility;
+Terminal=false

@@ -1,0 +1,118 @@
+{
+  "id": "parent",
+  "name": "Disappointed Parent",
+  "description": "Not mad. Just disappointed. Wear a jacket.",
+  "political": false,
+  "lines": {
+    "storm": [
+      {
+        "head": "Stay inside. I mean it.",
+        "sub": "And unplug the computer. Yes, I know you have stuff to do."
+      },
+      {
+        "head": "Don't you dare go out in that.",
+        "sub": "Lightning doesn't care how busy you are."
+      }
+    ],
+    "snow": [
+      {
+        "head": "Wear a hat or I swear to God.",
+        "sub": "And real boots. Not those sneakers with the holes in them."
+      },
+      {
+        "head": "Text me when you get there.",
+        "sub": "It's snowing. Drive slow. I'm not sleeping until you text me."
+      }
+    ],
+    "rain": [
+      {
+        "head": "Take an umbrella. Now.",
+        "sub": "No, I don't care that it 'ruins the look.' Wet looks worse."
+      },
+      {
+        "head": "Don't come home soaked again.",
+        "sub": "{pop}% chance of rain. I'm not doing your laundry this time."
+      }
+    ],
+    "drizzle": [
+      {
+        "head": "It's drizzling. Hood up.",
+        "sub": "Your hair does not look good wet. I say this with love."
+      }
+    ],
+    "fog": [
+      {
+        "head": "Headlights on, sweetie.",
+        "sub": "It's foggy as hell. And put the damn phone down while driving."
+      }
+    ],
+    "windy": [
+      {
+        "head": "Tie your hair back.",
+        "sub": "Gusts to {gusts}. And bring the patio chairs in, I asked you twice."
+      }
+    ],
+    "scorching": [
+      {
+        "head": "Drink some water. WATER.",
+        "sub": "Not that energy drink crap. {temp} out there."
+      },
+      {
+        "head": "Sunscreen. Did you put on sunscreen?",
+        "sub": "I can tell you didn't. Go back inside and do it."
+      }
+    ],
+    "hot": [
+      {
+        "head": "Did you drink water today?",
+        "sub": "{temp}. Your body is 60% water and you're acting like it's 6%."
+      }
+    ],
+    "freezing": [
+      {
+        "head": "Where is your coat?",
+        "sub": "Feels like {feels}. You will catch your death. Don't argue."
+      },
+      {
+        "head": "Put on a damn jacket. I'm not asking.",
+        "sub": "And gloves. I bought you gloves. Where are the gloves?"
+      }
+    ],
+    "cold": [
+      {
+        "head": "Bring a sweater.",
+        "sub": "You always say you're fine and then you're cold. {temp} out there."
+      },
+      {
+        "head": "You're going out like THAT?",
+        "sub": "High of {high}. Go put on a real jacket."
+      }
+    ],
+    "nice": [
+      {
+        "head": "Go outside. Get some sun.",
+        "sub": "It's lovely out. You look pale, honey."
+      },
+      {
+        "head": "Why are you inside?",
+        "sub": "{temp} and beautiful. Go touch grass, I'm serious."
+      }
+    ],
+    "meh": [
+      {
+        "head": "It's fine. Bring a jacket anyway.",
+        "sub": "You never know. I'm just saying."
+      },
+      {
+        "head": "Kinda gray. Call your grandmother.",
+        "sub": "Perfect day for it. She asks about you."
+      }
+    ],
+    "clearNight": [
+      {
+        "head": "Why are you still up?",
+        "sub": "It's late. The weather will still be there tomorrow. Go to bed."
+      }
+    ]
+  }
+}

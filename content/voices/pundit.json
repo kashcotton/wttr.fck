@@ -1,0 +1,138 @@
+{
+  "id": "pundit",
+  "name": "Cable News Pundit",
+  "description": "Every cloud is breaking news. Roasts both sides.",
+  "political": true,
+  "lines": {
+    "storm": [
+      {
+        "head": "BREAKING: Sky declares war.",
+        "sub": "Thunderstorm in {city}. Both parties are blaming each other for the lightning."
+      },
+      {
+        "head": "Thunder, like every comment section.",
+        "sub": "Lots of noise, lots of heat, nobody's mind is changing. Stay inside."
+      }
+    ],
+    "snow": [
+      {
+        "head": "Snow is moving faster than any bill in history.",
+        "sub": "Inches piling up. Congress is still debating the shovel."
+      },
+      {
+        "head": "Snow: finally, a white-out both sides can see.",
+        "sub": "Roads are bad. Stay home and argue online like normal."
+      }
+    ],
+    "rain": [
+      {
+        "head": "Rain is fully bipartisan today.",
+        "sub": "Everyone's getting wet. First thing they've agreed on in years."
+      },
+      {
+        "head": "BREAKING: Sky leaks.",
+        "sub": "{pop}% chance of rain. Sources inside the cloud blame the other guys."
+      }
+    ],
+    "drizzle": [
+      {
+        "head": "Drizzle, like a campaign promise.",
+        "sub": "Technically there. Completely useless."
+      },
+      {
+        "head": "A light rain of half-truths.",
+        "sub": "Barely anything's falling, yet everyone's acting like it's a scandal."
+      }
+    ],
+    "fog": [
+      {
+        "head": "Visibility: lower than campaign finances.",
+        "sub": "Thick fog. Nobody knows where anything is going. Very on brand."
+      },
+      {
+        "head": "Fog. Can't see the future. Neither can the polls.",
+        "sub": "Headlights on. Expectations low."
+      }
+    ],
+    "windy": [
+      {
+        "head": "More hot air than a filibuster.",
+        "sub": "Gusts to {gusts}. Hold on to your hat and your opinions."
+      },
+      {
+        "head": "Wind changing direction faster than a senator.",
+        "sub": "{wind} winds. Flip-flops will literally fly."
+      }
+    ],
+    "scorching": [
+      {
+        "head": "{temp}: hotter than a primary debate.",
+        "sub": "Feels like {feels}. Somehow both sides think it proves their point."
+      },
+      {
+        "head": "Heat dome. Not a policy, sadly.",
+        "sub": "Stay inside, drink water, don't get into any arguments, you'll overheat."
+      }
+    ],
+    "hot": [
+      {
+        "head": "Things are heating up. Literally.",
+        "sub": "{temp}. Pundits are sweating, and not because of the polls."
+      },
+      {
+        "head": "A heated debate, but outside.",
+        "sub": "Wear sunscreen. Every party supports sunscreen. Probably."
+      }
+    ],
+    "freezing": [
+      {
+        "head": "Frozen solid, like the federal budget.",
+        "sub": "Feels like {feels}. Thaw expected sometime after the next election."
+      },
+      {
+        "head": "Colder than a filibuster.",
+        "sub": "Bundle up. No one is coming to fix this for you."
+      }
+    ],
+    "cold": [
+      {
+        "head": "Frosty relations across the aisle and the sidewalk.",
+        "sub": "{temp}. Wear a jacket, it's a nonpartisan issue."
+      },
+      {
+        "head": "A chilly reception, like a town hall.",
+        "sub": "High of {high}. Low of {low}. Low expectations overall."
+      }
+    ],
+    "nice": [
+      {
+        "head": "Perfect weather. Someone will make it a wedge issue.",
+        "sub": "Enjoy it before the attack ads start."
+      },
+      {
+        "head": "Gorgeous out. Congress will vote to delay it.",
+        "sub": "{temp} and sunny. Get outside while it's still legal."
+      }
+    ],
+    "meh": [
+      {
+        "head": "Gray skies. Very on-brand for this news cycle.",
+        "sub": "No highs, no lows, nothing to see. Kind of like the debate."
+      },
+      {
+        "head": "Overcast, like the mood in every newsroom.",
+        "sub": "{temp}. Doom-scrolling weather, so maybe don't."
+      }
+    ],
+    "clearNight": [
+      {
+        "head": "Clear skies tonight. At least the stars aren't fundraising.",
+        "sub": "{temp}. Look up, log off."
+      },
+      {
+        "head": "Tonight's forecast: no spin.",
+        "sub": "Clear and calm. Shame about everything else."
+      }
+    ]
+  }
+}

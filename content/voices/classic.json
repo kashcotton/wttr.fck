@@ -1,0 +1,214 @@
+{
+  "id": "classic",
+  "name": "Classic Jerk",
+  "description": "Tells you the weather. Hates you a little.",
+  "political": false,
+  "lines": {
+    "storm": [
+      {
+        "head": "It's a fucking thunderstorm.",
+        "sub": "The sky is throwing a tantrum. Unplug your shit and stay in."
+      },
+      {
+        "head": "Lightning. Go inside, genius.",
+        "sub": "You're not in a movie. Nobody needs to see you stand in a field."
+      },
+      {
+        "head": "Thor is pissed.",
+        "sub": "Whatever you did, apologize. Then stay the hell indoors."
+      },
+      {
+        "head": "The sky is screaming.",
+        "sub": "Honestly, same. Stay in and keep your phone charged."
+      }
+    ],
+    "snow": [
+      {
+        "head": "It's fucking snowing.",
+        "sub": "Pretty for about four minutes, then it turns into gray slush."
+      },
+      {
+        "head": "Snow. Great. Fantastic.",
+        "sub": "Drive like your grandma is watching. Because she is."
+      },
+      {
+        "head": "The sky is dandruffing.",
+        "sub": "Boots on. And no, sneakers do not count as boots."
+      },
+      {
+        "head": "Winter wonderland my ass.",
+        "sub": "It's frozen water falling on you. Dress like you mean it."
+      }
+    ],
+    "rain": [
+      {
+        "head": "It's fucking raining.",
+        "sub": "{pop}% chance you regret leaving that umbrella at home."
+      },
+      {
+        "head": "Wet. Everything is wet.",
+        "sub": "Socks included, if you go out like an idiot."
+      },
+      {
+        "head": "The sky is crying again.",
+        "sub": "Not about you. Probably. Bring a damn umbrella."
+      },
+      {
+        "head": "Rain. Obviously.",
+        "sub": "Your hair is about to have a really bad day."
+      }
+    ],
+    "drizzle": [
+      {
+        "head": "It's drizzling. Ugh.",
+        "sub": "Too weak for an umbrella, strong enough to ruin your glasses."
+      },
+      {
+        "head": "Spitting rain.",
+        "sub": "The sky is too lazy to commit to actually raining. Relatable."
+      },
+      {
+        "head": "Mist with an attitude.",
+        "sub": "Not quite rain. Still somehow fucks up your hair."
+      }
+    ],
+    "fog": [
+      {
+        "head": "Can't see shit.",
+        "sub": "It's foggy as hell. Headlights on, ego off."
+      },
+      {
+        "head": "Silent Hill vibes.",
+        "sub": "Visibility is about {vis}. Drive slow, and maybe skip the creepy alley."
+      },
+      {
+        "head": "The world forgot to load.",
+        "sub": "Fog everywhere. Don't walk into anything expensive."
+      }
+    ],
+    "windy": [
+      {
+        "head": "It's windy as hell.",
+        "sub": "Gusts up to {gusts}. Secure your hat, your bins and your dignity."
+      },
+      {
+        "head": "Hold onto your shit.",
+        "sub": "Wind is {wind}. Umbrellas will die today."
+      },
+      {
+        "head": "Free hairstyling outside.",
+        "sub": "Gusts of {gusts}. You won't like the style."
+      }
+    ],
+    "scorching": [
+      {
+        "head": "It's fucking scorching.",
+        "sub": "{temp} and it feels like {feels}. Sun's out, brain's cooked."
+      },
+      {
+        "head": "Satan called. He wants his weather back.",
+        "sub": "Hydrate or die-drate. Stay in the shade."
+      },
+      {
+        "head": "Ow. The sun. Ow.",
+        "sub": "{temp}. Your car is now an oven. Don't leave anything alive in it."
+      }
+    ],
+    "hot": [
+      {
+        "head": "It's hot as balls.",
+        "sub": "{temp} out there. Sweat in places you forgot you had."
+      },
+      {
+        "head": "Toasty as hell.",
+        "sub": "Sunscreen. Water. Don't be a hero."
+      },
+      {
+        "head": "Sweaty. Sticky. Gross.",
+        "sub": "Thighs will stick to every chair today. Plan accordingly."
+      }
+    ],
+    "freezing": [
+      {
+        "head": "It's fucking freezing.",
+        "sub": "Feels like {feels}. Your nostrils may freeze shut. Enjoy."
+      },
+      {
+        "head": "Cold as a witch's… everything.",
+        "sub": "Below zero. Layers, gloves, hat. All of it."
+      },
+      {
+        "head": "Nope. Nope. Nope.",
+        "sub": "It's {temp}. Stay under the blanket, it's the law now."
+      },
+      {
+        "head": "Ice cold. Like your ex.",
+        "sub": "Watch for black ice. Walk like a penguin. It works."
+      }
+    ],
+    "cold": [
+      {
+        "head": "It's fucking cold.",
+        "sub": "Feels like {feels}. Grab a jacket, you stubborn ass."
+      },
+      {
+        "head": "Brisk. That means cold.",
+        "sub": "Hoodie weather if you're tough. Jacket if you're smart."
+      },
+      {
+        "head": "Chilly as shit.",
+        "sub": "High of {high}. That's it. That's the best it gets today."
+      }
+    ],
+    "nice": [
+      {
+        "head": "It's actually fucking nice.",
+        "sub": "{temp} and pleasant. Go outside before it changes its mind."
+      },
+      {
+        "head": "Holy shit, it's perfect.",
+        "sub": "No excuses today. Touch some grass."
+      },
+      {
+        "head": "Nice. Suspiciously nice.",
+        "sub": "Enjoy it. Something will go wrong tomorrow. It always does."
+      },
+      {
+        "head": "Damn, look at that.",
+        "sub": "Peak weather. If you stay inside today, that's on you."
+      }
+    ],
+    "meh": [
+      {
+        "head": "It's fucking meh.",
+        "sub": "Gray and boring. Like a Tuesday that won't end."
+      },
+      {
+        "head": "Weather: unremarkable.",
+        "sub": "{temp}, cloudy, zero personality. Like a beige wall."
+      },
+      {
+        "head": "The sky gave up.",
+        "sub": "Overcast and lifeless. Light jacket, low expectations."
+      },
+      {
+        "head": "Gray. Just gray.",
+        "sub": "Nothing happening up there. Go do something interesting yourself."
+      }
+    ],
+    "clearNight": [
+      {
+        "head": "It's a nice fucking night.",
+        "sub": "Clear skies, {temp}. Look up, you might see a star or a satellite."
+      },
+      {
+        "head": "Go to bed.",
+        "sub": "It's dark and clear and you're on your phone checking the weather."
+      },
+      {
+        "head": "Clear skies. Starry as hell.",
+        "sub": "Good night for a walk. Or for staring at the ceiling."
+      }
+    ]
+  }
+}

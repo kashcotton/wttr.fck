@@ -1,0 +1,103 @@
+{
+  "storm": [
+    {
+      "left": "This storm is the result of decades of inaction!",
+      "right": "Big Weather wants you scared so you buy their umbrellas.",
+      "weather": "I'm literally electricity. Get inside, both of you."
+    }
+  ],
+  "snow": [
+    {
+      "left": "Snow plows should be distributed equitably.",
+      "right": "Shovel your own driveway. That's freedom.",
+      "weather": "I'm snowing on both your driveways equally."
+    }
+  ],
+  "rain": [
+    {
+      "left": "Rain should be free for everyone! Oh. It is.",
+      "right": "I don't need the government telling me when to bring an umbrella.",
+      "weather": "You're both wet. Congratulations."
+    },
+    {
+      "left": "We need to invest in umbrella infrastructure.",
+      "right": "The free market will provide umbrellas.",
+      "weather": "{pop}% chance of rain. Nobody brought one."
+    }
+  ],
+  "drizzle": [
+    {
+      "left": "This drizzle deserves our support.",
+      "right": "This drizzle is a handout.",
+      "weather": "It's barely raining. Calm down."
+    }
+  ],
+  "fog": [
+    {
+      "left": "The fog is a metaphor for lack of transparency.",
+      "right": "The fog is a metaphor for lack of transparency.",
+      "weather": "You two agreeing is the real weather event today."
+    }
+  ],
+  "windy": [
+    {
+      "left": "This wind could power the whole town!",
+      "right": "These gusts are a hoax pushed by Big Kite.",
+      "weather": "Gusts to {gusts}. Hold onto your lawn chairs."
+    }
+  ],
+  "scorching": [
+    {
+      "left": "It's this hot and you still want to debate it?",
+      "right": "In my day it was hot and we called it 'summer.'",
+      "weather": "Drink water. Both of you. You're turning red."
+    }
+  ],
+  "hot": [
+    {
+      "left": "Shade should be a human right.",
+      "right": "Shade should be earned.",
+      "weather": "It's {temp}. Sit under a tree and stop yelling."
+    }
+  ],
+  "freezing": [
+    {
+      "left": "Freezing! Proves we need climate action!",
+      "right": "Freezing! Proves the climate's fine!",
+      "weather": "It's called winter. It happens every single year."
+    }
+  ],
+  "cold": [
+    {
+      "left": "Every household deserves a heating plan.",
+      "right": "Cold builds character. Buy a good coat.",
+      "weather": "{temp}. Wear layers regardless of party."
+    }
+  ],
+  "nice": [
+    {
+      "left": "Beautiful day. Let's tax it.",
+      "right": "Beautiful day. Let's deregulate it.",
+      "weather": "Can everyone just go to a park, please?"
+    },
+    {
+      "left": "This sunshine is a win for the people.",
+      "right": "This sunshine is a win for small business.",
+      "weather": "I'm a sun. I don't vote."
+    }
+  ],
+  "meh": [
+    {
+      "left": "Gray skies. Typical of this administration.",
+      "right": "Gray skies. Typical of the last administration.",
+      "weather": "I'm a cloud. I have no opinion. I'm just here."
+    }
+  ],
+  "clearNight": [
+    {
+      "left": "Look at the stars. Protected by dark-sky laws!",
+      "right": "Look at the stars. No permit required!",
+      "weather": "Go to bed, both of you."
+    }
+  ]
+}

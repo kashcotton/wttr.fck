@@ -1,0 +1,21 @@
+{
+  "name": "wttr.fck",
+  "short_name": "wttr.fck",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "background_color": "#f7f9ff",
+  "theme_color": "#3b6ea8",
+  "description": "The weather, with attitude. Free, no ads.",
+  "categories": ["weather", "entertainment"],
+  "orientation": "any",
+  "prefer_related_applications": false,
+  "icons": [
+    { "src": "icons/Icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/Icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/Icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/Icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
