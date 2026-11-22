@@ -5,9 +5,6 @@ import 'package:http/http.dart' as http;
 
 import '../models/weather.dart';
 
-/// All data comes from Open-Meteo (CC BY 4.0, free, no API key).
-/// Reverse geocoding: BigDataCloud's free client endpoint.
-/// IP fallback location: GeoJS.
 class WeatherApi {
   WeatherApi({http.Client? client}) : _client = client ?? http.Client();
 
@@ -23,8 +20,6 @@ class WeatherApi {
     return jsonDecode(res.body) as Map<String, dynamic>;
   }
 
-  /// Fetches forecast + air quality. Returns the raw payloads so they can be
-  /// cached and re-parsed offline.
   Future<RawForecast> fetchRaw(Place place) async {
     final lat = place.lat.toStringAsFixed(4);
     final lon = place.lon.toStringAsFixed(4);
@@ -51,7 +46,7 @@ class WeatherApi {
     });
 
     final forecastF = _get(forecastUri);
-    // Air quality is a nice-to-have. Don't let it sink the whole ship.
+
     final airF = _get(airUri).then<Map<String, dynamic>?>((v) => v,
         onError: (_) => null);
     final f = await forecastF;
@@ -106,8 +101,6 @@ class WeatherApi {
     }
   }
 
-  /// Rough location from the IP address. Used on desktop or when GPS is
-  /// unavailable/denied.
   Future<Place> ipLocation() async {
     final j = await _get(Uri.https('get.geojs.io', '/v1/ip/geo.json'));
     final lat = double.tryParse('${j['latitude']}');

@@ -49,7 +49,7 @@ class WttrApp extends StatelessWidget {
             darkTheme: buildTheme(seed, Brightness.dark),
             themeAnimationDuration: const Duration(milliseconds: 600),
             themeAnimationCurve: Curves.easeOutCubic,
-            // Respect the user's text size, within reason, so layouts hold.
+
             builder: (context, child) {
               final mq = MediaQuery.of(context);
               return MediaQuery(

@@ -19,9 +19,6 @@ const contributeUrl = '$repoUrl/blob/main/CONTRIBUTING.md';
 Future<void> openUrl(String url) =>
     launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
 
-// ---------------------------------------------------------------------------
-// Shared bits
-
 class SectionCard extends StatelessWidget {
   const SectionCard({
     super.key,
@@ -142,9 +139,6 @@ class ErrorBanner extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Hero
-
 class HeroBlock extends StatelessWidget {
   const HeroBlock({super.key, required this.forecast, required this.state});
   final Forecast forecast;
@@ -234,9 +228,6 @@ class HeroBlock extends StatelessWidget {
     );
   }
 }
-
-// ---------------------------------------------------------------------------
-// The roast
 
 class RoastCard extends StatelessWidget {
   const RoastCard({super.key, required this.engine, required this.state});
@@ -365,9 +356,6 @@ class RoastCard extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Misery + verdict
-
 class VerdictRow extends StatelessWidget {
   const VerdictRow({super.key, required this.engine});
   final RoastEngine engine;
@@ -469,9 +457,6 @@ class VerdictRow extends StatelessWidget {
     );
   }
 }
-
-// ---------------------------------------------------------------------------
-// Hourly, with a temperature curve
 
 class HourlyCard extends StatelessWidget {
   const HourlyCard({
@@ -688,9 +673,6 @@ class _TempCurve extends CustomPainter {
       !listEquals(old.temps, temps) || old.line != line || old.label != label;
 }
 
-// ---------------------------------------------------------------------------
-// 10-day
-
 class DailyCard extends StatelessWidget {
   const DailyCard({super.key, required this.forecast, required this.units});
   final Forecast forecast;
@@ -829,9 +811,6 @@ class _DayRow extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Pundit Panel
-
 class PanelCard extends StatelessWidget {
   const PanelCard({super.key, required this.engine, required this.seed});
   final RoastEngine engine;
@@ -961,9 +940,6 @@ class _Speaker extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Election Night
-
 class ElectionCard extends StatelessWidget {
   const ElectionCard({super.key, required this.engine, required this.seed});
   final RoastEngine engine;
@@ -1085,9 +1061,6 @@ class ElectionCard extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Outfit
-
 class OutfitCard extends StatelessWidget {
   const OutfitCard({super.key, required this.engine});
   final RoastEngine engine;
@@ -1115,9 +1088,6 @@ class OutfitCard extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Details grid
-
 class DetailsGrid extends StatelessWidget {
   const DetailsGrid({
     super.key,
@@ -1142,7 +1112,7 @@ class DetailsGrid extends StatelessWidget {
         detail: '${compass(c.windDir)} · gusts ${units.speed(c.gusts)}',
         quip: engine.windQuip(c.gusts),
         trailing: Transform.rotate(
-          // Arrow points where the wind is going.
+
           angle: (c.windDir + 180) * math.pi / 180,
           child: const Icon(Icons.navigation_rounded, size: 20),
         ),
@@ -1284,9 +1254,6 @@ class _Tile extends StatelessWidget {
     );
   }
 }
-
-// ---------------------------------------------------------------------------
-// Community + footer
 
 class CommunityCard extends StatelessWidget {
   const CommunityCard({super.key, required this.content});

@@ -14,10 +14,6 @@ import com.wttrfck.wttr_fck.MainActivity
 import com.wttrfck.wttr_fck.R
 import es.antonborri.home_widget.HomeWidgetProvider
 
-/**
- * The home-screen widget. Three responsive layouts (2x2, 4x1, 4x2+),
- * Material You colors, tap to open the app, arrow button for a new roast.
- */
 class WeatherWidget : HomeWidgetProvider() {
 
     override fun onUpdate(
@@ -27,7 +23,7 @@ class WeatherWidget : HomeWidgetProvider() {
         widgetData: SharedPreferences,
     ) {
         for (id in appWidgetIds) render(context, appWidgetManager, id)
-        // Stale or never fetched? Ask for a background refresh.
+
         val store = WidgetStore(context)
         val age = System.currentTimeMillis() - store.updatedAt
         if (store.hasPlace && age > 40 * 60 * 1000L) WidgetRefreshWorker.refreshNow(context)
@@ -71,7 +67,7 @@ class WeatherWidget : HomeWidgetProvider() {
 
         fun render(context: Context, mgr: AppWidgetManager, id: Int) {
             val views = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                // Android 12+: the launcher picks the best layout for the size.
+
                 RemoteViews(
                     mapOf(
                         SizeF(100f, 100f) to build(context, R.layout.widget_small),
@@ -93,8 +89,6 @@ class WeatherWidget : HomeWidgetProvider() {
             mgr.updateAppWidget(id, views)
         }
 
-        /** Which views each layout has. RemoteViews fails the whole widget
-         *  ("Can't load widget") if we touch a view that isn't there. */
         private val VIEWS = mapOf(
             R.layout.widget_small to setOf(R.id.w_temp, R.id.w_icon, R.id.w_place, R.id.w_head),
             R.layout.widget_short to setOf(R.id.w_icon, R.id.w_temp, R.id.w_head, R.id.w_reroll),
@@ -135,7 +129,6 @@ class WeatherWidget : HomeWidgetProvider() {
                 v.setContentDescription(R.id.w_temp, "${u.deg(w.temp)}, $cond in ${store.place}")
             }
 
-            // Tap anywhere: open the app.
             val open = PendingIntent.getActivity(
                 context, 0,
                 Intent(context, MainActivity::class.java)
@@ -144,7 +137,6 @@ class WeatherWidget : HomeWidgetProvider() {
             )
             v.setOnClickPendingIntent(android.R.id.background, open)
 
-            // Arrow: a new roast, no network needed.
             val reroll = PendingIntent.getBroadcast(
                 context, 1,
                 Intent(context, WeatherWidget::class.java).setAction(ACTION_REROLL),

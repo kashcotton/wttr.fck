@@ -5,8 +5,6 @@ import 'package:material_ui/material_ui.dart';
 
 import '../theme.dart';
 
-/// Material 3 Expressive loading indicator: a blob that morphs through the
-/// expressive shape set while spinning. Only shown while loading.
 class ShapeLoader extends StatefulWidget {
   const ShapeLoader({super.key, this.size = 56, this.color});
   final double size;
@@ -55,12 +53,6 @@ class _ShapeLoaderState extends State<ShapeLoader>
   }
 }
 
-/// The weather icon sitting on a morphing expressive shape.
-///
-/// When the weather changes, the shape morphs and settles into place with a
-/// springy quarter-twist, then stays still. It deliberately never animates
-/// forever: on the web, any never-ending animation makes the browser redraw
-/// the whole page 60 times a second, which is what made the site laggy.
 class SkyBadge extends StatefulWidget {
   const SkyBadge({
     super.key,
@@ -76,7 +68,7 @@ class SkyBadge extends StatefulWidget {
   final Color iconColor;
   final Color fill;
   final double size;
-  /// Settle in with a twist (used for sunny weather).
+
   final bool twist;
 
   @override
@@ -130,8 +122,7 @@ class _SkyBadgeState extends State<SkyBadge> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    // Performance: the shape is painted once into its own layer and only
-    // *rotated* while it twists, so nothing else repaints.
+
     return ExcludeSemantics(
       child: RepaintBoundary(
         child: SizedBox.square(
@@ -183,13 +174,6 @@ class _SkyBadgeState extends State<SkyBadge> with TickerProviderStateMixin {
   }
 }
 
-/// Rotates its child by [turns] at *paint* time only.
-///
-/// [RotationTransition] rebuilds a widget every frame, and any rebuild inside
-/// a LayoutBuilder makes that LayoutBuilder lay out again. Doing the rotation
-/// in the render object means a spinning shape costs one transform per frame:
-/// no build, no layout, and the child (behind its own RepaintBoundary) is
-/// never repainted.
 class PaintRotation extends SingleChildRenderObjectWidget {
   const PaintRotation({super.key, required this.turns, super.child});
   final Animation<double> turns;
@@ -268,8 +252,6 @@ class RenderPaintRotation extends RenderProxyBox {
   }
 }
 
-/// Paints a morph between two expressive shapes. Repaints from the
-/// animation directly, so it never triggers a widget rebuild.
 class _MorphPainter extends CustomPainter {
   _MorphPainter({
     required this.shapes,

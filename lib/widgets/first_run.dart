@@ -3,8 +3,6 @@ import 'package:material_ui/material_ui.dart';
 import '../main.dart';
 import '../roasts/censor.dart';
 
-/// First launch: let people pick how filthy they want it. Makes the app
-/// usable for literally everyone, from teenagers to grandparents.
 Future<void> showFirstRun(BuildContext context) {
   return showModalBottomSheet(
     context: context,

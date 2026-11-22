@@ -28,11 +28,8 @@ class AppState extends ChangeNotifier {
   late final LocationService location;
   final Random _rand;
 
-  /// Roasts, panels and jokes. Starts as the bundled copy, upgraded to the
-  /// latest community version from GitHub when available.
   Content content;
 
-  // ---- settings -------------------------------------------------------------
   TempUnit tempUnit = TempUnit.f;
   WindUnit windUnit = WindUnit.mph;
   bool h24 = false;
@@ -42,7 +39,6 @@ class AppState extends ChangeNotifier {
   bool onboarded = false;
   bool communityUpdates = true;
 
-  // Politics. Master switch plus individual features.
   bool politics = true;
   bool panel = true;
   bool election = true;
@@ -60,14 +56,11 @@ class AppState extends ChangeNotifier {
     return (!politics && v.political) ? content.classic : v;
   }
 
-  // ---- places ---------------------------------------------------------------
   List<Place> saved = [];
 
-  /// null = follow the device location.
   Place? selected;
   bool get followingDevice => selected == null;
 
-  // ---- weather --------------------------------------------------------------
   LoadState state = LoadState.idle;
   Forecast? forecast;
   String? error;
@@ -107,12 +100,11 @@ class AppState extends ChangeNotifier {
             RawForecast.fromJson(jsonDecode(cached) as Map<String, dynamic>)
                 .parse();
         state = LoadState.ready;
-      } catch (_) {/* stale cache shape; ignore */}
+      } catch (_) {}
     }
     roastSeed = _rand.nextInt(1000);
   }
 
-  // Fahrenheit only where people actually use it.
   static String get _country =>
       WidgetsBinding.instance.platformDispatcher.locale.countryCode ?? 'US';
   static TempUnit _defaultTemp() =>
@@ -158,14 +150,11 @@ class AppState extends ChangeNotifier {
     _syncWidget();
   }
 
-  /// Hands the Android home-screen widget the latest weather and roasts.
   void _syncWidget() => WidgetSync.push(this);
-
-  // ---- community content ----------------------------------------------------
 
   Future<void> _refreshContent() async {
     if (!communityUpdates) return;
-    // Use the cached community copy immediately if we have one.
+
     final cachedRaw = _prefs.getString('contentFiles');
     if (cachedRaw != null) {
       final files = (jsonDecode(cachedRaw) as Map).cast<String, String>();
@@ -205,8 +194,6 @@ class AppState extends ChangeNotifier {
       notifyListeners();
     }
   }
-
-  // ---- weather ----------------------------------------------------------------
 
   Future<void> refresh({bool silent = false}) async {
     if (state == LoadState.loading) return;

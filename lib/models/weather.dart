@@ -1,5 +1,3 @@
-/// Plain data models. Everything is stored metric (°C, km/h, mm, hPa, m)
-/// and converted for display in `util/units.dart`.
 library;
 
 class Place {
@@ -39,7 +37,6 @@ class Place {
       );
 }
 
-/// Broad buckets the roast engine and theming care about.
 enum Sky { clear, partly, cloudy, fog, drizzle, rain, snow, storm }
 
 Sky skyFromCode(int code) {
@@ -190,7 +187,7 @@ class AirQuality {
 class Forecast {
   final Place place;
   final Current current;
-  final List<Hour> hours; // next 24h starting at the current hour
+  final List<Hour> hours;
   final List<Day> days;
   final AirQuality? air;
   final DateTime fetchedAt;

@@ -59,7 +59,7 @@ void main() {
     'phone_rain_light': const Case(63, 9, 1, Size(412, 2400), ThemeMode.light, 2, 'pundit'),
     'phone_sunny_dark': const Case(0, 24, 1, Size(412, 2400), ThemeMode.dark, 1, 'classic'),
     'phone_night_clean': const Case(1, 14, 0, Size(360, 2400), ThemeMode.dark, 0, 'parent'),
-    // Unfolded book-style foldable with a hinge down the middle.
+
     'foldable_open_hinge': Case(2, 17, 1, const Size(842, 1500), ThemeMode.light, 1,
         'campaign', [
       const DisplayFeature(
@@ -68,7 +68,7 @@ void main() {
         state: DisplayFeatureState.postureFlat,
       ),
     ]),
-    // Half-folded on a table: weather on top, details below.
+
     'foldable_tabletop': Case(95, 22, 1, const Size(700, 840), ThemeMode.dark, 1,
         'corporate', [
       const DisplayFeature(

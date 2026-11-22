@@ -16,12 +16,6 @@ import java.net.URL
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
-/**
- * Keeps the widget fresh while the app is closed: fetches the current
- * weather for the last place the app showed (no background location access
- * needed), picks a new roast and redraws. Plain native code, so it never
- * has to start the Flutter engine. Cheap on battery.
- */
 class WidgetRefreshWorker(context: Context, params: WorkerParameters) :
     Worker(context, params) {
 

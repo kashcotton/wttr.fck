@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    // Keep it fresh while the app is open.
+
     _timer = Timer.periodic(const Duration(minutes: 15), (_) {
       if (mounted) AppScope.of(context).refresh(silent: true);
     });
@@ -161,8 +161,6 @@ class _AdaptiveHome extends StatelessWidget {
     final e = s.engine!;
     const gap = SizedBox(height: 12);
 
-    // Every card paints into its own layer, so an animation in one card
-    // (a new roast, a morphing shape) never repaints the rest of the page.
     Widget card(Widget w) => RepaintBoundary(child: w);
 
     final hero = <Widget>[
@@ -218,9 +216,6 @@ class _AdaptiveHome extends StatelessWidget {
           ),
         );
 
-    // Sized from MediaQuery instead of a LayoutBuilder on purpose: with a
-    // LayoutBuilder at the root, every animating card would force the whole
-    // page to lay out again on every frame.
     final mq = MediaQuery.of(context);
     final box = BoxConstraints.tight(
       Size(
@@ -230,8 +225,7 @@ class _AdaptiveHome extends StatelessWidget {
     );
     final fold = Fold.of(context);
     final cls = windowClassOf(box.maxWidth);
-    // Tabletop: half-folded with a horizontal hinge. Weather on the top
-    // half like a little screen, everything else scrolls on the bottom.
+
     if (fold != null && !fold.vertical && fold.halfOpen) {
       final top = MediaQuery.paddingOf(context).top;
       final topH = (fold.bounds.top - top).clamp(0.0, box.maxHeight);
@@ -307,7 +301,6 @@ class _AdaptiveHome extends StatelessWidget {
   }
 }
 
-/// Large screens: a list-detail layout with saved places always visible.
 class _PlacesPane extends StatelessWidget {
   const _PlacesPane({required this.state});
   final AppState state;

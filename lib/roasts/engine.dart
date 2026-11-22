@@ -24,7 +24,7 @@ Mood moodFor(Current c) {
   if (!c.isDay && (sky == Sky.clear || sky == Sky.partly)) {
     return Mood.clearNight;
   }
-  // Clear and not cold or hot: that's a nice day. Gray days are "meh".
+
   if (sky == Sky.clear || sky == Sky.partly) return Mood.nice;
   return Mood.meh;
 }
@@ -82,7 +82,6 @@ class RoastEngine {
     );
   }
 
-  /// Weather conditions run for office. Vote shares come from the forecast.
   ElectionResult election(int seed) {
     final c = f.current;
     final next = f.hours.take(12);
@@ -116,7 +115,7 @@ class RoastEngine {
       for (final e in raw.entries)
         (key: e.key, who: content.candidates[e.key]!, pct: (e.value / total * 100).round()),
     ]..sort((a, b) => b.pct.compareTo(a.pct));
-    // Fix rounding so it adds to exactly 100. Democracy demands it.
+
     final drift = 100 - results.fold<int>(0, (s, r) => s + r.pct);
     if (drift != 0) {
       final w = results.first;
@@ -140,7 +139,6 @@ class RoastEngine {
   String loadingLine(int seed) =>
       censor(content.loading[seed.abs() % content.loading.length], level);
 
-  /// 0 (bliss) to 10 (apocalypse).
   int get misery {
     final c = f.current;
     var m = ((c.feelsLike - 21).abs() / 3.2).clamp(0, 5).toDouble();
@@ -157,7 +155,7 @@ class RoastEngine {
     if (c.uv >= 8 && c.isDay) m += 1;
     if (c.humidity >= 85 && c.temp >= 24) m += 1;
     if ((f.air?.usAqi ?? 0) > 100) m += 1;
-    // Lightning doesn't care how nice the temperature is.
+
     if (c.sky == Sky.storm) m = m < 7 ? 7 : m;
     return m.round().clamp(0, 10);
   }
@@ -231,8 +229,6 @@ class RoastEngine {
     };
     return (items: items, quip: censor(quip, level));
   }
-
-  // ---- Detail tile snark -------------------------------------------------
 
   String humidityQuip(int h) => censor(
       h >= 85
