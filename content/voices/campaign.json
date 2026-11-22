@@ -5,48 +5,366 @@
   "political": true,
   "lines": {
     "storm": [
-      {"head": "The Storm: Tough. Loud. Wrong for {city}.", "sub": "Paid for by Citizens for Staying the Hell Inside."},
-      {"head": "Thunder says it's fighting for you.", "sub": "Thunder has never fought for you. Thunder fights everyone. Stay in."}
+      {
+        "head": "The Storm: Tough. Loud. Wrong for {city}.",
+        "sub": "Paid for by Citizens for Staying the Hell Inside."
+      },
+      {
+        "head": "Thunder says it's fighting for you.",
+        "sub": "Thunder has never fought for you. Thunder fights everyone. Stay in."
+      },
+      {
+        "head": "Storm: a record of destruction.",
+        "sub": "Downed trees. Lost power. Ruined picnics. Can {city} afford another Storm?"
+      },
+      {
+        "head": "The Storm has a temper problem.",
+        "sub": "Ask anyone who's met it. Stay inside. Paid for by Friends of Indoors."
+      },
+      {
+        "head": "Lightning: shocking. Out of touch.",
+        "sub": "It strikes without warning. Vote Indoors."
+      },
+      {
+        "head": "Thunder: all noise, no plan.",
+        "sub": "Loud, angry, and gone by morning. Sound familiar?"
+      },
+      {
+        "head": "Re-elect Basement.",
+        "sub": "Safe, dry, reliable. Paid for by Citizens for Staying Indoors."
+      }
     ],
     "snow": [
-      {"head": "Snow promised you a white Christmas.", "sub": "Now it's {temp} and slushy. Snow: all flake, no follow-through."},
-      {"head": "Four more inches!", "sub": "I'm the Snow, and I approve this message. You will not approve of your commute."}
+      {
+        "head": "Snow promised you a white Christmas.",
+        "sub": "Now it's {temp} and slushy. Snow: all flake, no follow-through."
+      },
+      {
+        "head": "Four more inches!",
+        "sub": "I'm the Snow, and I approve this message. You will not approve of your commute."
+      },
+      {
+        "head": "Snow: cold. Distant. Flaky.",
+        "sub": "It said it would stop by noon. It lied."
+      },
+      {
+        "head": "Vote Plow.",
+        "sub": "Plow: clearing the way for {city}. Paid for by Shovel PAC."
+      },
+      {
+        "head": "Snow's plan: more snow.",
+        "sub": "No ideas. No vision. Just inches. Real boots this cycle."
+      },
+      {
+        "head": "Snow promised a winter wonderland.",
+        "sub": "It delivered slush. Hold Snow accountable."
+      },
+      {
+        "head": "Shovel: hard-working. Never quits.",
+        "sub": "A shovel in every garage. Vote Shovel."
+      },
+      {
+        "head": "Blizzard: too extreme for {city}.",
+        "sub": "We need moderate weather, not more inches."
+      }
     ],
     "rain": [
-      {"head": "Rain: soaking taxpayers since forever.", "sub": "{pop}% chance. Can {city} really afford four more hours of this?"},
-      {"head": "What is Rain hiding?", "sub": "Rain won't release its forecast. We did. It's {pop}%. Bring an umbrella."}
+      {
+        "head": "Rain: soaking taxpayers since forever.",
+        "sub": "{pop}% chance. Can {city} really afford four more hours of this?"
+      },
+      {
+        "head": "What is Rain hiding?",
+        "sub": "Rain won't release its forecast. We did. It's {pop}%. Bring an umbrella."
+      },
+      {
+        "head": "Rain: all wet on the issues.",
+        "sub": "{pop}% chance of the same old story."
+      },
+      {
+        "head": "Umbrella: a candidate who covers you.",
+        "sub": "Umbrella for {city}. Bring one today."
+      },
+      {
+        "head": "Rain promised change. It's just more water.",
+        "sub": "We deserve better. Hood up."
+      },
+      {
+        "head": "I'm Puddle, and I'm deeper than you think.",
+        "sub": "Vote carefully. Step carefully."
+      },
+      {
+        "head": "Rain: soaking you since forever.",
+        "sub": "Can you afford another day of this?"
+      },
+      {
+        "head": "Galoshes: the boot that gets things done.",
+        "sub": "Galoshes for {city}. Paid for by Dry Feet Now."
+      }
     ],
     "drizzle": [
-      {"head": "Drizzle: weak on rain.", "sub": "Can't even commit to a real downpour. Is that who you want leading your afternoon?"}
+      {
+        "head": "Drizzle: weak on rain.",
+        "sub": "Can't even commit to a real downpour. Is that who you want leading your afternoon?"
+      },
+      {
+        "head": "Drizzle: never committed to anything.",
+        "sub": "Is it raining? Is it not? Drizzle won't say."
+      },
+      {
+        "head": "Mist: flip-flopping all day.",
+        "sub": "Wet, then dry, then wet. Who can trust it?"
+      },
+      {
+        "head": "Drizzle: weak leadership.",
+        "sub": "Can't even rain properly. Is that who you want?"
+      },
+      {
+        "head": "Hood: covering you when nobody else will.",
+        "sub": "Hood up. Vote Hood."
+      },
+      {
+        "head": "Drizzle's record speaks for itself.",
+        "sub": "Damp. Gray. Mediocre."
+      }
     ],
     "fog": [
-      {"head": "Fog won't answer the tough questions.", "sub": "Where are the roads? Where's the horizon? Fog has no plan. Headlights on."}
+      {
+        "head": "Fog won't answer the tough questions.",
+        "sub": "Where are the roads? Where's the horizon? Fog has no plan. Headlights on."
+      },
+      {
+        "head": "Fog: hiding something?",
+        "sub": "Visibility {vis}. What doesn't Fog want you to see?"
+      },
+      {
+        "head": "Fog doesn't show up to debates.",
+        "sub": "It just shows up everywhere else. Drive slow."
+      },
+      {
+        "head": "Fog: no vision for {city}.",
+        "sub": "Literally. Visibility {vis}."
+      },
+      {
+        "head": "Headlights: lighting the way forward.",
+        "sub": "Vote Headlights. Low beams, of course."
+      },
+      {
+        "head": "What is Fog covering up?",
+        "sub": "Roads. Trees. Basically everything. Drive slow."
+      }
     ],
     "windy": [
-      {"head": "Wind keeps changing direction.", "sub": "North on Monday, southwest today. Gusts to {gusts}. You can't trust the Wind."}
+      {
+        "head": "Wind keeps changing direction.",
+        "sub": "North on Monday, southwest today. Gusts to {gusts}. You can't trust the Wind."
+      },
+      {
+        "head": "Wind: blows hot and cold.",
+        "sub": "Gusts to {gusts}. Says one thing, blows another."
+      },
+      {
+        "head": "Wind wants your hat.",
+        "sub": "And your umbrella. And your recycling. Don't let Wind win."
+      },
+      {
+        "head": "Wind: no fixed position.",
+        "sub": "Gusts to {gusts}. Flip-flops literally flying."
+      },
+      {
+        "head": "Kite: rising above the competition.",
+        "sub": "On a day like this, only Kite thrives. Vote Kite."
+      },
+      {
+        "head": "Wind blew it.",
+        "sub": "Wind at {wind}. Again. Time for calmer leadership."
+      }
     ],
     "scorching": [
-      {"head": "The Sun says it's on your side.", "sub": "It's {temp}. Feels like {feels}. The Sun is lying to you. Get in the shade."},
-      {"head": "Heat: extreme. Dangerous. Out of touch.", "sub": "Paid for by the Committee to Re-Elect Air Conditioning."}
+      {
+        "head": "The Sun says it's on your side.",
+        "sub": "It's {temp}. Feels like {feels}. The Sun is lying to you. Get in the shade."
+      },
+      {
+        "head": "Heat: extreme. Dangerous. Out of touch.",
+        "sub": "Paid for by the Committee to Re-Elect Air Conditioning."
+      },
+      {
+        "head": "Heat: crushing working families.",
+        "sub": "{temp}. Electric bills soaring. Vote Shade."
+      },
+      {
+        "head": "The Sun's approval: melting.",
+        "sub": "Feels like {feels}. Even its supporters are sweating."
+      },
+      {
+        "head": "Paid for by Friends of AC.",
+        "sub": "{temp} today. Stay cool. Stay inside. Stay registered."
+      },
+      {
+        "head": "Shade: the coolest candidate in the race.",
+        "sub": "{temp}. Vote Shade, today."
+      }
     ],
     "hot": [
-      {"head": "Sunscreen. It's not partisan.", "sub": "{temp} today. A message from Americans for Not Getting Burned."}
+      {
+        "head": "Sunscreen. It's not partisan.",
+        "sub": "{temp} today. A message from Americans for Not Getting Burned."
+      },
+      {
+        "head": "Summer: four more months?",
+        "sub": "{temp} and sticky. Is this the future we want?"
+      },
+      {
+        "head": "Ice Cream for {city}.",
+        "sub": "A cool choice for hot times. High of {high}."
+      },
+      {
+        "head": "Sunscreen: protecting families.",
+        "sub": "UV {uv}. A message from Americans for Not Burning."
+      },
+      {
+        "head": "Popsicle: refreshing. Honest. Sticky.",
+        "sub": "Popsicle for {city}. High of {high}."
+      },
+      {
+        "head": "Heat: a hot mess.",
+        "sub": "{temp}. We deserve a cooler tomorrow."
+      }
     ],
     "freezing": [
-      {"head": "Winter wants another term.", "sub": "Feels like {feels}. Winter's record speaks for itself: frozen pipes, dead batteries, misery."}
+      {
+        "head": "Winter wants another term.",
+        "sub": "Feels like {feels}. Winter's record speaks for itself: frozen pipes, dead batteries, misery."
+      },
+      {
+        "head": "Winter: frozen in the past.",
+        "sub": "Feels like {feels}. Winter's only plan is more of the same."
+      },
+      {
+        "head": "Vote Thermostat.",
+        "sub": "Turn it up. A message from Citizens for Cozy."
+      },
+      {
+        "head": "Ice: dangerous. Slippery. Wrong.",
+        "sub": "Low of {low}. Watch your step out there."
+      },
+      {
+        "head": "Fireplace: warm, welcoming, ready.",
+        "sub": "Feels like {feels}. Fireplace for {city}."
+      },
+      {
+        "head": "Frost: cold and calculating.",
+        "sub": "It came overnight. It hid on your windshield. Shame."
+      }
     ],
     "cold": [
-      {"head": "Cold: wrong on jackets, wrong for you.", "sub": "High of {high}. Vote with your outerwear."}
+      {
+        "head": "Cold: wrong on jackets, wrong for you.",
+        "sub": "High of {high}. Vote with your outerwear."
+      },
+      {
+        "head": "Cold: on the wrong side of comfort.",
+        "sub": "{temp}. A jacket is the only candidate you can trust."
+      },
+      {
+        "head": "Sweater: experienced. Reliable. Warm.",
+        "sub": "Sweater for {city}. I'm Sweater, and I approve this message."
+      },
+      {
+        "head": "Cold: chilling our way of life.",
+        "sub": "{temp}. Time for Warmth."
+      },
+      {
+        "head": "Gloves: hand in hand with {city}.",
+        "sub": "Vote Gloves. Your fingers will thank you."
+      },
+      {
+        "head": "Hot Chocolate: a sweet deal.",
+        "sub": "High of {high}. Paid for by Marshmallow PAC."
+      }
     ],
     "nice": [
-      {"head": "It's morning in {city}.", "sub": "{temp}, sunny, perfect. I'm the Weather, and I approve this message."},
-      {"head": "Four more hours of this!", "sub": "Real results for real people. Go outside, it's a mandate."}
+      {
+        "head": "It's morning in {city}.",
+        "sub": "{temp}, sunny, perfect. I'm the Weather, and I approve this message."
+      },
+      {
+        "head": "Four more hours of this!",
+        "sub": "Real results for real people. Go outside, it's a mandate."
+      },
+      {
+        "head": "Sunshine: proven results.",
+        "sub": "{temp} and beautiful. Re-elect Sunshine."
+      },
+      {
+        "head": "A brighter tomorrow starts today.",
+        "sub": "Actually, today is bright already. Go outside."
+      },
+      {
+        "head": "Promises kept.",
+        "sub": "It said it would be nice. It's nice. When was the last time that happened?"
+      },
+      {
+        "head": "This is what results look like.",
+        "sub": "{temp} and sunny. Paid for by the Committee to Re-Elect Today."
+      },
+      {
+        "head": "Picnic: bringing people together.",
+        "sub": "Vote Picnic. Blanket optional."
+      }
     ],
     "meh": [
-      {"head": "Clouds: no vision. No plan. Just gray.", "sub": "{temp} and nothing happening. Is this the leadership {city} deserves?"}
+      {
+        "head": "Clouds: no vision. No plan. Just gray.",
+        "sub": "{temp} and nothing happening. Is this the leadership {city} deserves?"
+      },
+      {
+        "head": "Overcast: the status quo candidate.",
+        "sub": "Gray yesterday, gray today. Isn't it time for a change?"
+      },
+      {
+        "head": "Clouds took your sunshine.",
+        "sub": "And gave you nothing. {temp}. Paid for by Sunshine 2028."
+      },
+      {
+        "head": "Gray skies have failed {city}.",
+        "sub": "No sun, no rain, no plan. Just {temp} and gray."
+      },
+      {
+        "head": "Clouds: a decade of dullness?",
+        "sub": "Don't settle for overcast. Demand sunshine."
+      },
+      {
+        "head": "Mediocrity is on the ballot.",
+        "sub": "Clouds want four more days of this. Say no."
+      }
     ],
     "clearNight": [
-      {"head": "Tonight, the stars are out.", "sub": "Unlike your candidate, they show up when they say they will. {temp}, clear."}
+      {
+        "head": "Tonight, the stars are out.",
+        "sub": "Unlike your candidate, they show up when they say they will. {temp}, clear."
+      },
+      {
+        "head": "Moon: working the night shift for you.",
+        "sub": "Clear skies, {temp}. Re-elect Moon."
+      },
+      {
+        "head": "Stars: everywhere, for everyone.",
+        "sub": "A clear night for {city}. I'm Night, and I approve this message."
+      },
+      {
+        "head": "Night: delivering peace and quiet.",
+        "sub": "Clear and {temp}. Re-elect Night."
+      },
+      {
+        "head": "Stars: shining for everyone.",
+        "sub": "I'm the Night Sky, and I approve this message."
+      },
+      {
+        "head": "Sleep: the bipartisan solution.",
+        "sub": "It's late. Clear and {temp}. Go to bed."
+      }
     ]
   }
 }

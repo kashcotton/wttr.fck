@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generated from the Material Icons font (Apache 2.0) by tool/make_icons.py. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp"
+    android:viewportWidth="512" android:viewportHeight="512">
+  <path android:fillColor="#FFFFFFFF" android:pathData="M400 84 87 215C69 223 70 248 87 255L201 299C207 301 211 305 213 311L257 425C264 442 289 443 297 425L428 112C435 95 417 77 400 84Z"/>
+</vector>

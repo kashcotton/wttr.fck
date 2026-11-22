@@ -9,6 +9,7 @@ import '../models/weather.dart';
 import '../roasts/engine.dart';
 import '../services/location.dart';
 import '../services/weather_api.dart';
+import '../services/widget_sync.dart';
 import '../util/units.dart';
 
 enum LoadState { idle, loading, ready, error }
@@ -148,12 +149,17 @@ class AppState extends ChangeNotifier {
     fn(this);
     _save();
     notifyListeners();
+    _syncWidget();
   }
 
   void reroll() {
     roastSeed++;
     notifyListeners();
+    _syncWidget();
   }
+
+  /// Hands the Android home-screen widget the latest weather and roasts.
+  void _syncWidget() => WidgetSync.push(this);
 
   // ---- community content ----------------------------------------------------
 
@@ -182,6 +188,7 @@ class AppState extends ChangeNotifier {
       _prefs.setInt('contentFetched', DateTime.now().millisecondsSinceEpoch);
       content = r.$2;
       notifyListeners();
+      _syncWidget();
     } finally {
       client.close();
     }
@@ -214,6 +221,7 @@ class AppState extends ChangeNotifier {
       _prefs.setString('cache', jsonEncode(raw.toJson()));
       roastSeed = _rand.nextInt(1000);
       state = LoadState.ready;
+      _syncWidget();
     } catch (e) {
       error = e is WeatherException
           ? e.message

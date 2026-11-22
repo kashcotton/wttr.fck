@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../main.dart';
 import '../roasts/engine.dart';
+import '../services/widget_sync.dart';
 import '../util/units.dart';
 import '../widgets/cards.dart';
 
@@ -188,6 +189,30 @@ class SettingsScreen extends StatelessWidget {
                       'Colors follow the sky: sunny is warm, rain is blue, storms get moody.',
                 ),
               ]),
+              if (WidgetSync.supported) ...[
+                header('Home screen'),
+                group([
+                  ListTile(
+                    leading: const Icon(Icons.widgets_outlined),
+                    title: const Text('Add the widget'),
+                    subtitle: const Text(
+                        'Temperature and a fresh roast on your home screen. '
+                        'Updates itself every 30 minutes. Tap the arrow for a new insult.'),
+                    trailing: const Icon(Icons.add_rounded),
+                    onTap: () async {
+                      final messenger = ScaffoldMessenger.of(context);
+                      if (await WidgetSync.canPin()) {
+                        await WidgetSync.pin();
+                      } else {
+                        messenger.showSnackBar(const SnackBar(
+                          content: Text(
+                              'Long-press your home screen, tap Widgets, and find wttr.fck.'),
+                        ));
+                      }
+                    },
+                  ),
+                ]),
+              ],
               header('Community'),
               group([
                 SwitchListTile(

@@ -67,3 +67,8 @@ kotlin {
 flutter {
     source = "../.."
 }
+
+dependencies {
+    // Background refresh for the home-screen widget.
+    implementation("androidx.work:work-runtime-ktx:2.11.2")
+}

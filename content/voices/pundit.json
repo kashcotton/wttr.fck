@@ -12,6 +12,34 @@
       {
         "head": "Thunder, like every comment section.",
         "sub": "Lots of noise, lots of heat, nobody's mind is changing. Stay inside."
+      },
+      {
+        "head": "Sources confirm: the sky is furious.",
+        "sub": "Experts on both sides agree it's loud. They disagree on why. Stay inside."
+      },
+      {
+        "head": "Thunder interrupts again.",
+        "sub": "The sky has gone over its speaking time. Moderators are powerless."
+      },
+      {
+        "head": "Live team coverage of a cloud.",
+        "sub": "We've got reporters in raincoats screaming into the wind. Stay home."
+      },
+      {
+        "head": "Developing story: everything is wet and loud.",
+        "sub": "Our analysts will be wrong about this for hours. Stay in."
+      },
+      {
+        "head": "Thunderous applause. Literally.",
+        "sub": "The sky is clapping for itself. Stay indoors."
+      },
+      {
+        "head": "Storm declares a state of emergency.",
+        "sub": "Lawmakers will debate it after it's over. Stay inside."
+      },
+      {
+        "head": "Both sides agree: unplug the TV.",
+        "sub": "A historic moment. Lightning in {city}."
       }
     ],
     "snow": [
@@ -22,6 +50,34 @@
       {
         "head": "Snow: finally, a white-out both sides can see.",
         "sub": "Roads are bad. Stay home and argue online like normal."
+      },
+      {
+        "head": "Snow forms coalition with cold.",
+        "sub": "{temp} and falling. Commuters call it an attack on their way of life."
+      },
+      {
+        "head": "Breaking: shovel shortage.",
+        "sub": "Both parties blame each other. Your driveway doesn't care."
+      },
+      {
+        "head": "Snow totals beat expectations.",
+        "sub": "Analysts predicted flurries. Analysts were wrong. As usual."
+      },
+      {
+        "head": "Grid-lock, but with snow.",
+        "sub": "Nothing is moving in {city}. Like every committee ever."
+      },
+      {
+        "head": "Snow covers everything, like the news.",
+        "sub": "But snow at least eventually melts."
+      },
+      {
+        "head": "Snow: the great equalizer.",
+        "sub": "Every car is stuck regardless of its bumper stickers."
+      },
+      {
+        "head": "Inches pile up like unread bills.",
+        "sub": "{temp}. Plows dispatched. Bills still pending."
       }
     ],
     "rain": [
@@ -32,6 +88,34 @@
       {
         "head": "BREAKING: Sky leaks.",
         "sub": "{pop}% chance of rain. Sources inside the cloud blame the other guys."
+      },
+      {
+        "head": "Rain leads in every poll.",
+        "sub": "{pop}% and climbing. Sun campaign in disarray."
+      },
+      {
+        "head": "Rain refuses to concede.",
+        "sub": "Expected to continue all day. Lawyers are already involved."
+      },
+      {
+        "head": "Soaking: the one bipartisan experience.",
+        "sub": "Left, right, center: everyone gets wet today."
+      },
+      {
+        "head": "Precipitation hearing runs long.",
+        "sub": "The sky took the fifth. Bring an umbrella."
+      },
+      {
+        "head": "Rain wins key districts.",
+        "sub": "Umbrella turnout high. Sun supporters stay home."
+      },
+      {
+        "head": "Deluge of developments.",
+        "sub": "Literally. It's raining. We'll be right back after this."
+      },
+      {
+        "head": "Wet weather filibuster.",
+        "sub": "The rain refuses to yield the floor. Expect it all day."
       }
     ],
     "drizzle": [
@@ -42,6 +126,26 @@
       {
         "head": "A light rain of half-truths.",
         "sub": "Barely anything's falling, yet everyone's acting like it's a scandal."
+      },
+      {
+        "head": "Drizzle: the moderate candidate.",
+        "sub": "Nobody's excited, nobody's outraged. Light rain, low turnout."
+      },
+      {
+        "head": "Sky issues vague statement.",
+        "sub": "It's sort of raining. Spokespeople declined to clarify."
+      },
+      {
+        "head": "Mist polling within margin of error.",
+        "sub": "Is it raining? Statistically, maybe. Hood up."
+      },
+      {
+        "head": "Light rain, heavy spin.",
+        "sub": "Some call it a downpour. Some call it a hoax. It's drizzle."
+      },
+      {
+        "head": "Damp approval ratings.",
+        "sub": "Nobody loves it. Nobody hates it. Hood up."
       }
     ],
     "fog": [
@@ -52,6 +156,26 @@
       {
         "head": "Fog. Can't see the future. Neither can the polls.",
         "sub": "Headlights on. Expectations low."
+      },
+      {
+        "head": "Fog of war. Literally.",
+        "sub": "Nobody can see anything. Cable news will speculate for hours."
+      },
+      {
+        "head": "Transparency at record low.",
+        "sub": "Visibility is {vis}. Just like the budget process."
+      },
+      {
+        "head": "Sources say the fog is anonymous.",
+        "sub": "It won't go on the record. Drive slow."
+      },
+      {
+        "head": "Murky outlook for everyone.",
+        "sub": "Visibility {vis}. Pollsters say it's too close to call."
+      },
+      {
+        "head": "Clarity: not on the ballot.",
+        "sub": "Thick fog. Headlights on."
       }
     ],
     "windy": [
@@ -62,6 +186,26 @@
       {
         "head": "Wind changing direction faster than a senator.",
         "sub": "{wind} winds. Flip-flops will literally fly."
+      },
+      {
+        "head": "Political winds shifting. Also real winds.",
+        "sub": "Gusts to {gusts}. Both are blowing your hat off."
+      },
+      {
+        "head": "Hot air advisory in effect.",
+        "sub": "Wind at {wind}. Unrelated to any speeches. Probably."
+      },
+      {
+        "head": "Gusts outpace campaign spin.",
+        "sub": "{gusts} today. Tie down the yard signs."
+      },
+      {
+        "head": "Winds shift. Pundits pivot.",
+        "sub": "Gusts to {gusts}. Nobody's position holds still."
+      },
+      {
+        "head": "A blustery news cycle.",
+        "sub": "Wind at {wind}. Hold onto your talking points."
       }
     ],
     "scorching": [
@@ -72,6 +216,26 @@
       {
         "head": "Heat dome. Not a policy, sadly.",
         "sub": "Stay inside, drink water, don't get into any arguments, you'll overheat."
+      },
+      {
+        "head": "Heat wave dominates news cycle.",
+        "sub": "{temp}. Every pundit is sweating through their suit on live TV."
+      },
+      {
+        "head": "Temperatures, like tensions, are high.",
+        "sub": "Feels like {feels}. Stay hydrated, stay calm, stay off comment sections."
+      },
+      {
+        "head": "Hottest take of the day: it's hot.",
+        "sub": "Groundbreaking analysis. {temp}. Find shade."
+      },
+      {
+        "head": "Heat index tops approval index.",
+        "sub": "Feels like {feels}. Hotter than any debate stage."
+      },
+      {
+        "head": "Panel melts on live TV.",
+        "sub": "{temp}. Stay indoors. Watch reruns."
       }
     ],
     "hot": [
@@ -82,6 +246,26 @@
       {
         "head": "A heated debate, but outside.",
         "sub": "Wear sunscreen. Every party supports sunscreen. Probably."
+      },
+      {
+        "head": "Things are heating up on the trail.",
+        "sub": "And on the sidewalk. {temp} today."
+      },
+      {
+        "head": "Summer recess energy.",
+        "sub": "It's {temp}. Nobody wants to work, including the sky."
+      },
+      {
+        "head": "Polls show 100% support for shade.",
+        "sub": "A rare unanimous decision. High of {high}."
+      },
+      {
+        "head": "Sweaty press conference weather.",
+        "sub": "{temp}. Even the podium is perspiring."
+      },
+      {
+        "head": "A hot summer for everybody.",
+        "sub": "Both sides are sweating. Literally. High of {high}."
       }
     ],
     "freezing": [
@@ -92,6 +276,26 @@
       {
         "head": "Colder than a filibuster.",
         "sub": "Bundle up. No one is coming to fix this for you."
+      },
+      {
+        "head": "Cold war. Not that one.",
+        "sub": "Feels like {feels}. Diplomatic relations with outside: severed."
+      },
+      {
+        "head": "Freezing, like negotiations.",
+        "sub": "Nothing is moving. Not the talks, not your car."
+      },
+      {
+        "head": "Sky votes for misery.",
+        "sub": "Low of {low}. Recount unlikely to change the result."
+      },
+      {
+        "head": "Ice storm of controversy.",
+        "sub": "Feels like {feels}. Mostly the ice part."
+      },
+      {
+        "head": "Frozen talks, frozen streets.",
+        "sub": "Nothing is getting done today. Stay warm."
       }
     ],
     "cold": [
@@ -102,6 +306,26 @@
       {
         "head": "A chilly reception, like a town hall.",
         "sub": "High of {high}. Low of {low}. Low expectations overall."
+      },
+      {
+        "head": "Cold shoulder from the sky.",
+        "sub": "{temp}. Typical of how it treats its constituents."
+      },
+      {
+        "head": "Chilly reception expected.",
+        "sub": "High of {high}. Jackets are a nonpartisan issue."
+      },
+      {
+        "head": "Breaking: it's sweater season.",
+        "sub": "Experts on both sides recommend layers."
+      },
+      {
+        "head": "Cold front makes landfall.",
+        "sub": "Experts disagree on everything except your need for a coat."
+      },
+      {
+        "head": "Frosty exchange expected.",
+        "sub": "{temp}. Bring layers to any debate."
       }
     ],
     "nice": [
@@ -112,6 +336,26 @@
       {
         "head": "Gorgeous out. Congress will vote to delay it.",
         "sub": "{temp} and sunny. Get outside while it's still legal."
+      },
+      {
+        "head": "Nice weather. Nobody knows how to cover it.",
+        "sub": "No outrage. No scandal. Panelists visibly confused."
+      },
+      {
+        "head": "Perfect day threatens ratings.",
+        "sub": "{temp} and lovely. Turn off the news and go outside."
+      },
+      {
+        "head": "Sun wins in landslide.",
+        "sub": "Clouds concede early. Opposition plans to regroup tomorrow."
+      },
+      {
+        "head": "Weather achieves rare unity.",
+        "sub": "Everyone agrees it's nice. Historians are stunned."
+      },
+      {
+        "head": "Good news, for once.",
+        "sub": "{temp} and sunny. We don't know what to do with ourselves."
       }
     ],
     "meh": [
@@ -122,6 +366,26 @@
       {
         "head": "Overcast, like the mood in every newsroom.",
         "sub": "{temp}. Doom-scrolling weather, so maybe don't."
+      },
+      {
+        "head": "Overcast with a chance of nothing.",
+        "sub": "{temp} and gray. Like a midterm nobody cares about."
+      },
+      {
+        "head": "Status quo maintained.",
+        "sub": "Nothing changed. Nothing will. Gray all day."
+      },
+      {
+        "head": "The sky abstains.",
+        "sub": "It's not voting either way. {temp}, cloudy."
+      },
+      {
+        "head": "A forgettable day.",
+        "sub": "Like most press releases. {temp}, overcast."
+      },
+      {
+        "head": "Mild, moderate, middle-of-the-road.",
+        "sub": "The centrist sky. Gray and noncommittal."
       }
     ],
     "clearNight": [
@@ -132,6 +396,26 @@
       {
         "head": "Tonight's forecast: no spin.",
         "sub": "Clear and calm. Shame about everything else."
+      },
+      {
+        "head": "Polls closed. Sky clear.",
+        "sub": "Results show {temp} and calm. Go to bed, we'll call it in the morning."
+      },
+      {
+        "head": "Late-night analysis: it's dark.",
+        "sub": "Clear skies. Our panel will discuss this for six hours."
+      },
+      {
+        "head": "No breaking news tonight.",
+        "sub": "Just stars. Enjoy the silence while it lasts."
+      },
+      {
+        "head": "Election night energy, minus the yelling.",
+        "sub": "Clear skies, {temp}. Go to sleep."
+      },
+      {
+        "head": "The night sky stays neutral.",
+        "sub": "As always. Clear and {temp}."
       }
     ]
   }

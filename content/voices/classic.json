@@ -20,6 +20,42 @@
       {
         "head": "The sky is screaming.",
         "sub": "Honestly, same. Stay in and keep your phone charged."
+      },
+      {
+        "head": "Nature's having a meltdown.",
+        "sub": "Thunder, lightning, the works. Stay inside and pretend you're in a cozy movie."
+      },
+      {
+        "head": "Kaboom. Stay the hell in.",
+        "sub": "Lightning hits the tallest thing around. Don't be the tallest thing around."
+      },
+      {
+        "head": "It's biblical out there.",
+        "sub": "Charge your phone, find a flashlight, and cancel whatever dumb plan you had."
+      },
+      {
+        "head": "Zeus is throwing shit again.",
+        "sub": "Don't golf. Don't hike. Don't stand under a tree like an idiot."
+      },
+      {
+        "head": "The sky is clearing its throat. Loudly.",
+        "sub": "Thunder at {temp}. Your dog is under the bed and honestly, join him."
+      },
+      {
+        "head": "Absolutely not.",
+        "sub": "Storms all over {city}. Whatever it is, it can wait. Stay in."
+      },
+      {
+        "head": "Power outage speedrun.",
+        "sub": "Find the candles now, not in the dark while swearing."
+      },
+      {
+        "head": "Lightning roulette.",
+        "sub": "Every flash is the sky picking a target. Don't volunteer."
+      },
+      {
+        "head": "The sky is drunk and angry.",
+        "sub": "Stay inside until it sobers up."
       }
     ],
     "snow": [
@@ -38,6 +74,42 @@
       {
         "head": "Winter wonderland my ass.",
         "sub": "It's frozen water falling on you. Dress like you mean it."
+      },
+      {
+        "head": "Holy shit, snow.",
+        "sub": "Everything's white and quiet. Enjoy it before the plows turn it brown."
+      },
+      {
+        "head": "Snow day? Not for you, adult.",
+        "sub": "You still have to work. The snow doesn't care. Neither does your boss."
+      },
+      {
+        "head": "Cold, wet and sideways.",
+        "sub": "{temp} and snowing. Layer up like a damn onion."
+      },
+      {
+        "head": "Shovel time, champ.",
+        "sub": "Lift with your legs. Your back has had enough of your bullshit."
+      },
+      {
+        "head": "Slip-and-slide season.",
+        "sub": "Walk like a penguin. It's not cute, it's physics."
+      },
+      {
+        "head": "Frozen fluff from hell.",
+        "sub": "Looks magical. Gets in your socks. Real boots, now."
+      },
+      {
+        "head": "The world got a white-out.",
+        "sub": "Drive like there's an egg under your gas pedal. Because there basically is."
+      },
+      {
+        "head": "Snowmageddon, junior edition.",
+        "sub": "{temp} and piling up. The bread and milk aisles are already a warzone."
+      },
+      {
+        "head": "Everything's slippery as shit.",
+        "sub": "Stairs, sidewalks, your dignity. Hold the railing."
       }
     ],
     "rain": [
@@ -56,6 +128,42 @@
       {
         "head": "Rain. Obviously.",
         "sub": "Your hair is about to have a really bad day."
+      },
+      {
+        "head": "Soggy as shit.",
+        "sub": "{pop}% chance and the sky is cashing every percent of it."
+      },
+      {
+        "head": "Grab the damn umbrella.",
+        "sub": "Not the tiny broken one. The real one."
+      },
+      {
+        "head": "Rain, rain, fuck off.",
+        "sub": "Come again some other day. Ideally never. Bring a hood."
+      },
+      {
+        "head": "Puddle season.",
+        "sub": "Every puddle is deeper than it looks. You will learn this the hard way."
+      },
+      {
+        "head": "Wet dog weather.",
+        "sub": "Everything smells like wet dog. Including people who don't own dogs."
+      },
+      {
+        "head": "Indoors. Blanket. Done.",
+        "sub": "Rain at {temp}. Perfect excuse to do nothing. You're welcome."
+      },
+      {
+        "head": "Your shoes are about to die.",
+        "sub": "Canvas sneakers in this? Bold. Stupid, but bold."
+      },
+      {
+        "head": "Monsoon mode.",
+        "sub": "{pop}% chance. Your umbrella is about to earn its keep."
+      },
+      {
+        "head": "Wet. Again. Fuck.",
+        "sub": "The sky has a leak and nobody's coming to fix it."
       }
     ],
     "drizzle": [
@@ -70,6 +178,38 @@
       {
         "head": "Mist with an attitude.",
         "sub": "Not quite rain. Still somehow fucks up your hair."
+      },
+      {
+        "head": "Rain's lazy cousin.",
+        "sub": "Barely wet, deeply annoying. Hood up."
+      },
+      {
+        "head": "Is it raining? Kinda?",
+        "sub": "Yes. Sort of. Enough to fuck up your glasses."
+      },
+      {
+        "head": "Damp. Just damp.",
+        "sub": "Not worth an umbrella, but you'll regret not bringing one."
+      },
+      {
+        "head": "Spray-bottle weather.",
+        "sub": "Like the sky is a cat owner and you're the cat on the counter."
+      },
+      {
+        "head": "Wet-ish. Ugh.",
+        "sub": "The kind of rain that ruins your hair but doesn't count as an excuse to stay home."
+      },
+      {
+        "head": "The sky is sneezing on you.",
+        "sub": "Gross, light and constant. Hood up."
+      },
+      {
+        "head": "Fine mist of disappointment.",
+        "sub": "Too wet for suede, too dry to stay home. Ugh."
+      },
+      {
+        "head": "Drip, drip, damn it.",
+        "sub": "Wipers on intermittent. Mood on intermittent too."
       }
     ],
     "fog": [
@@ -84,6 +224,38 @@
       {
         "head": "The world forgot to load.",
         "sub": "Fog everywhere. Don't walk into anything expensive."
+      },
+      {
+        "head": "Where the hell did everything go?",
+        "sub": "The fog ate {city}. Drive slow and pray."
+      },
+      {
+        "head": "Pea soup out there.",
+        "sub": "Visibility is {vis}. That's not a lot of seeing."
+      },
+      {
+        "head": "Spooky as shit.",
+        "sub": "Perfect day to hear footsteps behind you. Don't turn around."
+      },
+      {
+        "head": "Cloud? On the ground? Rude.",
+        "sub": "Low beams, not high beams. High beams just make it worse, genius."
+      },
+      {
+        "head": "Fog. Thick as hell.",
+        "sub": "Can't see the end of the street. Can't see the point of today either."
+      },
+      {
+        "head": "Low-budget horror movie out.",
+        "sub": "Visibility {vis}. If you hear a chainsaw, go home."
+      },
+      {
+        "head": "Fog thicker than your excuses.",
+        "sub": "Leave early. Drive like a grandparent."
+      },
+      {
+        "head": "Can't see shit, part two.",
+        "sub": "Seriously, slow down. The fog doesn't care about your schedule."
       }
     ],
     "windy": [
@@ -98,6 +270,42 @@
       {
         "head": "Free hairstyling outside.",
         "sub": "Gusts of {gusts}. You won't like the style."
+      },
+      {
+        "head": "Bad hair day guaranteed.",
+        "sub": "Gusts up to {gusts}. Don't bother styling anything."
+      },
+      {
+        "head": "Trash cans are migrating.",
+        "sub": "Wind at {wind}. Your recycling is touring the neighborhood."
+      },
+      {
+        "head": "Blustery as fuck.",
+        "sub": "Hold onto your hat. Better yet, leave the hat at home."
+      },
+      {
+        "head": "The air is shoving people.",
+        "sub": "Gusts of {gusts}. Walk into it like a determined little tugboat."
+      },
+      {
+        "head": "Kite weather. Or chaos.",
+        "sub": "Depends on whether you're holding a kite or an umbrella."
+      },
+      {
+        "head": "Doors will slam today.",
+        "sub": "Gusts to {gusts}. Mind your fingers, you dumbass."
+      },
+      {
+        "head": "Umbrella-flipping weather.",
+        "sub": "Gusts to {gusts}. Your umbrella will turn inside out and so will your mood."
+      },
+      {
+        "head": "Hair: destroyed.",
+        "sub": "Wind at {wind}. Embrace the chaos or wear a hat with a strap."
+      },
+      {
+        "head": "The wind is unhinged today.",
+        "sub": "Gusts to {gusts}. Lawn furniture, beware."
       }
     ],
     "scorching": [
@@ -112,6 +320,42 @@
       {
         "head": "Ow. The sun. Ow.",
         "sub": "{temp}. Your car is now an oven. Don't leave anything alive in it."
+      },
+      {
+        "head": "Hot as Satan's armpit.",
+        "sub": "{temp}, feels like {feels}. Stay inside and worship your AC."
+      },
+      {
+        "head": "The air is soup.",
+        "sub": "Hot soup. Don't touch metal. Don't touch anything."
+      },
+      {
+        "head": "Seatbelt buckle = branding iron.",
+        "sub": "Your car has been preheating all day. {temp} outside, worse in there."
+      },
+      {
+        "head": "Nope. Absolutely not.",
+        "sub": "{feels} feels-like. Water, shade, and zero cardio."
+      },
+      {
+        "head": "The sun chose violence.",
+        "sub": "UV is {uv}. Sunscreen or become a lobster. Your call."
+      },
+      {
+        "head": "Sweating in places with no name.",
+        "sub": "{temp}. Even your eyelids are hot. Stay in the shade."
+      },
+      {
+        "head": "Even the shade is hot.",
+        "sub": "{temp}. There is no escape. Only AC."
+      },
+      {
+        "head": "Cooked. You will be cooked.",
+        "sub": "Feels like {feels}. Pretend you're a vampire and stay in."
+      },
+      {
+        "head": "Hell called. It's jealous.",
+        "sub": "{temp}. Hydrate like it's your job."
       }
     ],
     "hot": [
@@ -126,6 +370,38 @@
       {
         "head": "Sweaty. Sticky. Gross.",
         "sub": "Thighs will stick to every chair today. Plan accordingly."
+      },
+      {
+        "head": "Sticky as hell.",
+        "sub": "{temp}. You'll be damp by noon and nobody will hug you."
+      },
+      {
+        "head": "Pit stain o'clock.",
+        "sub": "Wear a dark shirt. Trust me."
+      },
+      {
+        "head": "Toasty. Too toasty.",
+        "sub": "High of {high}. Ice cream is technically hydration."
+      },
+      {
+        "head": "Swamp ass season.",
+        "sub": "Breathable fabrics. Breathable everything. You know why."
+      },
+      {
+        "head": "The AC is your best friend now.",
+        "sub": "{temp}. Be nice to it. Close the damn door."
+      },
+      {
+        "head": "Thigh-sweat season.",
+        "sub": "{temp}. Shorts are a necessity, not a choice."
+      },
+      {
+        "head": "Hot enough to complain about.",
+        "sub": "High of {high}. You'll complain. Everyone will. Deal with it."
+      },
+      {
+        "head": "Sun's out, everything's sticky.",
+        "sub": "Bring water and a backup shirt."
       }
     ],
     "freezing": [
@@ -144,6 +420,42 @@
       {
         "head": "Ice cold. Like your ex.",
         "sub": "Watch for black ice. Walk like a penguin. It works."
+      },
+      {
+        "head": "Colder than your mother-in-law.",
+        "sub": "Feels like {feels}. Your face will hurt. That's normal now."
+      },
+      {
+        "head": "Fuck. That. Cold.",
+        "sub": "{temp}. Your car will take 10 minutes to stop screaming."
+      },
+      {
+        "head": "Ice everywhere.",
+        "sub": "Every step is a gamble. Walk like you've got secrets in your pockets."
+      },
+      {
+        "head": "Snot icicle weather.",
+        "sub": "Feels like {feels}. Cover your face. All of it."
+      },
+      {
+        "head": "Brass monkey territory.",
+        "sub": "Low of {low}. Pipes are scared. So am I."
+      },
+      {
+        "head": "Your eyeballs are cold.",
+        "sub": "Didn't know that was possible? Welcome to {temp}."
+      },
+      {
+        "head": "Cold as hell. Frozen hell.",
+        "sub": "Feels like {feels}. Every breath stings. Cute, right?"
+      },
+      {
+        "head": "Lips: chapped. Soul: chapped.",
+        "sub": "{temp}. Lip balm and layers, you beautiful icicle."
+      },
+      {
+        "head": "Arctic as fuck.",
+        "sub": "Low of {low}. Nobody should be outside. Including you."
       }
     ],
     "cold": [
@@ -158,6 +470,42 @@
       {
         "head": "Chilly as shit.",
         "sub": "High of {high}. That's it. That's the best it gets today."
+      },
+      {
+        "head": "Hoodie won't cut it.",
+        "sub": "{temp} and feels like {feels}. Real jacket, tough guy."
+      },
+      {
+        "head": "Nippy as hell.",
+        "sub": "Your nose will be red. Your hands will be sad. Gloves."
+      },
+      {
+        "head": "Sweater weather, but meaner.",
+        "sub": "High of {high}. Hot drink in one hand, regret in the other."
+      },
+      {
+        "head": "Cold enough to complain.",
+        "sub": "And you will. All day. To everyone."
+      },
+      {
+        "head": "Heated seat weather.",
+        "sub": "If your car doesn't have them, I'm sorry. Truly. {temp}."
+      },
+      {
+        "head": "Cold. Like, actually cold.",
+        "sub": "{temp}. Not 'brisk.' Not 'crisp.' Cold. Dress for it."
+      },
+      {
+        "head": "Your fingers will hate you.",
+        "sub": "Feels like {feels}. Gloves exist for a reason."
+      },
+      {
+        "head": "Soup weather.",
+        "sub": "{temp}. Make soup. Eat soup. Become soup."
+      },
+      {
+        "head": "Hot coffee is mandatory.",
+        "sub": "High of {high}. Hold it with both hands like a little gremlin."
       }
     ],
     "nice": [
@@ -176,6 +524,42 @@
       {
         "head": "Damn, look at that.",
         "sub": "Peak weather. If you stay inside today, that's on you."
+      },
+      {
+        "head": "No complaints. Weird.",
+        "sub": "{temp}, clear and calm. I have nothing mean to say. I hate it."
+      },
+      {
+        "head": "Goddamn gorgeous out.",
+        "sub": "Open a window. Better yet, walk through a door."
+      },
+      {
+        "head": "Big touch-grass energy.",
+        "sub": "{temp}. The grass is right there. Touch it."
+      },
+      {
+        "head": "The weather is carrying today.",
+        "sub": "If today sucks, that's on you, not the sky."
+      },
+      {
+        "head": "Chef's kiss, honestly.",
+        "sub": "Go eat lunch outside like a person in a commercial."
+      },
+      {
+        "head": "Windows down kind of day.",
+        "sub": "{temp} and sunny. Blast something embarrassing."
+      },
+      {
+        "head": "Holy hell, it's lovely.",
+        "sub": "{temp}. Somebody's having a great day. Make it you."
+      },
+      {
+        "head": "Picnic weather, damn it.",
+        "sub": "Grab a blanket and some snacks. No excuses."
+      },
+      {
+        "head": "Okay, sky. You win today.",
+        "sub": "{temp} and perfect. I take back everything I said yesterday."
       }
     ],
     "meh": [
@@ -194,6 +578,38 @@
       {
         "head": "Gray. Just gray.",
         "sub": "Nothing happening up there. Go do something interesting yourself."
+      },
+      {
+        "head": "Aggressively beige.",
+        "sub": "{temp} and gray. The sky has the personality of a waiting room."
+      },
+      {
+        "head": "Neither here nor there.",
+        "sub": "Not cold, not warm, not anything. Bring a light layer and lower your expectations."
+      },
+      {
+        "head": "Blah. Just blah.",
+        "sub": "Perfect weather for doing laundry and questioning your choices."
+      },
+      {
+        "head": "The sky is on mute.",
+        "sub": "Overcast and {temp}. Nothing to report, and that's the report."
+      },
+      {
+        "head": "Sweatpants weather.",
+        "sub": "Gray, dull, cozy. Nobody's going to see you anyway."
+      },
+      {
+        "head": "Peak mid.",
+        "sub": "The weather equivalent of a sandwich with no sauce."
+      },
+      {
+        "head": "Gray. Again. Shit.",
+        "sub": "{temp}. The sky is giving Monday energy no matter what day it is."
+      },
+      {
+        "head": "Uninspired weather.",
+        "sub": "Not good enough to go out, not bad enough to complain. Limbo."
       }
     ],
     "clearNight": [
@@ -208,6 +624,38 @@
       {
         "head": "Clear skies. Starry as hell.",
         "sub": "Good night for a walk. Or for staring at the ceiling."
+      },
+      {
+        "head": "Stars are out. Are you?",
+        "sub": "Clear and {temp}. Go look up for a minute, it's free."
+      },
+      {
+        "head": "Quiet as hell out there.",
+        "sub": "Clear skies, {temp}. Perfect night for bad decisions or good sleep."
+      },
+      {
+        "head": "Moon's doing its thing.",
+        "sub": "Clear night, low of {low}. Close the laptop."
+      },
+      {
+        "head": "Night mode: activated.",
+        "sub": "It's dark, it's clear, and you're still checking the weather. Bed."
+      },
+      {
+        "head": "Clear skies. Bad sleep anyway.",
+        "sub": "{temp}. Put the phone face down and close your eyes."
+      },
+      {
+        "head": "Good night for a walk.",
+        "sub": "Clear and {temp}. Bring a light layer and some sense."
+      },
+      {
+        "head": "Starry as hell.",
+        "sub": "Get away from the streetlights and look up. Worth it."
+      },
+      {
+        "head": "The night is clear. Your mind isn't.",
+        "sub": "Turn off the screen. Seriously. It's late."
       }
     ]
   }

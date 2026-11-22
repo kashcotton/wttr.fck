@@ -12,6 +12,30 @@
       {
         "head": "Don't you dare go out in that.",
         "sub": "Lightning doesn't care how busy you are."
+      },
+      {
+        "head": "Get away from the window.",
+        "sub": "I don't care if it's 'cool.' It's lightning."
+      },
+      {
+        "head": "Did you charge your phone?",
+        "sub": "Storms knock the power out. Then you'll be calling me from a dead phone."
+      },
+      {
+        "head": "No baths during lightning.",
+        "sub": "I read that somewhere. Just humor me."
+      },
+      {
+        "head": "Bring the dog inside.",
+        "sub": "And the cushions. And yourself. Now, please."
+      },
+      {
+        "head": "Stay off the phone during lightning.",
+        "sub": "The landline thing. Yes, I know nobody has one. Still."
+      },
+      {
+        "head": "Fill a pot with water.",
+        "sub": "In case the power goes. Why? Just in case. Trust me."
       }
     ],
     "snow": [
@@ -22,6 +46,30 @@
       {
         "head": "Text me when you get there.",
         "sub": "It's snowing. Drive slow. I'm not sleeping until you text me."
+      },
+      {
+        "head": "Scrape your whole windshield.",
+        "sub": "Not just a little hole. The WHOLE thing. People die that way."
+      },
+      {
+        "head": "Your feet will be wet in those.",
+        "sub": "Real boots. I know you have them, I bought them."
+      },
+      {
+        "head": "Leave early. There's snow.",
+        "sub": "Everyone drives like idiots in it. Don't be one of them."
+      },
+      {
+        "head": "Wear the ugly hat.",
+        "sub": "The one Grandma knitted. It's warm and she'll ask."
+      },
+      {
+        "head": "Is there a shovel in your car?",
+        "sub": "There should be. And a blanket. And snacks. Do I have to do everything?"
+      },
+      {
+        "head": "Wear your gloves this time.",
+        "sub": "Not in your pocket. On your hands."
       }
     ],
     "rain": [
@@ -32,24 +80,116 @@
       {
         "head": "Don't come home soaked again.",
         "sub": "{pop}% chance of rain. I'm not doing your laundry this time."
+      },
+      {
+        "head": "Where's your raincoat?",
+        "sub": "Don't tell me you lost another one."
+      },
+      {
+        "head": "Take your shoes off at the door.",
+        "sub": "I just cleaned. {pop}% chance of mud on my floors."
+      },
+      {
+        "head": "Don't drive through puddles.",
+        "sub": "You don't know how deep they are. Nobody does."
+      },
+      {
+        "head": "Bring an extra pair of socks.",
+        "sub": "You'll thank me. You won't actually thank me, but you should."
+      },
+      {
+        "head": "Close the car windows.",
+        "sub": "You left them open last time. I'm not mad. I'm just remembering."
+      },
+      {
+        "head": "Hang your coat up to dry.",
+        "sub": "Not on the floor. On a hook. That's what hooks are for."
       }
     ],
     "drizzle": [
       {
         "head": "It's drizzling. Hood up.",
         "sub": "Your hair does not look good wet. I say this with love."
+      },
+      {
+        "head": "It's not 'barely raining.'",
+        "sub": "It's raining. Take the umbrella."
+      },
+      {
+        "head": "Hood up, sweetheart.",
+        "sub": "You'll catch a cold. Yes, I know that's not how colds work."
+      },
+      {
+        "head": "You're getting frizzy.",
+        "sub": "Just saying. Hood. Up."
+      },
+      {
+        "head": "You'll get sick going out wet.",
+        "sub": "Science says otherwise. I say wear a hood."
+      },
+      {
+        "head": "Bring the umbrella anyway.",
+        "sub": "You'll thank me later. Probably not. But you should."
+      },
+      {
+        "head": "Your glasses are wet, honey.",
+        "sub": "Wipe them. Gently. Not with your shirt."
       }
     ],
     "fog": [
       {
         "head": "Headlights on, sweetie.",
         "sub": "It's foggy as hell. And put the damn phone down while driving."
+      },
+      {
+        "head": "Drive slower than you think.",
+        "sub": "Slower. Slower than that. I mean it."
+      },
+      {
+        "head": "Text me when you get there.",
+        "sub": "It's foggy. I'll be up. I won't sleep."
+      },
+      {
+        "head": "Low beams, not brights.",
+        "sub": "Your father did that once and we ended up in a ditch."
+      },
+      {
+        "head": "Don't tailgate in this.",
+        "sub": "Leave room. More room. I'm serious."
+      },
+      {
+        "head": "Wear something bright.",
+        "sub": "So cars can see you. Is that so much to ask?"
       }
     ],
     "windy": [
       {
         "head": "Tie your hair back.",
         "sub": "Gusts to {gusts}. And bring the patio chairs in, I asked you twice."
+      },
+      {
+        "head": "Hold onto your hat.",
+        "sub": "That's how you lost the last one. And the one before that."
+      },
+      {
+        "head": "Don't park under the tree.",
+        "sub": "Gusts to {gusts}. Branches fall. I've seen it."
+      },
+      {
+        "head": "Close the windows.",
+        "sub": "All of them. Do you want leaves in your bed?"
+      },
+      {
+        "head": "Bring the patio chairs in.",
+        "sub": "I asked you yesterday. Gusts to {gusts}. Today, please."
+      },
+      {
+        "head": "Don't fling the car door open.",
+        "sub": "The wind will rip it off. I've seen it happen. Twice."
+      },
+      {
+        "head": "Tie your hair back, sweetie.",
+        "sub": "You'll be eating it otherwise."
       }
     ],
     "scorching": [
@@ -60,12 +200,60 @@
       {
         "head": "Sunscreen. Did you put on sunscreen?",
         "sub": "I can tell you didn't. Go back inside and do it."
+      },
+      {
+        "head": "Don't leave anything in the car.",
+        "sub": "Not the dog, not the groceries, not your lip balm. {temp} out."
+      },
+      {
+        "head": "Stay out of the sun, it's {temp}.",
+        "sub": "And reapply sunscreen. Every two hours. I'll set a reminder."
+      },
+      {
+        "head": "Wear a hat. A real one.",
+        "sub": "Not a backwards cap. Your neck burns too."
+      },
+      {
+        "head": "Are you peeing clear?",
+        "sub": "Don't make that face. It's {feels}. It's a valid question."
+      },
+      {
+        "head": "Stay in the shade, please.",
+        "sub": "It's {temp}. I worry. That's my job."
+      },
+      {
+        "head": "Don't touch the slide.",
+        "sub": "Or the car door. Or the seatbelt. Everything is hot."
       }
     ],
     "hot": [
       {
         "head": "Did you drink water today?",
         "sub": "{temp}. Your body is 60% water and you're acting like it's 6%."
+      },
+      {
+        "head": "Sunscreen. Even if it's cloudy.",
+        "sub": "UV is {uv}. You'll burn and then you'll complain."
+      },
+      {
+        "head": "Don't wear jeans in this.",
+        "sub": "It's {temp}. You'll be miserable. You know I'm right."
+      },
+      {
+        "head": "Bring a water bottle.",
+        "sub": "Not a soda. A water bottle. With water in it."
+      },
+      {
+        "head": "Wear the sunscreen I bought you.",
+        "sub": "It's in the bathroom. Behind the other sunscreen."
+      },
+      {
+        "head": "Drink more water than you think.",
+        "sub": "Then drink some more. {temp} today."
+      },
+      {
+        "head": "You look flushed.",
+        "sub": "Sit down. Drink water. Don't argue."
       }
     ],
     "freezing": [
@@ -76,6 +264,30 @@
       {
         "head": "Put on a damn jacket. I'm not asking.",
         "sub": "And gloves. I bought you gloves. Where are the gloves?"
+      },
+      {
+        "head": "Did you warm up the car?",
+        "sub": "Let it run a minute. It's {temp}. Engines have feelings too."
+      },
+      {
+        "head": "Cover your ears.",
+        "sub": "You'll get frostbite and then you'll be the kid with no ears."
+      },
+      {
+        "head": "Two pairs of socks.",
+        "sub": "It's {feels}. Two. Pairs. Don't argue with me."
+      },
+      {
+        "head": "Drip the faucets tonight.",
+        "sub": "Low of {low}. Frozen pipes cost more than your rent."
+      },
+      {
+        "head": "Hat. Gloves. Scarf. Now.",
+        "sub": "It's {feels}. I'm not asking."
+      },
+      {
+        "head": "Keep a blanket in your car.",
+        "sub": "If you get stuck, you'll thank me. It's {temp}."
       }
     ],
     "cold": [
@@ -86,6 +298,30 @@
       {
         "head": "You're going out like THAT?",
         "sub": "High of {high}. Go put on a real jacket."
+      },
+      {
+        "head": "Zip up your jacket.",
+        "sub": "It's not a cape. Zip it."
+      },
+      {
+        "head": "Wear a scarf, please.",
+        "sub": "For me. Do it for me."
+      },
+      {
+        "head": "You'll catch your death.",
+        "sub": "I know that's not a real thing. Wear the jacket anyway."
+      },
+      {
+        "head": "Your hands are freezing.",
+        "sub": "Where are your gloves? Did you lose them? Again?"
+      },
+      {
+        "head": "You need a warmer coat.",
+        "sub": "That's a fashion jacket. That's not a coat."
+      },
+      {
+        "head": "Make yourself some soup.",
+        "sub": "It's {temp}. Soup fixes things."
       }
     ],
     "nice": [
@@ -96,6 +332,30 @@
       {
         "head": "Why are you inside?",
         "sub": "{temp} and beautiful. Go touch grass, I'm serious."
+      },
+      {
+        "head": "Open the windows, it's lovely.",
+        "sub": "Let some fresh air in. Your room smells like a teenager."
+      },
+      {
+        "head": "Call your grandmother.",
+        "sub": "Then go for a walk. It's {temp} and beautiful."
+      },
+      {
+        "head": "Look at that sky!",
+        "sub": "I took a picture. I'll send it to you. I sent it to you."
+      },
+      {
+        "head": "Get off the computer.",
+        "sub": "It's a gorgeous day. When I was your age we were outside all day."
+      },
+      {
+        "head": "Go for a walk with a friend.",
+        "sub": "It's {temp}. Real people. Not on the phone."
+      },
+      {
+        "head": "Hang the laundry outside.",
+        "sub": "It's a beautiful drying day. Your grandmother would be thrilled."
       }
     ],
     "meh": [
@@ -106,12 +366,56 @@
       {
         "head": "Kinda gray. Call your grandmother.",
         "sub": "Perfect day for it. She asks about you."
+      },
+      {
+        "head": "Bring a light jacket, just in case.",
+        "sub": "In case of what? In case of weather. Just bring it."
+      },
+      {
+        "head": "Good day to clean your room.",
+        "sub": "It's gray anyway. No excuses."
+      },
+      {
+        "head": "Eat something green today.",
+        "sub": "It's {temp} and gray. A vegetable won't fix it but it won't hurt."
+      },
+      {
+        "head": "Get some vitamin D.",
+        "sub": "From a pill, since the sun isn't helping."
+      },
+      {
+        "head": "Are you eating okay?",
+        "sub": "You sound tired. It's gray out. Eat something warm."
       }
     ],
     "clearNight": [
       {
         "head": "Why are you still up?",
         "sub": "It's late. The weather will still be there tomorrow. Go to bed."
+      },
+      {
+        "head": "Lock the door.",
+        "sub": "And check it again. I worry."
+      },
+      {
+        "head": "It's late. Put the phone down.",
+        "sub": "The weather will still be there in the morning. So will I."
+      },
+      {
+        "head": "Did you eat dinner?",
+        "sub": "Cereal doesn't count. Clear skies, {temp}. Go to bed."
+      },
+      {
+        "head": "Look at the stars, then sleep.",
+        "sub": "Clear skies tonight. Five minutes of stars, then bed."
+      },
+      {
+        "head": "Leave the porch light on.",
+        "sub": "For whoever's coming home late. It's {temp} out."
+      },
+      {
+        "head": "Text me goodnight.",
+        "sub": "It's clear and {temp}. I just like knowing you're home."
       }
     ]
   }

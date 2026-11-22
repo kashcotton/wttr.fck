@@ -12,12 +12,60 @@
       {
         "head": "Let's take this offline. Fully offline.",
         "sub": "Thunderstorm in progress. Unplug and circle back later."
+      },
+      {
+        "head": "Lightning is out of scope.",
+        "sub": "We are not resourced to handle this. Remote work approved."
+      },
+      {
+        "head": "The sky escalated to leadership.",
+        "sub": "Thunderstorm in {city}. Please hold all outdoor meetings."
+      },
+      {
+        "head": "This storm could've been an email.",
+        "sub": "But here we are. Laptops away from windows."
+      },
+      {
+        "head": "Incident report: sky.",
+        "sub": "Severity: high. Owner: nobody. Status: stay inside."
+      },
+      {
+        "head": "Severe weather has entered the chat.",
+        "sub": "Please mute your outdoor plans."
+      },
+      {
+        "head": "Thunder is double-booked with your commute.",
+        "sub": "Recommend rescheduling. Indefinitely."
       }
     ],
     "snow": [
       {
         "head": "The sky has unilaterally decided to work from home.",
         "sub": "You should too. Roads are a shitshow."
+      },
+      {
+        "head": "Snow is a blocker.",
+        "sub": "Commute ETA pushed to Q2. Async updates encouraged."
+      },
+      {
+        "head": "We're seeing some headwinds. And flakes.",
+        "sub": "{temp}. Please be mindful of slippery deliverables."
+      },
+      {
+        "head": "OOO: the roads.",
+        "sub": "Plows are working on it. Expect delays in all workstreams."
+      },
+      {
+        "head": "Low visibility on the roadmap.",
+        "sub": "And the actual road. WFH strongly recommended."
+      },
+      {
+        "head": "Snow: unplanned downtime.",
+        "sub": "Root cause: winter. Mitigation: boots."
+      },
+      {
+        "head": "Commute latency: high.",
+        "sub": "{temp}. Expect timeouts on all roads."
       }
     ],
     "rain": [
@@ -28,48 +76,212 @@
       {
         "head": "Quick sync: rain.",
         "sub": "Let's align on bringing a jacket going forward."
+      },
+      {
+        "head": "Rain has been added to your calendar.",
+        "sub": "Recurring. All day. {pop}% chance. No option to decline."
+      },
+      {
+        "head": "Let's put a pin in going outside.",
+        "sub": "Circle back when the precipitation is deprioritized."
+      },
+      {
+        "head": "Wet weather: known issue.",
+        "sub": "No fix scheduled. Workaround: umbrella."
+      },
+      {
+        "head": "Just looping you in: rain.",
+        "sub": "No action needed. Except an umbrella. That's an action."
+      },
+      {
+        "head": "Rain is now a core competency.",
+        "sub": "Of the sky. {pop}%. Bring an umbrella."
+      },
+      {
+        "head": "Water-cooler talk is just rain now.",
+        "sub": "Bring the umbrella so you have something to say."
       }
     ],
     "drizzle": [
       {
         "head": "Light drizzle. Low-impact, high-annoyance.",
         "sub": "Not a blocker, but let's flag it."
+      },
+      {
+        "head": "Minor drizzle. Non-critical.",
+        "sub": "Logged as low priority. Will not fix."
+      },
+      {
+        "head": "Soft launch of rain.",
+        "sub": "Stakeholders are underwhelmed. Rollout continues."
+      },
+      {
+        "head": "Rain pilot program underway.",
+        "sub": "Feedback is mixed. Mostly damp."
+      },
+      {
+        "head": "Drizzle: technical debt of the sky.",
+        "sub": "Small, annoying, never fully resolved."
+      },
+      {
+        "head": "Precipitation backlog: low.",
+        "sub": "But nonzero. Hood up."
       }
     ],
     "fog": [
       {
         "head": "Limited visibility into Q4. And the road.",
         "sub": "Foggy out. Let's proceed with caution and lower our KPIs."
+      },
+      {
+        "head": "Alignment unclear.",
+        "sub": "Like everything else this week. Visibility {vis}."
+      },
+      {
+        "head": "We lack clarity on the path forward.",
+        "sub": "Literally. Fog. Headlights on."
+      },
+      {
+        "head": "Low-transparency environment.",
+        "sub": "HR says that's fine. Drive slow."
+      },
+      {
+        "head": "Roadmap foggy, as expected.",
+        "sub": "Visibility {vis}. Please don't commit to arrival times."
+      },
+      {
+        "head": "Let's not boil the ocean. Or drive fast.",
+        "sub": "Fog in {city}. Take it slow, team."
       }
     ],
     "windy": [
       {
         "head": "Strong headwinds this quarter.",
         "sub": "Gusts to {gusts}. Secure your deliverables. And your hat."
+      },
+      {
+        "head": "Pivoting in all directions.",
+        "sub": "Gusts to {gusts}. The wind has no long-term strategy."
+      },
+      {
+        "head": "Disruptive conditions.",
+        "sub": "Wind at {wind}. Not the good kind of disruption."
+      },
+      {
+        "head": "Please secure loose items.",
+        "sub": "Lanyards, badges, the patio umbrella. Gusts to {gusts}."
+      },
+      {
+        "head": "High churn outside.",
+        "sub": "Gusts to {gusts}. Trash cans have left the organization."
+      },
+      {
+        "head": "Wind: aggressive growth strategy.",
+        "sub": "Wind at {wind}. Unsustainable, but here we are."
       }
     ],
     "scorching": [
       {
         "head": "We're running hot today.",
         "sub": "{temp}. Let's take this offline. Offline meaning inside, with AC."
+      },
+      {
+        "head": "Thermal KPIs exceeded.",
+        "sub": "{temp}, feels like {feels}. Exceeding is not always good."
+      },
+      {
+        "head": "Our sun is overdelivering.",
+        "sub": "Please submit sunscreen as a reimbursable expense."
+      },
+      {
+        "head": "Heat is a top-down initiative.",
+        "sub": "Mandatory. Unpopular. Leave the blazer at home."
+      },
+      {
+        "head": "Heat has been flagged by Facilities.",
+        "sub": "{temp}. Please stop opening the loading dock door."
+      },
+      {
+        "head": "Burnout risk: literal.",
+        "sub": "Feels like {feels}. Take a break in the AC."
       }
     ],
     "hot": [
       {
         "head": "Let's leverage some shade.",
         "sub": "{temp}. Hydration is a core value at this company."
+      },
+      {
+        "head": "Business casual is now business shorts.",
+        "sub": "{temp}. Policy update pending legal review."
+      },
+      {
+        "head": "Let's keep it cool in here.",
+        "sub": "Thermostat wars resume at 9 AM."
+      },
+      {
+        "head": "Running a little hot today.",
+        "sub": "High of {high}. Stay hydrated, team."
+      },
+      {
+        "head": "Sweat equity: mandatory.",
+        "sub": "{temp}. No vesting schedule."
+      },
+      {
+        "head": "Thermal headroom: none.",
+        "sub": "High of {high}. Please hydrate responsibly."
       }
     ],
     "freezing": [
       {
         "head": "Let's circle back when it's above freezing.",
         "sub": "Feels like {feels}. This is fucking unacceptable. Sorry. Per policy."
+      },
+      {
+        "head": "Hard freeze on hiring. And outside.",
+        "sub": "Feels like {feels}. Budgets and pipes at risk."
+      },
+      {
+        "head": "Frozen. Like your raise.",
+        "sub": "{temp}. Bundle up. Benefits do not include frostbite."
+      },
+      {
+        "head": "Cold-start problem.",
+        "sub": "Your car, your fingers, your motivation. All of it. {temp}."
+      },
+      {
+        "head": "We're in a deep freeze.",
+        "sub": "Like the budget. Feels like {feels}."
+      },
+      {
+        "head": "Ice: a slippery slope.",
+        "sub": "Low of {low}. HR reminds you to hold the handrail."
       }
     ],
     "cold": [
       {
         "head": "Cold today. Let's touch base on jackets.",
         "sub": "High of {high}. That's the stretch goal, people."
+      },
+      {
+        "head": "Chilly environment detected.",
+        "sub": "Not culture. Weather. {temp}. Jacket recommended."
+      },
+      {
+        "head": "Some cold feedback for you.",
+        "sub": "It's {temp}. Please action a coat."
+      },
+      {
+        "head": "Temperature below target.",
+        "sub": "High of {high}. We'll revisit expectations next quarter."
+      },
+      {
+        "head": "Cold outreach from the sky.",
+        "sub": "{temp}. Unsolicited and unwelcome. Wear a jacket."
+      },
+      {
+        "head": "Brrr-ainstorm session.",
+        "sub": "High of {high}. All ideas welcome, especially coats."
       }
     ],
     "nice": [
@@ -80,18 +292,74 @@
       {
         "head": "Weather is exceeding expectations.",
         "sub": "Please don't spend it in a meeting that could've been an email."
+      },
+      {
+        "head": "Outdoor offsite energy.",
+        "sub": "{temp}, sunny. Walking 1:1s are now approved."
+      },
+      {
+        "head": "Weather: crushing it.",
+        "sub": "Gold star. Exceeds expectations. Promote the sun."
+      },
+      {
+        "head": "Q3 vibes, honestly.",
+        "sub": "Take your lunch outside. That's an order. A friendly order."
+      },
+      {
+        "head": "The sun is a high performer.",
+        "sub": "{temp}. Please don't schedule anything over lunch."
+      },
+      {
+        "head": "Let's take this outside.",
+        "sub": "Not a fight. A meeting. It's {temp} and lovely."
       }
     ],
     "meh": [
       {
         "head": "Weather is meeting expectations. Barely.",
         "sub": "Gray. Neutral. A solid 'needs improvement.'"
+      },
+      {
+        "head": "Weather status: yellow.",
+        "sub": "Not great, not terrible. Monitoring."
+      },
+      {
+        "head": "Neutral sentiment outside.",
+        "sub": "{temp}, gray. Nothing to escalate."
+      },
+      {
+        "head": "A business-as-usual day.",
+        "sub": "Gray, dull, perfectly adequate. Like the quarterly review."
+      },
+      {
+        "head": "Weather is in maintenance mode.",
+        "sub": "{temp}. Gray. Business as usual."
+      },
+      {
+        "head": "Sky submitted the bare minimum.",
+        "sub": "Meets expectations. Barely."
       }
     ],
     "clearNight": [
       {
         "head": "It's after hours. Log off.",
         "sub": "Clear night, {temp}. Nobody's reading your email right now."
+      },
+      {
+        "head": "Please disconnect.",
+        "sub": "Clear skies, {temp}. Slack will still be there tomorrow, unfortunately."
+      },
+      {
+        "head": "End of day. Truly.",
+        "sub": "Stars are out. Your notifications should be too."
+      },
+      {
+        "head": "You're working late again.",
+        "sub": "Close the laptop. The night is clear and so should your schedule be."
+      },
+      {
+        "head": "Night mode enabled.",
+        "sub": "Please disable notifications. Clear skies, {temp}."
       }
     ]
   }

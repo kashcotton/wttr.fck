@@ -1,43 +1,93 @@
 {
   "candidates": {
-    "sun": {"name": "Sun", "party": "Clear Skies Party"},
-    "rain": {"name": "Rain", "party": "Wet Coalition"},
-    "clouds": {"name": "Clouds", "party": "Grey Caucus"},
-    "wind": {"name": "Wind", "party": "Gust Front"},
-    "snow": {"name": "Snow", "party": "Flake Alliance"}
+    "sun": {
+      "name": "Sun",
+      "party": "Clear Skies Party"
+    },
+    "rain": {
+      "name": "Rain",
+      "party": "Wet Coalition"
+    },
+    "clouds": {
+      "name": "Clouds",
+      "party": "Grey Caucus"
+    },
+    "wind": {
+      "name": "Wind",
+      "party": "Gust Front"
+    },
+    "snow": {
+      "name": "Snow",
+      "party": "Flake Alliance"
+    }
   },
   "winner": {
     "sun": [
       "Sun wins in a landslide. Clouds demand a recount.",
       "Sun takes it. Victory speech is just a long, hot stare.",
-      "Sun projected winner. Sunscreen stocks surge."
+      "Sun projected winner. Sunscreen stocks surge.",
+      "Sun claims mandate. Cloud cover drops to zero.",
+      "Sun wins. Demands shorts be worn in every district.",
+      "Landslide for Sun. Shade declares a state of emergency.",
+      "Sun sweeps {city}. Pale people vow to fight on."
     ],
     "rain": [
       "Rain wins. Umbrellas declare a national holiday.",
       "Rain takes {city}. Sun refuses to concede, sulks behind clouds.",
-      "Rain sweeps the district. Literally. Everything is wet."
+      "Rain sweeps the district. Literally. Everything is wet.",
+      "Rain wins by a flood.",
+      "Rain takes {city}. Umbrella sales hit record highs.",
+      "Rain declares victory. Gutters overwhelmed by turnout.",
+      "Rain projected winner. Sun spotted crying in a tanning bed."
     ],
     "clouds": [
       "Clouds win by default. Nobody turned out.",
       "Clouds take it. Victory party is gray and quiet.",
-      "Clouds projected winner. Nobody is excited. Very on brand."
+      "Clouds projected winner. Nobody is excited. Very on brand.",
+      "Clouds win. Victory speech delivered in a monotone.",
+      "Clouds take it. Nobody can see the results. Literally.",
+      "Clouds projected winner. Mood: whatever.",
+      "Clouds win in an upset. Not that anyone's upset. Or anything."
     ],
     "wind": [
       "Wind wins. Promptly changes position on every issue.",
       "Wind blows away the competition. And your recycling bin.",
-      "Wind takes {city}. Hair everywhere demands an investigation."
+      "Wind takes {city}. Hair everywhere demands an investigation.",
+      "Wind wins. Results blown out of proportion.",
+      "Wind takes it. Campaign signs everywhere now. In trees.",
+      "Wind projected winner. Umbrellas file for bankruptcy.",
+      "Wind sweeps {city}. Then sweeps it again. And again."
     ],
     "snow": [
       "Snow wins. Schools close in celebration.",
       "Snow takes it in a white-out. Turnout was low because nobody could drive.",
-      "Snow projected winner. Shovels mobilize."
+      "Snow projected winner. Shovels mobilize.",
+      "Snow wins. Kids celebrate. Adults scrape windshields.",
+      "Snow takes {city}. Plows deployed as peacekeepers.",
+      "Snow projected winner. Hot cocoa futures up 40%.",
+      "Snow wins in a blizzard of votes. Sorry."
     ]
   },
   "approval": [
-    {"max": 25, "text": "Worst approval rating in recorded history. Impeach the sky."},
-    {"max": 45, "text": "Underwater. Fitting."},
-    {"max": 65, "text": "Middling. Like every politician you've ever had."},
-    {"max": 85, "text": "Strong numbers. Weather is considering a second term."},
-    {"max": 100, "text": "Beloved by all. Suspicious, honestly."}
+    {
+      "max": 25,
+      "text": "Worst approval rating in recorded history. Impeach the sky."
+    },
+    {
+      "max": 45,
+      "text": "Underwater. Fitting."
+    },
+    {
+      "max": 65,
+      "text": "Middling. Like every politician you've ever had."
+    },
+    {
+      "max": 85,
+      "text": "Strong numbers. Weather is considering a second term."
+    },
+    {
+      "max": 100,
+      "text": "Beloved by all. Suspicious, honestly."
+    }
   ]
 }

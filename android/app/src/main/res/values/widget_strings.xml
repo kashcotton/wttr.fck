@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_description">The forecast, with attitude. Tap the arrow for a fresh roast.</string>
+    <string name="widget_reroll">Roast me again</string>
+    <string name="widget_empty_head">Open wttr.fck once.</string>
+    <string name="widget_empty_sub">Then I\'ll know where to roast you from.</string>
+</resources>

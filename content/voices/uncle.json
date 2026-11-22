@@ -5,44 +5,346 @@
   "political": false,
   "lines": {
     "storm": [
-      {"head": "They're testing the weather machine again.", "sub": "Don't ask me who 'they' are. Just stay inside and unplug the router."}
+      {
+        "head": "They're testing the weather machine again.",
+        "sub": "Don't ask me who 'they' are. Just stay inside and unplug the router."
+      },
+      {
+        "head": "Thunder is just clouds arguing about who's real.",
+        "sub": "Stay inside. They can't see you through drywall."
+      },
+      {
+        "head": "Lightning never strikes twice. Because it's aiming.",
+        "sub": "Don't be a target. Go inside."
+      },
+      {
+        "head": "Storms are how the sky reboots.",
+        "sub": "It's installing updates. Unplug your stuff."
+      },
+      {
+        "head": "Thunder is the sky's dial-up noise.",
+        "sub": "It's connecting to something. Unplug your router."
+      },
+      {
+        "head": "I've got a bunker. Want the address?",
+        "sub": "No you don't. Just stay inside."
+      }
     ],
     "snow": [
-      {"head": "Snow is just cold rain that's hiding something.", "sub": "Taste it. That's not water. That's cover-up."}
+      {
+        "head": "Snow is just cold rain that's hiding something.",
+        "sub": "Taste it. That's not water. That's cover-up."
+      },
+      {
+        "head": "Every snowflake is unique? Says who?",
+        "sub": "Have you checked them all? I've checked eleven. Two were the same."
+      },
+      {
+        "head": "Snowplows know something.",
+        "sub": "Why are they always out before the snow? Think about it. Wear boots."
+      },
+      {
+        "head": "Snow is just the sky's packing peanuts.",
+        "sub": "What's being shipped? Stay home and find out."
+      },
+      {
+        "head": "Snow is just frozen cloud dandruff.",
+        "sub": "Disgusting. Wear a hat so it doesn't touch your head."
+      },
+      {
+        "head": "Snowmen are watching. Always smiling.",
+        "sub": "Why? What do they know? {temp} out."
+      }
     ],
     "rain": [
-      {"head": "Big Umbrella did this.", "sub": "{pop}% chance of rain, right when umbrella stock goes up? Wake up."},
-      {"head": "Rain is the sky's way of saying it knows.", "sub": "It knows what you did. Bring a hood."}
+      {
+        "head": "Big Umbrella did this.",
+        "sub": "{pop}% chance of rain, right when umbrella stock goes up? Wake up."
+      },
+      {
+        "head": "Rain is the sky's way of saying it knows.",
+        "sub": "It knows what you did. Bring a hood."
+      },
+      {
+        "head": "Rain is just recycled water.",
+        "sub": "Recycled from WHERE? Exactly. Umbrella."
+      },
+      {
+        "head": "Weathermen use umbrellas too. Suspicious.",
+        "sub": "They know. {pop}% chance. Cover your head."
+      },
+      {
+        "head": "Puddles are portals. Don't step in them.",
+        "sub": "Worst case it's a portal. Best case, wet socks."
+      },
+      {
+        "head": "Rain only falls down. Ever wonder why?",
+        "sub": "They don't want you asking. Bring an umbrella."
+      },
+      {
+        "head": "Umbrella companies run the weather.",
+        "sub": "Follow the money. {pop}% chance."
+      }
     ],
     "drizzle": [
-      {"head": "That's not drizzle. That's surveillance mist.", "sub": "Every droplet is a tiny camera. Smile, I guess."}
+      {
+        "head": "That's not drizzle. That's surveillance mist.",
+        "sub": "Every droplet is a tiny camera. Smile, I guess."
+      },
+      {
+        "head": "The sky is misting you like a plant.",
+        "sub": "Who's growing you? And for what?"
+      },
+      {
+        "head": "Drizzle is rain in disguise.",
+        "sub": "It thinks you won't notice. You noticed. Good."
+      },
+      {
+        "head": "Drizzle is the sky testing you.",
+        "sub": "Whether you'll notice. You passed. Hood up."
+      },
+      {
+        "head": "Mist is just shy rain.",
+        "sub": "Or is it? I've said too much."
+      },
+      {
+        "head": "Ever see a drizzle documentary? Exactly.",
+        "sub": "Nobody talks about it. Hood up."
+      }
     ],
     "fog": [
-      {"head": "Fog is just clouds that got too close.", "sub": "Ask yourself why. Then turn your headlights on."}
+      {
+        "head": "Fog is just clouds that got too close.",
+        "sub": "Ask yourself why. Then turn your headlights on."
+      },
+      {
+        "head": "Fog machines. Industrial scale.",
+        "sub": "Who's paying the electric bill on this one?"
+      },
+      {
+        "head": "The fog is where the birds recharge.",
+        "sub": "You didn't hear that from me. Drive slow."
+      },
+      {
+        "head": "Fog only happens when they want it to.",
+        "sub": "Who's they? Don't worry about it. Drive slow."
+      },
+      {
+        "head": "You can't photograph fog properly.",
+        "sub": "Try it. Blurry every time. Coincidence?"
+      },
+      {
+        "head": "Fog is clouds on a stakeout.",
+        "sub": "Watching. Waiting. Low beams on."
+      }
     ],
     "windy": [
-      {"head": "Birds aren't flying today. Interesting.", "sub": "Gusts to {gusts}. Because birds run on batteries and wind drains them. Look it up."}
+      {
+        "head": "Birds aren't flying today. Interesting.",
+        "sub": "Gusts to {gusts}. Because birds run on batteries and wind drains them. Look it up."
+      },
+      {
+        "head": "Wind is just air that's late for something.",
+        "sub": "Late for WHAT? Gusts to {gusts}. Hold your hat."
+      },
+      {
+        "head": "They're turning the big fans on again.",
+        "sub": "Wind at {wind}. Somebody's paying for that."
+      },
+      {
+        "head": "Wind doesn't exist. It's trees fanning.",
+        "sub": "Gusts to {gusts}. Explain THAT, scientists."
+      },
+      {
+        "head": "Birds are grounded today. Very convenient.",
+        "sub": "Who benefits? Wind at {wind}."
+      },
+      {
+        "head": "The wind took my hat in '09.",
+        "sub": "Never saw it again. Hold onto yours."
+      }
     ],
     "scorching": [
-      {"head": "The sun is closer today. I measured.", "sub": "{temp}. Mainstream thermometers won't tell you the real number."}
+      {
+        "head": "The sun is closer today. I measured.",
+        "sub": "{temp}. Mainstream thermometers won't tell you the real number."
+      },
+      {
+        "head": "The sun is a big lamp and someone left it on.",
+        "sub": "{temp}. Nobody's taking responsibility."
+      },
+      {
+        "head": "Asphalt is soft today. Coincidence?",
+        "sub": "Feels like {feels}. Don't walk barefoot, they're tracking footprints."
+      },
+      {
+        "head": "The thermometer is lying to you.",
+        "sub": "It says {temp}. It's actually just hot. Stay inside."
+      },
+      {
+        "head": "Shadows are thinner today. Look.",
+        "sub": "Feels like {feels}. They're up to something. Drink water."
+      },
+      {
+        "head": "The sun has never been to a doctor.",
+        "sub": "Think about it. Sunscreen anyway."
+      }
     ],
     "hot": [
-      {"head": "{temp}? That's what they want you to think.", "sub": "It's hotter. Drink water anyway. Water is one of the good ones."}
+      {
+        "head": "{temp}? That's what they want you to think.",
+        "sub": "It's hotter. Drink water anyway. Water is one of the good ones."
+      },
+      {
+        "head": "Sweat is your body leaking secrets.",
+        "sub": "{temp}. Wear antiperspirant. Stay mysterious."
+      },
+      {
+        "head": "Ice cream trucks are mobile listening posts.",
+        "sub": "Buy one anyway. It's {temp}. Treat yourself."
+      },
+      {
+        "head": "Ever notice AC was invented in summer?",
+        "sub": "Convenient. {temp}. Turn yours on."
+      },
+      {
+        "head": "Lemonade stands are a front.",
+        "sub": "For what? Just buy a cup. It's {temp}."
+      },
+      {
+        "head": "Mosquitoes are drones. Small ones.",
+        "sub": "Wear repellent. High of {high}."
+      }
     ],
     "freezing": [
-      {"head": "Global warming, huh? Then explain THIS.", "sub": "Feels like {feels}. (That's called weather. Uncle won't listen. Wear gloves.)"}
+      {
+        "head": "Global warming, huh? Then explain THIS.",
+        "sub": "Feels like {feels}. (That's called weather. Uncle won't listen. Wear gloves.)"
+      },
+      {
+        "head": "Cold is just heat that gave up.",
+        "sub": "{temp}. Don't give up like heat did. Wear a coat."
+      },
+      {
+        "head": "Icicles are nature's spikes.",
+        "sub": "Defensive measures. Against what? Stay inside and think."
+      },
+      {
+        "head": "Your breath is visible. So are you.",
+        "sub": "Feels like {feels}. Hat and scarf. Blend in."
+      },
+      {
+        "head": "Ice is just water that's hiding.",
+        "sub": "From what? From you. Walk carefully."
+      },
+      {
+        "head": "Penguins are fine in this. Penguins know things.",
+        "sub": "Feels like {feels}. Dress like a penguin."
+      }
     ],
     "cold": [
-      {"head": "Cold front? More like cold FRONT ORGANIZATION.", "sub": "High of {high}. Wear a jacket. They can't track you through wool."}
+      {
+        "head": "Cold front? More like cold FRONT ORGANIZATION.",
+        "sub": "High of {high}. Wear a jacket. They can't track you through wool."
+      },
+      {
+        "head": "Ever notice it's cold every winter?",
+        "sub": "Every year. Like clockwork. Who's setting the clock?"
+      },
+      {
+        "head": "Hot cocoa is a distraction.",
+        "sub": "A delicious one. {temp}. Drink it, but stay alert."
+      },
+      {
+        "head": "Your breath is a cloud. Who owns it?",
+        "sub": "Not you, apparently. {temp}. Scarf over your mouth."
+      },
+      {
+        "head": "Thermostats are linked. All of them.",
+        "sub": "Turn yours up anyway. {temp}."
+      },
+      {
+        "head": "The cold drains your phone faster.",
+        "sub": "Coincidence? I don't think so. Keep it in a pocket."
+      }
     ],
     "nice": [
-      {"head": "Nice weather. Suspicious.", "sub": "Nothing is ever this nice for free. Go outside and keep your eyes open."}
+      {
+        "head": "Nice weather. Suspicious.",
+        "sub": "Nothing is ever this nice for free. Go outside and keep your eyes open."
+      },
+      {
+        "head": "Nothing's wrong. That's what's wrong.",
+        "sub": "{temp} and perfect. Enjoy it with one eye open."
+      },
+      {
+        "head": "Birds are out today. Batteries must be charged.",
+        "sub": "Go outside. Wave at them. They report back."
+      },
+      {
+        "head": "Perfect weather is how they get you outside.",
+        "sub": "Outside where they can see you. Go anyway, it's {temp}."
+      },
+      {
+        "head": "The grass is greener. Literally. Why?",
+        "sub": "Go touch it and report back."
+      },
+      {
+        "head": "Clear skies mean clear surveillance.",
+        "sub": "Wave at the satellites. Enjoy the {temp}."
+      }
     ],
     "meh": [
-      {"head": "Clouds are just sky curtains.", "sub": "What are they hiding up there? Nobody knows. {temp} down here."}
+      {
+        "head": "Clouds are just sky curtains.",
+        "sub": "What are they hiding up there? Nobody knows. {temp} down here."
+      },
+      {
+        "head": "Gray days are when they do maintenance.",
+        "sub": "On what? The sky, obviously. {temp}."
+      },
+      {
+        "head": "Clouds this boring are covering something.",
+        "sub": "Nothing to see up there. Which is exactly what they'd want."
+      },
+      {
+        "head": "Overcast is a cover story.",
+        "sub": "Literally. The sky is covered. {temp}."
+      },
+      {
+        "head": "Gray is the color of secrets.",
+        "sub": "And this sky is full of them. Light jacket."
+      },
+      {
+        "head": "Nobody remembers gray days. That's the point.",
+        "sub": "{temp}. Make it memorable. Or don't."
+      }
     ],
     "clearNight": [
-      {"head": "Count the stars. Now count again.", "sub": "Different number? Exactly. Go to bed, I'll keep watch."}
+      {
+        "head": "Count the stars. Now count again.",
+        "sub": "Different number? Exactly. Go to bed, I'll keep watch."
+      },
+      {
+        "head": "That's not a star. That's a satellite.",
+        "sub": "Most of them are. Wave anyway. Clear and {temp}."
+      },
+      {
+        "head": "The moon follows you home. Every night.",
+        "sub": "Lock your door. Go to bed. It's {temp}."
+      },
+      {
+        "head": "The moon has a dark side. Ask yourself why.",
+        "sub": "Clear skies, {temp}. Close your curtains."
+      },
+      {
+        "head": "Shooting stars are just stars giving up.",
+        "sub": "Make a wish anyway. Clear and {temp}."
+      },
+      {
+        "head": "Owls are awake. Owls see everything.",
+        "sub": "Go to bed before they notice you."
+      }
     ]
   }
 }
