@@ -69,6 +69,7 @@ politics off never see it.
 ### Other files
 
 - [`panels.json`](content/panels.json): the Pundit Panel (left, right, and the weather's reply)
+- [`pundits.json`](content/pundits.json): the cast of made-up pundits. Fictional names only, never real people
 - [`election.json`](content/election.json): Election Night winner lines and approval ratings
 - [`loading.json`](content/loading.json): the loading screen
 

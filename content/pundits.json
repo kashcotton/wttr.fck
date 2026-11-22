@@ -1,0 +1,248 @@
+{
+  "left": [
+    {
+      "name": "Lefty Lou",
+      "role": "Left of center"
+    },
+    {
+      "name": "Organic Olivia",
+      "role": "Composts competitively"
+    },
+    {
+      "name": "Bike-Lane Brett",
+      "role": "Cycles through blizzards"
+    },
+    {
+      "name": "Fair-Trade Farah",
+      "role": "Community organizer"
+    },
+    {
+      "name": "Solar Sage",
+      "role": "Has a podcast"
+    },
+    {
+      "name": "Oat-Milk Owen",
+      "role": "Think-tank fellow"
+    },
+    {
+      "name": "Tote-Bag Tamsin",
+      "role": "Owns 41 tote bags"
+    },
+    {
+      "name": "Union Ulysses",
+      "role": "Shop steward"
+    },
+    {
+      "name": "Recycling Rosa",
+      "role": "Sorts your trash for you"
+    },
+    {
+      "name": "Rent-Control Remy",
+      "role": "Tenant advocate"
+    },
+    {
+      "name": "Tofu Theo",
+      "role": "Very online"
+    },
+    {
+      "name": "Protest-Sign Peggy",
+      "role": "Laminates everything"
+    },
+    {
+      "name": "Cardigan Kai",
+      "role": "Adjunct professor"
+    },
+    {
+      "name": "Grant-Writer Gwen",
+      "role": "Nonprofit lifer"
+    },
+    {
+      "name": "Thrift-Store Tess",
+      "role": "Vintage everything"
+    },
+    {
+      "name": "Seminar Sam",
+      "role": "Panelist at large"
+    },
+    {
+      "name": "Wind-Farm Wanda",
+      "role": "Clean energy booster"
+    },
+    {
+      "name": "Library Lionel",
+      "role": "Overdue on nothing"
+    },
+    {
+      "name": "Co-op Coco",
+      "role": "Board member, food co-op"
+    },
+    {
+      "name": "Kombucha Kurt",
+      "role": "Brews it in the closet"
+    },
+    {
+      "name": "Transit Tia",
+      "role": "Knows every bus route"
+    },
+    {
+      "name": "Podcast Pax",
+      "role": "Brings snacks to meetings"
+    },
+    {
+      "name": "Farmers-Market Fern",
+      "role": "Here every Saturday"
+    },
+    {
+      "name": "Op-Ed Odette",
+      "role": "Writes letters to the editor"
+    },
+    {
+      "name": "Mutual-Aid Mo",
+      "role": "Runs the group chat"
+    }
+  ],
+  "right": [
+    {
+      "name": "Righty Rhonda",
+      "role": "Right of center"
+    },
+    {
+      "name": "Bootstraps Bob",
+      "role": "Self-made, he'll tell you"
+    },
+    {
+      "name": "Grill-Master Greg",
+      "role": "Grills year-round"
+    },
+    {
+      "name": "Tax-Cut Tammy",
+      "role": "Talk radio, 5 to 7"
+    },
+    {
+      "name": "Pickup Pete",
+      "role": "Hauls things for friends"
+    },
+    {
+      "name": "Small-Biz Sheila",
+      "role": "Owns a hardware store"
+    },
+    {
+      "name": "Deregulation Dale",
+      "role": "Free-market guy"
+    },
+    {
+      "name": "Freedom Frank",
+      "role": "Flag on the porch"
+    },
+    {
+      "name": "Lawn-Care Larry",
+      "role": "Edges with a ruler"
+    },
+    {
+      "name": "Steakhouse Stan",
+      "role": "Medium rare, always"
+    },
+    {
+      "name": "Mortgage Marge",
+      "role": "Paid it off early"
+    },
+    {
+      "name": "Golf-Course Gordon",
+      "role": "Tee time at seven"
+    },
+    {
+      "name": "Cul-de-Sac Cindy",
+      "role": "HOA president"
+    },
+    {
+      "name": "Bulk-Buy Brenda",
+      "role": "Costco member since day one"
+    },
+    {
+      "name": "Fishing-Trip Phil",
+      "role": "Up before the sun"
+    },
+    {
+      "name": "Overtime Otis",
+      "role": "Hasn't missed a shift"
+    },
+    {
+      "name": "Spreadsheet Stu",
+      "role": "Balances the budget for fun"
+    },
+    {
+      "name": "Bass-Boat Barb",
+      "role": "Lake people"
+    },
+    {
+      "name": "Thermostat Ted",
+      "role": "Nobody touches the dial"
+    },
+    {
+      "name": "Bake-Sale Bev",
+      "role": "Church fundraiser chair"
+    },
+    {
+      "name": "Hunting-Season Hal",
+      "role": "Owns a lot of camo"
+    },
+    {
+      "name": "Toolbelt Tony",
+      "role": "Contractor, cash preferred"
+    },
+    {
+      "name": "Truck-Stop Trudy",
+      "role": "Long-haul trucker"
+    },
+    {
+      "name": "Pancake-Breakfast Pam",
+      "role": "Rotary Club regular"
+    },
+    {
+      "name": "Gun-Safe Gus",
+      "role": "Keeps it locked, thanks"
+    }
+  ],
+  "weather": [
+    {
+      "name": "The Actual Weather",
+      "role": "Independent. Tired."
+    },
+    {
+      "name": "The Sky",
+      "role": "Nonpartisan. Overworked."
+    },
+    {
+      "name": "Mother Nature",
+      "role": "Running unopposed"
+    },
+    {
+      "name": "The Jet Stream",
+      "role": "Goes wherever it wants"
+    },
+    {
+      "name": "The Barometer",
+      "role": "Under a lot of pressure"
+    },
+    {
+      "name": "The Forecast",
+      "role": "Usually right. Ish."
+    },
+    {
+      "name": "Your Local Cloud",
+      "role": "Unaffiliated"
+    },
+    {
+      "name": "The Thermometer",
+      "role": "Just reads the numbers"
+    },
+    {
+      "name": "The Atmosphere",
+      "role": "Has seen it all"
+    },
+    {
+      "name": "The Dew Point",
+      "role": "Nobody understands me"
+    }
+  ]
+}

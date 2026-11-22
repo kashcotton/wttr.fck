@@ -3,7 +3,7 @@ description: "A free weather app that tells you the forecast and swears at you."
 
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.1.0+2
 
 environment:
   sdk: ^3.14.0

@@ -8,11 +8,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/weather.dart';
 import '../roasts/engine.dart';
 import '../services/location.dart';
+import '../services/system_colors.dart';
+import '../services/warnings.dart';
 import '../services/weather_api.dart';
 import '../services/widget_sync.dart';
+import '../theme.dart';
 import '../util/units.dart';
 
 enum LoadState { idle, loading, ready, error }
+
+enum ColorSource { wallpaper, weather, custom }
 
 class AppState extends ChangeNotifier {
   AppState(this._prefs, this.content, {bool fetchContent = true})
@@ -38,6 +43,17 @@ class AppState extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.system;
   bool onboarded = false;
   bool communityUpdates = true;
+
+  ColorSource colorSource =
+      SystemPalette.platformSupported ? ColorSource.wallpaper : ColorSource.weather;
+  int customColor = colorSwatches.first.$2.toARGB32();
+  SystemPalette? system;
+
+  final warnings = WarningsService();
+  List<WeatherAlert> alerts = const [];
+  bool alertsCovered = false;
+  String? _alertsFor;
+  int panelSeed = 0;
 
   bool politics = true;
   bool panel = true;
@@ -85,6 +101,12 @@ class AppState extends ChangeNotifier {
     themeMode = ThemeMode.values[p.getInt('themeMode') ?? 0];
     onboarded = p.getBool('onboarded') ?? false;
     communityUpdates = p.getBool('communityUpdates') ?? true;
+    final cs = p.getInt('colorSource');
+    if (cs != null && cs < ColorSource.values.length) {
+      colorSource = ColorSource.values[cs];
+    }
+    customColor = p.getInt('customColor') ?? customColor;
+    panelSeed = p.getInt('panelSeed') ?? _rand.nextInt(10000);
     saved = (p.getStringList('saved') ?? [])
         .map((s) => Place.fromJson(jsonDecode(s) as Map<String, dynamic>))
         .toList();
@@ -129,6 +151,9 @@ class AppState extends ChangeNotifier {
     p.setInt('themeMode', themeMode.index);
     p.setBool('onboarded', onboarded);
     p.setBool('communityUpdates', communityUpdates);
+    p.setInt('colorSource', colorSource.index);
+    p.setInt('customColor', customColor);
+    p.setInt('panelSeed', panelSeed);
     p.setStringList('saved', saved.map((s) => jsonEncode(s.toJson())).toList());
     if (selected == null) {
       p.remove('selected');
@@ -148,6 +173,42 @@ class AppState extends ChangeNotifier {
     roastSeed++;
     notifyListeners();
     _syncWidget();
+  }
+
+  void rerollPanel() {
+    panelSeed++;
+    _prefs.setInt('panelSeed', panelSeed);
+    notifyListeners();
+  }
+
+  SystemPalette? get activeSystem =>
+      colorSource == ColorSource.wallpaper ? system : null;
+
+  Color get seed => switch (colorSource) {
+        ColorSource.custom => Color(customColor),
+        _ => seedFor(forecast),
+      };
+
+  Future<void> loadSystemColors() async {
+    final p = await SystemPalette.load();
+    if (p != system) {
+      system = p;
+      notifyListeners();
+    }
+  }
+
+  Future<void> _loadAlerts(Place place) async {
+    alertsCovered = WarningsService.covered(place);
+    final found = await warnings.official(place);
+    if (forecast?.place.id != place.id) return;
+    alerts = found;
+    _alertsFor = place.id;
+    notifyListeners();
+  }
+
+  List<WeatherAlert> get shownAlerts {
+    if (alerts.isNotEmpty || forecast == null) return alerts;
+    return headsUps(forecast!, units);
   }
 
   void _syncWidget() => WidgetSync.push(this);
@@ -207,8 +268,12 @@ class AppState extends ChangeNotifier {
       forecast = raw.parse();
       _prefs.setString('cache', jsonEncode(raw.toJson()));
       roastSeed = _rand.nextInt(1000);
+      panelSeed++;
+      _prefs.setInt('panelSeed', panelSeed);
       state = LoadState.ready;
       _syncWidget();
+      if (_alertsFor != forecast!.place.id) alerts = const [];
+      _loadAlerts(forecast!.place);
     } catch (e) {
       error = e is WeatherException
           ? e.message

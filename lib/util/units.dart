@@ -24,6 +24,22 @@ class Units {
     }
   }
 
+  double speedValue(double kmh) => switch (wind) {
+        WindUnit.kmh => kmh,
+        WindUnit.mph => kmh * 0.621371,
+        WindUnit.ms => kmh / 3.6,
+      };
+
+  String get speedUnit => switch (wind) {
+        WindUnit.kmh => 'km/h',
+        WindUnit.mph => 'mph',
+        WindUnit.ms => 'm/s',
+      };
+
+  String precipShort(double mm) => imperial
+      ? (mm / 25.4 < 0.01 ? '<0.01"' : '${(mm / 25.4).toStringAsFixed(2)}"')
+      : (mm < 0.1 ? '<0.1' : mm.toStringAsFixed(1));
+
   String precip(double mm) =>
       imperial ? '${(mm / 25.4).toStringAsFixed(2)} in' : '${mm.toStringAsFixed(1)} mm';
 
@@ -60,3 +76,9 @@ String clock(DateTime t, {bool h24 = false}) {
   final h = t.hour % 12 == 0 ? 12 : t.hour % 12;
   return '$h:$m ${t.hour < 12 ? 'AM' : 'PM'}';
 }
+
+const _mo = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+String shortDate(DateTime d) => '${weekday(d)}, ${_mo[d.month - 1]} ${d.day}';
+
+const _wdLong = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+String longWeekday(DateTime d) => _wdLong[d.weekday - 1];

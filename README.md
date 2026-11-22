@@ -20,10 +20,11 @@ A free, open-source weather app that tells you the real forecast and swears at y
 
 ## What it does
 
-- **A real forecast.** Current conditions, a 24-hour temperature curve, 10 days, air quality, UV, wind, pressure, visibility, sunrise and sunset, for anywhere on Earth.
+- **A real forecast.** Current conditions, 48 hours of temperature, rain and wind, a "rain starting in 30 minutes" heads-up, 10 days you can tap into hour by hour, air quality, UV, wind, humidity and dew point, cloud cover, pressure, visibility, sunrise and sunset, for anywhere on Earth.
+- **Official weather warnings.** From the US National Weather Service, Environment Canada, Germany's DWD and MeteoAlarm (most of Europe, in the apps). Everywhere else it flags dangerous heat, cold, wind, rain and storms from the forecast, clearly marked as unofficial.
 - **Roasts you about it.** Every kind of weather has its own lines, in six voices: Classic Jerk, Cable News Pundit, Disappointed Parent, Middle Manager, Campaign Ad, Conspiracy Uncle.
 - **For everyone.** Pick **Clean** (fudge, heck), **Salty** (f\*ck) or **Unhinged**. Same jokes, different filth.
-- **Politics, optional and fair.** The *Pundit Panel* has two made-up pundits argue about the weather. *Election Night* has Sun, Rain, Clouds, Wind and Snow run for office with vote shares taken from the real forecast. Both sides get roasted equally, no real people are named, and one switch turns all of it off.
+- **Politics, optional and fair.** The *Pundit Panel* has a rotating cast of 50 made-up pundits argue about the weather, with a fresh take every time. *Election Night* has Sun, Rain, Clouds, Wind and Snow run for office with vote shares taken from the real forecast. Both sides get roasted equally, no real people are named, and one switch turns all of it off.
 - **Actually useful.** Misery index, a "should I go outside?" verdict, what to wear.
 - **Written by the community.** Every line lives in plain JSON in [`content/`](content/). Merged roasts reach every user automatically, with credit.
 - **Free.** No ads, no account, no tracking, no API keys.
@@ -31,7 +32,8 @@ A free, open-source weather app that tells you the real forecast and swears at y
 ## Design
 
 Built on Google's **Material 3 Expressive**: Google Sans Flex, tonal color that
-re-tints to match the sky, expressive shapes that morph with the weather
+matches your Android wallpaper (Material You) or re-tints to match the sky, or
+any color you pick in Settings, expressive shapes that morph with the weather
 (a sunny burst, a cookie for clouds, a flower for snow), and spring motion.
 
 It adapts to every screen using Material's window size classes:

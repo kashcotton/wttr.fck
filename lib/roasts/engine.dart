@@ -31,6 +31,21 @@ Mood moodFor(Current c) {
 
 typedef Roast = ({String head, String sub, String? by});
 
+class PanelTake {
+  final String left, right, weather;
+  final String? by;
+  final Pundit leftWho, rightWho, weatherWho;
+  const PanelTake({
+    required this.left,
+    required this.right,
+    required this.weather,
+    required this.by,
+    required this.leftWho,
+    required this.rightWho,
+    required this.weatherWho,
+  });
+}
+
 class ElectionResult {
   final List<({String key, Candidate who, int pct})> results;
   final String quip;
@@ -71,14 +86,27 @@ class RoastEngine {
     return (head: fill(l.head), sub: fill(l.sub), by: l.by);
   }
 
-  ({String left, String right, String weather, String? by}) panel(int seed) {
+  static final _perms = <(int, int), List<int>>{};
+
+  static int pick(int seed, int n, int salt) {
+    if (n <= 1) return 0;
+    final perm = _perms.putIfAbsent(
+        (n, salt), () => List.generate(n, (i) => i)..shuffle(math.Random(salt)));
+    return perm[seed.abs() % n];
+  }
+
+  PanelTake panel(int seed) {
     final pool = content.panels[mood]!;
-    final p = pool[seed.abs() % pool.length];
-    return (
+    final p = pool[pick(seed, pool.length, mood.index + 101)];
+    final r = content.pundits;
+    return PanelTake(
       left: fill(p.left),
       right: fill(p.right),
       weather: fill(p.weather),
       by: p.by,
+      leftWho: r.left[pick(seed, r.left.length, 7)],
+      rightWho: r.right[pick(seed, r.right.length, 13)],
+      weatherWho: r.weather[pick(seed, r.weather.length, 29)],
     );
   }
 
@@ -229,6 +257,27 @@ class RoastEngine {
     };
     return (items: items, quip: censor(quip, level));
   }
+
+  String feelsQuip(double temp, double feels, int humidity) {
+    final d = feels - temp;
+    return censor(
+        d >= 3
+            ? (humidity >= 60 ? 'Humidity is lying to the thermometer.' : 'The sun is cooking you extra.')
+            : d <= -3
+                ? 'The wind is making it worse. Of course it is.'
+                : 'What it says is what you get. Rare honesty.',
+        level);
+  }
+
+  String cloudQuip(int pct) => censor(
+      pct >= 90
+          ? 'Lid on. Nobody is getting a tan.'
+          : pct >= 60
+              ? 'Mostly gray. Moody as hell.'
+              : pct >= 25
+                  ? 'Some clouds. Decorative.'
+                  : 'Wide open sky. Show-off.',
+      level);
 
   String humidityQuip(int h) => censor(
       h >= 85

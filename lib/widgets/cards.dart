@@ -1,12 +1,14 @@
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../models/weather.dart';
+import '../services/warnings.dart';
 import '../roasts/engine.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
@@ -458,7 +460,33 @@ class VerdictRow extends StatelessWidget {
   }
 }
 
-class HourlyCard extends StatelessWidget {
+enum HourlyView { temp, rain, wind }
+
+String? nowcastLine(Forecast f) {
+  final n = f.nowcast;
+  if (n.length < 2) return null;
+  final now = f.current.time;
+  final upcoming = n.where((x) => !x.time.isBefore(now.subtract(const Duration(minutes: 15)))).toList();
+  if (upcoming.length < 2) return null;
+  const wet = 0.1;
+  final rainingNow = upcoming.first.mm >= wet;
+  String mins(DateTime t) {
+    final m = t.difference(now).inMinutes;
+    if (m <= 15) return 'in the next 15 minutes';
+    return 'in about ${(m / 15).round() * 15} minutes';
+  }
+
+  if (rainingNow) {
+    final stop = upcoming.skip(1).where((x) => x.mm < wet).firstOrNull;
+    return stop == null
+        ? 'Rain continues for at least the next two hours.'
+        : 'Rain should stop ${mins(stop.time)}.';
+  }
+  final start = upcoming.skip(1).where((x) => x.mm >= wet).firstOrNull;
+  return start == null ? null : 'Rain starting ${mins(start.time)}.';
+}
+
+class HourlyCard extends StatefulWidget {
   const HourlyCard({
     super.key,
     required this.forecast,
@@ -474,18 +502,70 @@ class HourlyCard extends StatelessWidget {
   static const itemW = 64.0;
 
   @override
-  Widget build(BuildContext context) {
-    final t = Theme.of(context).textTheme;
-    final cs = Theme.of(context).colorScheme;
-    final hours = forecast.hours;
+  State<HourlyCard> createState() => _HourlyCardState();
+}
+
+class _HourlyCardState extends State<HourlyCard> {
+  final _scroll = ScrollController();
+  var _view = HourlyView.temp;
+  var _atStart = true;
+  var _atEnd = false;
+
+  static bool get _pointer =>
+      kIsWeb ||
+      defaultTargetPlatform == TargetPlatform.windows ||
+      defaultTargetPlatform == TargetPlatform.linux ||
+      defaultTargetPlatform == TargetPlatform.macOS;
+
+  @override
+  void initState() {
+    super.initState();
+    _scroll.addListener(_edges);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _edges());
+  }
+
+  @override
+  void dispose() {
+    _scroll.dispose();
+    super.dispose();
+  }
+
+  void _edges() {
+    if (!_scroll.hasClients) return;
+    final p = _scroll.position;
+    final s = p.pixels <= p.minScrollExtent + 1;
+    final e = p.pixels >= p.maxScrollExtent - 1;
+    if (s != _atStart || e != _atEnd) {
+      setState(() {
+        _atStart = s;
+        _atEnd = e;
+      });
+    }
+  }
+
+  void _page(int dir) {
+    if (!_scroll.hasClients) return;
+    final p = _scroll.position;
+    final target = (p.pixels + dir * p.viewportDimension * 0.8)
+        .clamp(p.minScrollExtent, p.maxScrollExtent);
+    _scroll.animateTo(target,
+        duration: const Duration(milliseconds: 450), curve: Curves.easeOutCubic);
+  }
+
+  String _summary() {
+    final f = widget.forecast;
+    final h24 = widget.h24;
+    final hours = f.hours;
     final wetSoon = hours.take(12).where((h) => h.precipChance >= 50).toList();
-    final sky = forecast.current.sky;
+    final sky = f.current.sky;
     final wetNow = sky == Sky.rain || sky == Sky.drizzle || sky == Sky.storm;
     final dryAt = hours.take(12).where((h) {
       final s = skyFromCode(h.code);
       return s != Sky.rain && s != Sky.drizzle && s != Sky.storm;
     }).firstOrNull;
-    final summary = sky == Sky.snow
+    final now = nowcastLine(f);
+    if (now != null) return now;
+    return sky == Sky.snow
         ? 'Snowing now. Stay put if you can.'
         : wetNow
             ? (dryAt == null
@@ -494,6 +574,87 @@ class HourlyCard extends StatelessWidget {
             : wetSoon.isEmpty
                 ? 'No rain in the next 12 hours. Leave the umbrella.'
                 : 'Rain likely around ${hourLabel(wetSoon.first.time, h24: h24)}. Plan your shit.';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final t = Theme.of(context).textTheme;
+    final cs = Theme.of(context).colorScheme;
+    final units = widget.units;
+    final hours = widget.forecast.hours;
+    const itemW = HourlyCard.itemW;
+
+    final values = switch (_view) {
+      HourlyView.temp => [for (final h in hours) units.t(h.temp)],
+      HourlyView.rain => [for (final h in hours) h.precipChance.toDouble()],
+      HourlyView.wind => [for (final h in hours) units.speedValue(h.wind)],
+    };
+    String label(int i) => switch (_view) {
+          HourlyView.temp => '${values[i].round()}°',
+          HourlyView.rain => '${values[i].round()}%',
+          HourlyView.wind => '${values[i].round()}',
+        };
+
+    final strip = SizedBox(
+      width: hours.length * itemW,
+      child: Column(
+        children: [
+          ExcludeSemantics(
+            child: CustomPaint(
+              size: Size(hours.length * itemW, 76),
+              painter: _view == HourlyView.rain
+                  ? _Bars(
+                      values: values,
+                      itemW: itemW,
+                      bar: cs.primary,
+                      track: cs.surfaceContainerHighest,
+                      label: t.titleSmall!.copyWith(color: cs.onSurface),
+                    )
+                  : _TempCurve(
+                      temps: values,
+                      labels: [for (var i = 0; i < values.length; i++) label(i)],
+                      itemW: itemW,
+                      line: _view == HourlyView.wind ? cs.tertiary : cs.primary,
+                      dot: _view == HourlyView.wind ? cs.onTertiary : cs.onPrimary,
+                      label: t.titleSmall!.copyWith(color: cs.onSurface),
+                    ),
+            ),
+          ),
+          Row(
+            children: [
+              for (var i = 0; i < hours.length; i++)
+                _HourCell(
+                  hour: hours[i],
+                  now: i == 0,
+                  units: units,
+                  h24: widget.h24,
+                  view: _view,
+                ),
+            ],
+          ),
+        ],
+      ),
+    );
+
+    Widget arrow(int dir) => Positioned(
+          left: dir < 0 ? 4 : null,
+          right: dir > 0 ? 4 : null,
+          top: 60,
+          child: AnimatedOpacity(
+            opacity: (dir < 0 ? _atStart : _atEnd) ? 0 : 1,
+            duration: const Duration(milliseconds: 150),
+            child: IgnorePointer(
+              ignoring: dir < 0 ? _atStart : _atEnd,
+              child: IconButton.filledTonal(
+                tooltip: dir < 0 ? 'Earlier' : 'Later',
+                icon: Icon(dir < 0
+                    ? Icons.chevron_left_rounded
+                    : Icons.chevron_right_rounded),
+                onPressed: () => _page(dir),
+              ),
+            ),
+          ),
+        );
 
     return SectionCard(
       title: 'Hourly forecast',
@@ -504,42 +665,54 @@ class HourlyCard extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(censor(summary, level),
+            child: Text(censor(_summary(), widget.level),
                 style: t.bodyMedium?.copyWith(color: cs.onSurfaceVariant)),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: SizedBox(
-              width: hours.length * itemW,
-              child: Column(
-                children: [
-                  ExcludeSemantics(
-                    child: CustomPaint(
-                      size: Size(hours.length * itemW, 76),
-                      painter: _TempCurve(
-                        temps: [for (final h in hours) units.t(h.temp)],
-                        itemW: itemW,
-                        line: cs.primary,
-                        dot: cs.onPrimary,
-                        label: t.titleSmall!.copyWith(color: cs.onSurface),
-                      ),
-                    ),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Wrap(
+              spacing: 8,
+              children: [
+                for (final (v, name, icon) in const [
+                  (HourlyView.temp, 'Temperature', Icons.thermostat_rounded),
+                  (HourlyView.rain, 'Rain', Icons.water_drop_outlined),
+                  (HourlyView.wind, 'Wind', Icons.air_rounded),
+                ])
+                  ChoiceChip(
+                    label: Text(name),
+                    avatar: Icon(icon, size: 18),
+                    showCheckmark: false,
+                    selected: _view == v,
+                    onSelected: (_) => setState(() => _view = v),
                   ),
-                  Row(
-                    children: [
-                      for (var i = 0; i < hours.length; i++)
-                        _HourCell(
-                          hour: hours[i],
-                          now: i == 0,
-                          units: units,
-                          h24: h24,
-                        ),
-                    ],
+              ],
+            ),
+          ),
+          if (_view == HourlyView.wind)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
+              child: Text('Wind speed in ${units.speedUnit}',
+                  style: t.labelMedium?.copyWith(color: cs.onSurfaceVariant)),
+            ),
+          const SizedBox(height: 4),
+          ScrollConfiguration(
+            behavior: const _DragScroll(),
+            child: Stack(
+              children: [
+                Scrollbar(
+                  controller: _scroll,
+                  thumbVisibility: _pointer,
+                  child: SingleChildScrollView(
+                    controller: _scroll,
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.fromLTRB(8, 0, 8, _pointer ? 14 : 0),
+                    child: strip,
                   ),
-                ],
-              ),
+                ),
+                if (_pointer) ...[arrow(-1), arrow(1)],
+              ],
             ),
           ),
         ],
@@ -548,17 +721,32 @@ class HourlyCard extends StatelessWidget {
   }
 }
 
+class _DragScroll extends MaterialScrollBehavior {
+  const _DragScroll();
+  @override
+  Set<PointerDeviceKind> get dragDevices => const {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.stylus,
+        PointerDeviceKind.invertedStylus,
+        PointerDeviceKind.trackpad,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.unknown,
+      };
+}
+
 class _HourCell extends StatelessWidget {
   const _HourCell({
     required this.hour,
     required this.now,
     required this.units,
     required this.h24,
+    required this.view,
   });
   final Hour hour;
   final bool now;
   final Units units;
   final bool h24;
+  final HourlyView view;
 
   @override
   Widget build(BuildContext context) {
@@ -566,21 +754,38 @@ class _HourCell extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
     final h = hour;
     final label = now ? 'Now' : hourLabel(h.time, h24: h24);
+    final Widget top;
+    final String sub;
+    switch (view) {
+      case HourlyView.temp:
+        top = Icon(iconFor(h.code, h.isDay),
+            color: iconTint(h.code, h.isDay, cs), size: 26);
+        sub = h.precipChance >= 10 ? '${h.precipChance}%' : ' ';
+      case HourlyView.rain:
+        top = Icon(Icons.water_drop_rounded,
+            color: h.precip > 0 ? cs.primary : cs.outlineVariant, size: 22);
+        sub = h.precip > 0 ? units.precipShort(h.precip) : ' ';
+      case HourlyView.wind:
+        top = Transform.rotate(
+          angle: (h.windDir + 180) * math.pi / 180,
+          child: Icon(Icons.navigation_rounded, color: cs.tertiary, size: 22),
+        );
+        sub = h.gusts > h.wind + 8 ? 'G ${units.speedValue(h.gusts).round()}' : ' ';
+    }
     return Semantics(
-      label:
-          '$label: ${units.degU(h.temp)}, ${describeCode(h.code)}, ${h.precipChance}% chance of rain',
+      label: '$label: ${units.degU(h.temp)}, ${describeCode(h.code)}, '
+          '${h.precipChance}% chance of rain, wind ${units.speed(h.wind)} ${compass(h.windDir)}',
       excludeSemantics: true,
       child: SizedBox(
         width: HourlyCard.itemW,
         child: Column(
           children: [
-            Icon(iconFor(h.code, h.isDay),
-                color: iconTint(h.code, h.isDay, cs), size: 26),
+            SizedBox(height: 26, child: Center(child: top)),
             const SizedBox(height: 4),
-            Text(
-              h.precipChance >= 10 ? '${h.precipChance}%' : ' ',
-              style: t.labelSmall?.copyWith(color: cs.primary),
-            ),
+            Text(sub,
+                maxLines: 1,
+                style: t.labelSmall?.copyWith(
+                    color: view == HourlyView.wind ? cs.onSurfaceVariant : cs.primary)),
             const SizedBox(height: 6),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
@@ -602,15 +807,60 @@ class _HourCell extends StatelessWidget {
   }
 }
 
+class _Bars extends CustomPainter {
+  _Bars({
+    required this.values,
+    required this.itemW,
+    required this.bar,
+    required this.track,
+    required this.label,
+  });
+  final List<double> values;
+  final double itemW;
+  final Color bar, track;
+  final TextStyle label;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    const top = 30.0, bottom = 72.0, w = 14.0;
+    for (var i = 0; i < values.length; i++) {
+      final cx = i * itemW + itemW / 2;
+      final full = RRect.fromLTRBR(
+          cx - w / 2, top, cx + w / 2, bottom, const Radius.circular(7));
+      canvas.drawRRect(full, Paint()..color = track);
+      final v = values[i].clamp(0, 100) / 100;
+      if (v > 0) {
+        final h = math.max(w, (bottom - top) * v);
+        canvas.drawRRect(
+          RRect.fromLTRBR(cx - w / 2, bottom - h, cx + w / 2, bottom,
+              const Radius.circular(7)),
+          Paint()..color = bar.withValues(alpha: 0.35 + 0.65 * v),
+        );
+      }
+      final tp = TextPainter(
+        text: TextSpan(text: '${values[i].round()}%', style: label),
+        textDirection: TextDirection.ltr,
+      )..layout();
+      tp.paint(canvas, Offset(cx - tp.width / 2, top - tp.height - 6));
+    }
+  }
+
+  @override
+  bool shouldRepaint(_Bars old) =>
+      !listEquals(old.values, values) || old.bar != bar || old.label != label;
+}
+
 class _TempCurve extends CustomPainter {
   _TempCurve({
     required this.temps,
+    required this.labels,
     required this.itemW,
     required this.line,
     required this.dot,
     required this.label,
   });
   final List<double> temps;
+  final List<String> labels;
   final double itemW;
   final Color line;
   final Color dot;
@@ -659,7 +909,7 @@ class _TempCurve extends CustomPainter {
 
     for (var i = 0; i < pts.length; i++) {
       final tp = TextPainter(
-        text: TextSpan(text: '${temps[i].round()}°', style: label),
+        text: TextSpan(text: labels[i], style: label),
         textDirection: TextDirection.ltr,
       )..layout();
       tp.paint(canvas, pts[i] - Offset(tp.width / 2, tp.height + 8));
@@ -670,13 +920,19 @@ class _TempCurve extends CustomPainter {
 
   @override
   bool shouldRepaint(_TempCurve old) =>
-      !listEquals(old.temps, temps) || old.line != line || old.label != label;
+      !listEquals(old.labels, labels) || old.line != line || old.label != label;
 }
 
 class DailyCard extends StatelessWidget {
-  const DailyCard({super.key, required this.forecast, required this.units});
+  const DailyCard({
+    super.key,
+    required this.forecast,
+    required this.units,
+    this.h24 = false,
+  });
   final Forecast forecast;
   final Units units;
+  final bool h24;
 
   @override
   Widget build(BuildContext context) {
@@ -688,22 +944,364 @@ class DailyCard extends StatelessWidget {
     return SectionCard(
       title: '10-day forecast',
       icon: Icons.calendar_month_outlined,
-      padding: const EdgeInsets.fromLTRB(20, 20, 20, 8),
+      padding: const EdgeInsets.fromLTRB(8, 20, 8, 8),
       child: Column(
         children: [
           for (var i = 0; i < days.length; i++)
-            _DayRow(
-              day: days[i],
-              label: i == 0 ? 'Today' : weekday(days[i].date),
-              units: units,
-              lo: lo,
-              span: span,
-              currentTemp: i == 0 ? forecast.current.temp : null,
+            InkWell(
+              borderRadius: BorderRadius.circular(16),
+              onTap: () => showDaySheet(context, forecast, i, units, h24),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: _DayRow(
+                  day: days[i],
+                  label: i == 0 ? 'Today' : weekday(days[i].date),
+                  units: units,
+                  lo: lo,
+                  span: span,
+                  currentTemp: i == 0 ? forecast.current.temp : null,
+                ),
+              ),
             ),
         ],
       ),
     );
   }
+}
+
+
+Future<void> showDaySheet(
+    BuildContext context, Forecast f, int index, Units u, bool h24) {
+  return showModalBottomSheet<void>(
+    context: context,
+    isScrollControlled: true,
+    showDragHandle: true,
+    useSafeArea: true,
+    constraints: const BoxConstraints(maxWidth: 640),
+    builder: (context) => DraggableScrollableSheet(
+      expand: false,
+      initialChildSize: 0.7,
+      minChildSize: 0.4,
+      maxChildSize: 0.95,
+      builder: (context, scroll) =>
+          _DaySheet(f: f, index: index, u: u, h24: h24, scroll: scroll),
+    ),
+  );
+}
+
+class _DaySheet extends StatelessWidget {
+  const _DaySheet({
+    required this.f,
+    required this.index,
+    required this.u,
+    required this.h24,
+    required this.scroll,
+  });
+  final Forecast f;
+  final int index;
+  final Units u;
+  final bool h24;
+  final ScrollController scroll;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = Theme.of(context).textTheme;
+    final cs = Theme.of(context).colorScheme;
+    final d = f.days[index];
+    final hours = f.hoursOn(d.date);
+    final title = index == 0
+        ? 'Today'
+        : index == 1
+            ? 'Tomorrow'
+            : longWeekday(d.date);
+
+    Widget stat(IconData icon, String label, String value) => SizedBox(
+          width: 150,
+          child: Row(
+            children: [
+              Icon(icon, size: 20, color: cs.onSurfaceVariant),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(label,
+                        style: t.labelMedium?.copyWith(color: cs.onSurfaceVariant)),
+                    Text(value, style: t.titleSmall),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+
+    return ListView(
+      controller: scroll,
+      padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: t.headlineSmall),
+                  Text(shortDate(d.date),
+                      style: t.bodyMedium?.copyWith(color: cs.onSurfaceVariant)),
+                ],
+              ),
+            ),
+            Icon(iconFor(d.code, true), size: 40, color: iconTint(d.code, true, cs)),
+          ],
+        ),
+        const SizedBox(height: 16),
+        Text(
+          '${describeCode(d.code)}. High ${u.deg(d.max)}, low ${u.deg(d.min)}.',
+          style: t.titleMedium,
+        ),
+        const SizedBox(height: 20),
+        Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: [
+            stat(Icons.umbrella_rounded, 'Chance of rain', '${d.precipChance}%'),
+            stat(Icons.water_drop_outlined, 'Total rain', u.precip(d.precipSum)),
+            stat(Icons.air_rounded, 'Max wind', u.speed(d.windMax)),
+            stat(Icons.wb_sunny_outlined, 'Max UV', d.uvMax.toStringAsFixed(0)),
+            if (d.sunrise != null)
+              stat(Icons.wb_twilight_rounded, 'Sunrise', clock(d.sunrise!, h24: h24)),
+            if (d.sunset != null)
+              stat(Icons.nights_stay_outlined, 'Sunset', clock(d.sunset!, h24: h24)),
+          ],
+        ),
+        if (hours.isNotEmpty) ...[
+          const SizedBox(height: 24),
+          Text('Hour by hour', style: t.titleSmall?.copyWith(color: cs.primary)),
+          const SizedBox(height: 8),
+          for (final h in hours)
+            Semantics(
+              label: '${hourLabel(h.time, h24: h24)}: ${u.degU(h.temp)}, '
+                  '${describeCode(h.code)}, ${h.precipChance}% chance of rain, '
+                  'wind ${u.speed(h.wind)}',
+              excludeSemantics: true,
+              child: SizedBox(
+                height: 44,
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 64,
+                      child: Text(hourLabel(h.time, h24: h24),
+                          style: t.labelLarge?.copyWith(color: cs.onSurfaceVariant)),
+                    ),
+                    Icon(iconFor(h.code, h.isDay),
+                        size: 22, color: iconTint(h.code, h.isDay, cs)),
+                    const SizedBox(width: 12),
+                    SizedBox(width: 44, child: Text(u.deg(h.temp), style: t.titleSmall)),
+                    Expanded(
+                      child: Text(describeCode(h.code),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: t.bodyMedium?.copyWith(color: cs.onSurfaceVariant)),
+                    ),
+                    SizedBox(
+                      width: 48,
+                      child: Text(h.precipChance >= 10 ? '${h.precipChance}%' : '',
+                          textAlign: TextAlign.right,
+                          style: t.labelMedium?.copyWith(color: cs.primary)),
+                    ),
+                    SizedBox(
+                      width: 72,
+                      child: Text(u.speed(h.wind),
+                          textAlign: TextAlign.right,
+                          style: t.labelMedium?.copyWith(color: cs.onSurfaceVariant)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ],
+    );
+  }
+}
+
+class AlertsCard extends StatelessWidget {
+  const AlertsCard({
+    super.key,
+    required this.alerts,
+    required this.forecast,
+    required this.h24,
+  });
+  final List<WeatherAlert> alerts;
+  final Forecast forecast;
+  final bool h24;
+
+  static (Color, Color) colors(AlertLevel l, ColorScheme cs) => switch (l) {
+        AlertLevel.extreme || AlertLevel.severe => (cs.errorContainer, cs.onErrorContainer),
+        AlertLevel.moderate => (cs.tertiaryContainer, cs.onTertiaryContainer),
+        _ => (cs.secondaryContainer, cs.onSecondaryContainer),
+      };
+
+  static String levelName(AlertLevel l) => switch (l) {
+        AlertLevel.extreme => 'Extreme',
+        AlertLevel.severe => 'Severe',
+        AlertLevel.moderate => 'Moderate',
+        AlertLevel.minor => 'Minor',
+        AlertLevel.info => 'Advisory',
+      };
+
+  String _when(WeatherAlert a) {
+    DateTime at(DateTime t) => a.official ? forecast.localTime(t) : t;
+    final now = forecast.current.time;
+    final start = a.start == null ? null : at(a.start!);
+    final end = a.end == null ? null : at(a.end!);
+    String fmt(DateTime t) {
+      final sameDay = t.year == now.year && t.month == now.month && t.day == now.day;
+      return sameDay ? clock(t, h24: h24) : '${weekday(t)} ${clock(t, h24: h24)}';
+    }
+
+    if (start != null && start.isAfter(now)) {
+      return end == null ? 'From ${fmt(start)}' : '${fmt(start)} – ${fmt(end)}';
+    }
+    return end == null ? 'In effect now' : 'Until ${fmt(end)}';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final t = Theme.of(context).textTheme;
+    final cs = Theme.of(context).colorScheme;
+    final official = alerts.first.official;
+    final top = alerts.first;
+    final (bg, fg) = colors(top.level, cs);
+    return Card(
+      color: bg,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (var i = 0; i < alerts.length; i++) ...[
+            if (i > 0) Divider(height: 1, color: fg.withValues(alpha: 0.16)),
+            InkWell(
+              onTap: () => showAlertSheet(context, alerts[i], _when(alerts[i])),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 16, 12, 16),
+                child: Row(
+                  children: [
+                    Icon(
+                      official
+                          ? (alerts[i].level.index >= AlertLevel.severe.index
+                              ? Icons.warning_rounded
+                              : Icons.warning_amber_rounded)
+                          : Icons.info_outline_rounded,
+                      color: fg,
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(alerts[i].title,
+                              style: t.titleMedium?.copyWith(color: fg)),
+                          const SizedBox(height: 2),
+                          Text(
+                            official
+                                ? '${_when(alerts[i])} · ${alerts[i].source}'
+                                : '${_when(alerts[i])} · From the forecast, not an official warning',
+                            style: t.bodySmall
+                                ?.copyWith(color: fg.withValues(alpha: 0.8)),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(Icons.chevron_right_rounded, color: fg),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+Future<void> showAlertSheet(BuildContext context, WeatherAlert a, String when) {
+  return showModalBottomSheet<void>(
+    context: context,
+    isScrollControlled: true,
+    showDragHandle: true,
+    useSafeArea: true,
+    constraints: const BoxConstraints(maxWidth: 640),
+    builder: (context) {
+      final t = Theme.of(context).textTheme;
+      final cs = Theme.of(context).colorScheme;
+      final (bg, fg) = AlertsCard.colors(a.level, cs);
+      return DraggableScrollableSheet(
+        expand: false,
+        initialChildSize: 0.75,
+        minChildSize: 0.4,
+        maxChildSize: 0.95,
+        builder: (context, scroll) => ListView(
+          controller: scroll,
+          padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
+          children: [
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                Chip(
+                  label: Text(a.official
+                      ? AlertsCard.levelName(a.level)
+                      : 'Heads-up'),
+                  backgroundColor: bg,
+                  labelStyle: t.labelLarge?.copyWith(color: fg),
+                  side: BorderSide.none,
+                ),
+                Chip(label: Text(when)),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Text(a.title, style: t.headlineSmall),
+            if (a.area != null && a.area!.isNotEmpty) ...[
+              const SizedBox(height: 4),
+              Text(a.area!,
+                  style: t.bodyMedium?.copyWith(color: cs.onSurfaceVariant)),
+            ],
+            if (a.headline != null && a.headline != a.title) ...[
+              const SizedBox(height: 16),
+              Text(a.headline!, style: t.titleMedium),
+            ],
+            const SizedBox(height: 16),
+            SelectableText(a.description, style: t.bodyLarge),
+            if (a.instruction != null) ...[
+              const SizedBox(height: 24),
+              Text('What to do', style: t.titleSmall?.copyWith(color: cs.primary)),
+              const SizedBox(height: 8),
+              SelectableText(a.instruction!, style: t.bodyLarge),
+            ],
+            const SizedBox(height: 24),
+            Text(
+              a.official
+                  ? 'Issued by ${a.source}. Always follow instructions from local officials.'
+                  : 'wttr.fck spotted this in the forecast. It is not an official warning. '
+                      'Check your national weather service for the real thing.',
+              style: t.bodySmall?.copyWith(color: cs.onSurfaceVariant),
+            ),
+            if (a.url != null) ...[
+              const SizedBox(height: 12),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: OutlinedButton.icon(
+                  onPressed: () => openUrl(a.url!),
+                  icon: const Icon(Icons.open_in_new_rounded, size: 18),
+                  label: Text('Open ${a.source}'),
+                ),
+              ),
+            ],
+          ],
+        ),
+      );
+    },
+  );
 }
 
 class _DayRow extends StatelessWidget {
@@ -812,56 +1410,121 @@ class _DayRow extends StatelessWidget {
 }
 
 class PanelCard extends StatelessWidget {
-  const PanelCard({super.key, required this.engine, required this.seed});
+  const PanelCard({
+    super.key,
+    required this.engine,
+    required this.seed,
+    required this.onReroll,
+  });
   final RoastEngine engine;
   final int seed;
+  final VoidCallback onReroll;
+
+  static String _initials(String name) {
+    final words = name
+        .split(RegExp(r'[\s-]+'))
+        .where((w) => w.isNotEmpty && RegExp('[A-Za-z]').hasMatch(w[0]))
+        .toList();
+    if (words.isEmpty) return '?';
+    return words.last[0].toUpperCase();
+  }
+
+  void _about(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        icon: const Icon(Icons.podcasts_rounded),
+        title: const Text('About the Pundit Panel'),
+        content: const Text(
+          'Every pundit here is made up. None of them are real people, '
+          'and none of them are based on one.\n\n'
+          'Each take gives the left and the right one line apiece, and then '
+          'the weather tells them both to knock it off. Nobody wins except '
+          'the weather.\n\n'
+          'Want politics gone completely? Turn off Political humor in Settings.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Got it'),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final p = engine.panel(seed);
     final cs = Theme.of(context).colorScheme;
+    final c = engine.f.current;
     return SectionCard(
       title: 'The Pundit Panel',
       icon: Icons.podcasts_rounded,
-      trailing: Tooltip(
-        message: 'Fictional pundits. Both sides get roasted equally.',
-        child: Icon(Icons.info_outline_rounded, size: 18, color: cs.onSurfaceVariant),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          _Speaker(
-            avatar: const Text('L'),
-            shape: MaterialShapes.circle,
-            name: 'Lefty Lou',
-            role: 'Left of center',
-            quote: p.left,
-            color: const Color(0xFF2F6DB5),
+          IconButton(
+            tooltip: 'About the Pundit Panel',
+            icon: const Icon(Icons.info_outline_rounded, size: 20),
+            color: cs.onSurfaceVariant,
+            onPressed: () => _about(context),
           ),
-          const SizedBox(height: 12),
-          _Speaker(
-            avatar: const Text('R'),
-            shape: MaterialShapes.circle,
-            name: 'Righty Rhonda',
-            role: 'Right of center',
-            quote: p.right,
-            color: const Color(0xFFC0392B),
+          IconButton(
+            tooltip: 'New take',
+            icon: const Icon(Icons.shuffle_rounded, size: 20),
+            color: cs.onSurfaceVariant,
+            onPressed: onReroll,
           ),
-          const SizedBox(height: 12),
-          _Speaker(
-            avatar: const Icon(Icons.cloud_rounded, size: 20),
-            shape: MaterialShapes.puffy,
-            name: 'The Actual Weather',
-            role: 'Independent. Tired.',
-            quote: p.weather,
-            color: cs.outline,
-            emphasize: true,
-          ),
-          if (p.by != null) ...[
-            const SizedBox(height: 8),
-            Align(alignment: Alignment.centerRight, child: CreditChip(by: p.by!)),
-          ],
         ],
+      ),
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 280),
+        switchInCurve: springFast,
+        transitionBuilder: (child, anim) =>
+            FadeTransition(opacity: anim, child: child),
+        layoutBuilder: (cur, prev) => Stack(
+          alignment: Alignment.topLeft,
+          children: [...prev, ?cur],
+        ),
+        child: Column(
+          key: ValueKey(seed),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _Speaker(
+              avatar: Text(_initials(p.leftWho.name)),
+              shape: MaterialShapes.circle,
+              name: p.leftWho.name,
+              role: p.leftWho.role,
+              quote: p.left,
+              color: const Color(0xFF2F6DB5),
+            ),
+            const SizedBox(height: 12),
+            _Speaker(
+              avatar: Text(_initials(p.rightWho.name)),
+              shape: MaterialShapes.circle,
+              name: p.rightWho.name,
+              role: p.rightWho.role,
+              quote: p.right,
+              color: const Color(0xFFC0392B),
+            ),
+            const SizedBox(height: 12),
+            _Speaker(
+              avatar: Icon(iconFor(c.code, c.isDay), size: 20),
+              shape: MaterialShapes.puffy,
+              name: p.weatherWho.name,
+              role: p.weatherWho.role,
+              quote: p.weather,
+              color: cs.outline,
+              emphasize: true,
+            ),
+            if (p.by != null) ...[
+              const SizedBox(height: 8),
+              Align(alignment: Alignment.centerRight, child: CreditChip(by: p.by!)),
+            ],
+          ],
+        ),
       ),
     );
   }
@@ -1121,7 +1784,15 @@ class DetailsGrid extends StatelessWidget {
         icon: Icons.water_drop_outlined,
         label: 'Humidity',
         value: '${c.humidity}%',
+        detail: c.dewPoint == null ? null : 'Dew point ${units.deg(c.dewPoint!)}',
         quip: engine.humidityQuip(c.humidity),
+      ),
+      _Tile(
+        icon: Icons.thermostat_rounded,
+        label: 'Feels like',
+        value: units.deg(c.feelsLike),
+        detail: 'Actual ${units.deg(c.temp)}',
+        quip: engine.feelsQuip(c.temp, c.feelsLike, c.humidity),
       ),
       _Tile(
         icon: Icons.wb_sunny_outlined,
@@ -1145,6 +1816,12 @@ class DetailsGrid extends StatelessWidget {
           detail: RoastEngine.aqiLabel(f.air!.usAqi),
           quip: engine.aqiQuip(f.air!.usAqi),
         ),
+      _Tile(
+        icon: Icons.cloud_outlined,
+        label: 'Cloud cover',
+        value: '${c.cloudCover}%',
+        quip: engine.cloudQuip(c.cloudCover),
+      ),
       _Tile(
         icon: Icons.compress_rounded,
         label: 'Pressure',

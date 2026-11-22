@@ -28,9 +28,12 @@ class WeatherApi {
       'longitude': lon,
       'current': 'temperature_2m,relative_humidity_2m,apparent_temperature,'
           'is_day,precipitation,weather_code,cloud_cover,pressure_msl,'
-          'wind_speed_10m,wind_direction_10m,wind_gusts_10m',
+          'wind_speed_10m,wind_direction_10m,wind_gusts_10m,dew_point_2m',
       'hourly': 'temperature_2m,precipitation_probability,weather_code,is_day,'
-          'uv_index,visibility',
+          'uv_index,visibility,apparent_temperature,precipitation,'
+          'wind_speed_10m,wind_gusts_10m,wind_direction_10m,relative_humidity_2m',
+      'minutely_15': 'precipitation',
+      'forecast_minutely_15': '8',
       'daily': 'weather_code,temperature_2m_max,temperature_2m_min,sunrise,'
           'sunset,uv_index_max,precipitation_probability_max,'
           'precipitation_sum,wind_speed_10m_max',
@@ -69,6 +72,11 @@ class WeatherApi {
               name: r['name'] as String,
               region: r['admin1'] as String?,
               country: r['country'] as String?,
+              countryCode: r['country_code'] as String?,
+              areas: [
+                for (final k in ['admin1', 'admin2', 'admin3', 'admin4'])
+                  if (r[k] is String) r[k] as String,
+              ],
               lat: (r['latitude'] as num).toDouble(),
               lon: (r['longitude'] as num).toDouble(),
             ))
@@ -85,6 +93,8 @@ class WeatherApi {
       }));
       final city = (j['city'] as String?)?.trim();
       final locality = (j['locality'] as String?)?.trim();
+      final admin = ((j['localityInfo'] as Map?)?['administrative'] as List?) ??
+          const [];
       return Place(
         name: (city?.isNotEmpty ?? false)
             ? city!
@@ -93,6 +103,12 @@ class WeatherApi {
                 : 'Your location',
         region: j['principalSubdivision'] as String?,
         country: j['countryName'] as String?,
+        countryCode: j['countryCode'] as String?,
+        areas: [
+          for (final a in admin)
+            if (a is Map && a['name'] is String && (a['adminLevel'] ?? 0) as num > 2)
+              a['name'] as String,
+        ],
         lat: lat,
         lon: lon,
       );
@@ -112,6 +128,8 @@ class WeatherApi {
       name: (j['city'] as String?) ?? 'Somewhere',
       region: j['region'] as String?,
       country: j['country'] as String?,
+      countryCode: j['country_code'] as String?,
+      areas: [if (j['region'] is String) j['region'] as String],
       lat: lat,
       lon: lon,
     );
@@ -167,11 +185,42 @@ class RawForecast {
     final hDay = h['is_day'] as List;
     final hUv = h['uv_index'] as List;
     final hVis = h['visibility'] as List;
+    List? opt(String k) => h[k] as List?;
+    final hFeels = opt('apparent_temperature');
+    final hPrecip = opt('precipitation');
+    final hWind = opt('wind_speed_10m');
+    final hGusts = opt('wind_gusts_10m');
+    final hDir = opt('wind_direction_10m');
+    final hHum = opt('relative_humidity_2m');
 
-    final hours = <Hour>[];
-    for (var k = startIdx; k < hTimes.length && hours.length < 25; k++) {
-      hours.add(Hour(hTimes[k], d(hTemp[k]), i(hPop[k]), i(hCode[k]),
-          i(hDay[k], 1) == 1));
+    final allHours = <Hour>[
+      for (var k = 0; k < hTimes.length; k++)
+        Hour(
+          hTimes[k],
+          d(hTemp[k]),
+          i(hPop[k]),
+          i(hCode[k]),
+          i(hDay[k], 1) == 1,
+          precip: d(hPrecip?[k]),
+          wind: d(hWind?[k]),
+          gusts: d(hGusts?[k]),
+          windDir: i(hDir?[k]),
+          feels: hFeels?[k] is num ? d(hFeels![k]) : null,
+          humidity: hHum?[k] is num ? i(hHum![k]) : null,
+          uv: d(hUv[k]),
+        ),
+    ];
+    final hours = allHours.skip(startIdx).take(48).toList();
+
+    final nowcast = <Nowcast>[];
+    final m = forecast['minutely_15'] as Map<String, dynamic>?;
+    if (m != null && m['time'] is List && m['precipitation'] is List) {
+      final mt = (m['time'] as List).cast<String>();
+      final mp = m['precipitation'] as List;
+      for (var k = 0; k < mt.length && k < mp.length; k++) {
+        final t = DateTime.tryParse(mt[k]);
+        if (t != null) nowcast.add(Nowcast(t, d(mp[k])));
+      }
     }
 
     final current = Current(
@@ -189,6 +238,7 @@ class RawForecast {
       windDir: i(c['wind_direction_10m']),
       uv: d(hUv[startIdx]),
       visibility: d(hVis[startIdx], 10000),
+      dewPoint: c['dew_point_2m'] is num ? d(c['dew_point_2m']) : null,
     );
 
     final dTimes = (dl['time'] as List).cast<String>();
@@ -218,9 +268,14 @@ class RawForecast {
       place: place,
       current: current,
       hours: hours,
+      allHours: allHours,
       days: days,
       air: aq,
+      nowcast: nowcast,
       fetchedAt: fetchedAt,
+      utcOffset: forecast['utc_offset_seconds'] is num
+          ? Duration(seconds: (forecast['utc_offset_seconds'] as num).round())
+          : null,
     );
   }
 }

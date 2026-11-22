@@ -41,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       final s = AppScope.of(context);
+      s.loadSystemColors();
       final age = s.forecast == null
           ? const Duration(days: 1)
           : DateTime.now().difference(s.forecast!.fetchedAt);
@@ -163,9 +164,13 @@ class _AdaptiveHome extends StatelessWidget {
 
     Widget card(Widget w) => RepaintBoundary(child: w);
 
+    final alerts = s.shownAlerts;
     final hero = <Widget>[
       card(HeroBlock(forecast: f, state: s)),
-      gap,
+      if (alerts.isNotEmpty) ...[
+        card(AlertsCard(alerts: alerts, forecast: f, h24: s.h24)),
+        gap,
+      ],
       card(RoastCard(engine: e, state: s)),
     ];
     final primaryRest = <Widget>[
@@ -179,16 +184,17 @@ class _AdaptiveHome extends StatelessWidget {
       card(OutfitCard(engine: e)),
     ];
     final secondary = <Widget>[
-      card(DailyCard(forecast: f, units: s.units)),
+      card(DailyCard(forecast: f, units: s.units, h24: s.h24)),
       if (s.showElection) ...[
         gap,
         card(ElectionCard(engine: e, seed: s.roastSeed)),
       ],
-      if (s.showPanel) ...[gap, card(PanelCard(engine: e, seed: s.roastSeed))],
+      if (s.showPanel) ...[
+        gap,
+        card(PanelCard(engine: e, seed: s.panelSeed, onReroll: s.rerollPanel)),
+      ],
       gap,
       card(DetailsGrid(engine: e, units: s.units, h24: s.h24)),
-      gap,
-      card(CommunityCard(content: s.content)),
     ];
     final footer = <Widget>[
       const SizedBox(height: 16),

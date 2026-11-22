@@ -10,5 +10,6 @@
   ],
   "panels": "panels.json",
   "election": "election.json",
-  "loading": "loading.json"
+  "loading": "loading.json",
+  "pundits": "pundits.json"
 }

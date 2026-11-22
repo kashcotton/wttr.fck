@@ -3,6 +3,8 @@ import 'package:material_ui/material_ui.dart';
 import '../main.dart';
 import '../roasts/engine.dart';
 import '../services/widget_sync.dart';
+import '../state/app_state.dart';
+import '../theme.dart';
 import '../util/units.dart';
 import '../widgets/cards.dart';
 
@@ -185,9 +187,9 @@ class SettingsScreen extends StatelessWidget {
                     (ThemeMode.dark, 'Dark'),
                   ],
                   onChanged: (v) => s.update((s) => s.themeMode = v),
-                  help:
-                      'Colors follow the sky: sunny is warm, rain is blue, storms get moody.',
                 ),
+                divider,
+                _ColorPicker(state: s),
               ]),
               if (WidgetSync.supported) ...[
                 header('Home screen'),
@@ -214,6 +216,10 @@ class SettingsScreen extends StatelessWidget {
                 ]),
               ],
               header('Community'),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+                child: CommunityCard(content: content),
+              ),
               group([
                 SwitchListTile(
                   secondary: const Icon(Icons.sync_rounded),
@@ -225,16 +231,6 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   value: s.communityUpdates,
                   onChanged: (v) => s.setCommunityUpdates(v),
-                ),
-                divider,
-                ListTile(
-                  leading: const Icon(Icons.edit_note_rounded),
-                  title: const Text('Write a roast'),
-                  subtitle: const Text(
-                      'Every insult lives in a plain text file. Add yours, '
-                      'get credited in the app.'),
-                  trailing: const Icon(Icons.open_in_new_rounded, size: 18),
-                  onTap: () => openUrl(contributeUrl),
                 ),
               ]),
               header('About'),
@@ -254,6 +250,16 @@ class SettingsScreen extends StatelessWidget {
                   onTap: () => openUrl('https://open-meteo.com'),
                 ),
                 divider,
+                const ListTile(
+                  leading: Icon(Icons.warning_amber_rounded),
+                  title: Text('Weather warnings'),
+                  subtitle: Text(
+                      'Official warnings from the US National Weather Service, Environment Canada, '
+                      'Deutscher Wetterdienst (via Bright Sky) and MeteoAlarm for the rest of Europe. '
+                      'MeteoAlarm works in the Android, Windows and Linux apps, not the website. '
+                      'Everywhere else, wttr.fck flags dangerous weather from the forecast itself.'),
+                ),
+                divider,
                 ListTile(
                   leading: const Icon(Icons.code_rounded),
                   title: const Text('Source code'),
@@ -264,12 +270,12 @@ class SettingsScreen extends StatelessWidget {
                 divider,
                 ListTile(
                   leading: const Icon(Icons.info_outline_rounded),
-                  title: const Text('wttr.fck 1.0.0'),
+                  title: const Text('wttr.fck 1.1.0'),
                   subtitle: const Text('Open-source licenses'),
                   onTap: () => showLicensePage(
                     context: context,
                     applicationName: 'wttr.fck',
-                    applicationVersion: '1.0.0',
+                    applicationVersion: '1.1.0',
                     applicationLegalese:
                         'Weather data by Open-Meteo.com (CC BY 4.0). '
                         'Google Sans Flex font, SIL Open Font License 1.1.',
@@ -279,6 +285,115 @@ class SettingsScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _ColorPicker extends StatelessWidget {
+  const _ColorPicker({required this.state});
+  final AppState state;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = Theme.of(context).textTheme;
+    final cs = Theme.of(context).colorScheme;
+    final s = state;
+    final wallpaper = s.system != null;
+
+    Widget option({
+      required String label,
+      required bool selected,
+      required VoidCallback onTap,
+      Color? color,
+      IconData? icon,
+    }) =>
+        Tooltip(
+          message: label,
+          child: Semantics(
+            label: label,
+            selected: selected,
+            button: true,
+            excludeSemantics: true,
+            child: InkWell(
+              customBorder: const CircleBorder(),
+              onTap: onTap,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                width: 48,
+                height: 48,
+                padding: EdgeInsets.all(selected ? 4 : 0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: selected ? cs.primary : Colors.transparent,
+                    width: 2,
+                  ),
+                ),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: color ?? cs.surfaceContainerHighest,
+                  ),
+                  child: icon == null
+                      ? (selected
+                          ? const Icon(Icons.check_rounded, color: Colors.white, size: 20)
+                          : null)
+                      : Icon(icon, size: 20, color: color == null ? cs.onSurfaceVariant : Colors.white),
+                ),
+              ),
+            ),
+          ),
+        );
+
+    final help = switch (s.colorSource) {
+      ColorSource.wallpaper when wallpaper => 'Matches your phone\'s wallpaper colors.',
+      ColorSource.custom => 'Your pick. It stays put whatever the sky does.',
+      _ => 'Colors follow the sky: sunny is warm, rain is blue, storms get moody.',
+    };
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Color', style: t.bodyLarge),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              if (wallpaper)
+                option(
+                  label: 'Match wallpaper',
+                  selected: s.colorSource == ColorSource.wallpaper,
+                  color: s.system!.seed,
+                  icon: Icons.wallpaper_rounded,
+                  onTap: () => s.update((s) => s.colorSource = ColorSource.wallpaper),
+                ),
+              option(
+                label: 'Follow the weather',
+                selected: s.colorSource == ColorSource.weather ||
+                    (s.colorSource == ColorSource.wallpaper && !wallpaper),
+                icon: Icons.wb_cloudy_rounded,
+                onTap: () => s.update((s) => s.colorSource = ColorSource.weather),
+              ),
+              for (final (name, color) in colorSwatches)
+                option(
+                  label: name,
+                  color: color,
+                  selected: s.colorSource == ColorSource.custom &&
+                      s.customColor == color.toARGB32(),
+                  onTap: () => s.update((s) {
+                    s.colorSource = ColorSource.custom;
+                    s.customColor = color.toARGB32();
+                  }),
+                ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(help, style: t.bodySmall?.copyWith(color: cs.onSurfaceVariant)),
+        ],
       ),
     );
   }

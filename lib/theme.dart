@@ -2,6 +2,7 @@ import 'package:flutter/physics.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'models/weather.dart';
+import 'services/system_colors.dart';
 
 const fontFamily = 'GoogleSansFlex';
 
@@ -60,28 +61,47 @@ TextTheme _textTheme(TextTheme t) => t.copyWith(
       labelSmall: flex(t.labelSmall, weight: 560),
     );
 
-final _themeCache = <(Color, Brightness), ThemeData>{};
+final _themeCache = <(Color, Brightness, SystemPalette?), ThemeData>{};
 
-ThemeData buildTheme(Color seed, Brightness b) =>
-    _themeCache.putIfAbsent((seed, b), () => _buildTheme(seed, b));
+ThemeData buildTheme(Color seed, Brightness b, {SystemPalette? system}) =>
+    _themeCache.putIfAbsent(
+        (seed, b, system), () => _buildTheme(seed, b, system));
 
-ThemeData _buildTheme(Color seed, Brightness b) {
+const colorSwatches = <(String, Color)>[
+  ('Blue', Color(0xFF1A73E8)),
+  ('Teal', Color(0xFF00897B)),
+  ('Green', Color(0xFF1E8E3E)),
+  ('Olive', Color(0xFF7C8B2C)),
+  ('Yellow', Color(0xFFF9AB00)),
+  ('Orange', Color(0xFFE8710A)),
+  ('Red', Color(0xFFD93025)),
+  ('Pink', Color(0xFFD01884)),
+  ('Brown', Color(0xFF8D6E63)),
+  ('Gray', Color(0xFF5F6368)),
+];
+
+ThemeData _buildTheme(Color seed, Brightness b, SystemPalette? system) {
   final scheme = ColorScheme.fromSeed(
-    seedColor: seed,
+    seedColor: system?.seed ?? seed,
     brightness: b,
     dynamicSchemeVariant: DynamicSchemeVariant.tonalSpot,
   );
 
-  final accent = ColorScheme.fromSeed(
-    seedColor: const Color(0xFFE09A2C),
-    brightness: b,
-  );
-  final cs = scheme.copyWith(
-    tertiary: accent.primary,
-    onTertiary: accent.onPrimary,
-    tertiaryContainer: accent.primaryContainer,
-    onTertiaryContainer: accent.onPrimaryContainer,
-  );
+  ColorScheme cs;
+  if (system != null) {
+    cs = system.apply(scheme);
+  } else {
+    final accent = ColorScheme.fromSeed(
+      seedColor: const Color(0xFFE09A2C),
+      brightness: b,
+    );
+    cs = scheme.copyWith(
+      tertiary: accent.primary,
+      onTertiary: accent.onPrimary,
+      tertiaryContainer: accent.primaryContainer,
+      onTertiaryContainer: accent.onPrimaryContainer,
+    );
+  }
   final base = ThemeData(
     useMaterial3: true,
     colorScheme: cs,

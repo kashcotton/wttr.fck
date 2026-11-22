@@ -55,6 +55,22 @@ class PanelLine {
   const PanelLine(this.left, this.right, this.weather, [this.by]);
 }
 
+class Pundit {
+  final String name, role;
+  const Pundit(this.name, this.role);
+}
+
+class PunditRoster {
+  final List<Pundit> left, right, weather;
+  const PunditRoster(this.left, this.right, this.weather);
+
+  static const fallback = PunditRoster(
+    [Pundit('Lefty Lou', 'Left of center')],
+    [Pundit('Righty Rhonda', 'Right of center')],
+    [Pundit('The Actual Weather', 'Independent. Tired.')],
+  );
+}
+
 class Candidate {
   final String name, party;
   const Candidate(this.name, this.party);
@@ -63,6 +79,7 @@ class Candidate {
 class Content {
   final List<VoicePack> voices;
   final Map<Mood, List<PanelLine>> panels;
+  final PunditRoster pundits;
   final Map<String, Candidate> candidates;
   final Map<String, List<String>> winners;
   final List<({int max, String text})> approval;
@@ -72,6 +89,7 @@ class Content {
   const Content({
     required this.voices,
     required this.panels,
+    this.pundits = PunditRoster.fallback,
     required this.candidates,
     required this.winners,
     required this.approval,
@@ -270,6 +288,50 @@ Future<Content> parseContent(
     errs.add('panels.json: must be an object keyed by mood');
   }
 
+  var pundits = PunditRoster.fallback;
+  final punditsPath = index['pundits'] as String?;
+  if (punditsPath != null) {
+    final pj = await load(punditsPath);
+    if (pj is Map<String, dynamic>) {
+      List<Pundit> side(String k) {
+        final list = pj[k];
+        if (list is! List || list.isEmpty) {
+          errs.add('$punditsPath: "$k" must be a non-empty list');
+          return const [];
+        }
+        final out = <Pundit>[];
+        final names = <String>{};
+        for (var i = 0; i < list.length; i++) {
+          final e = list[i];
+          final where = '$punditsPath $k[$i]';
+          if (e is! Map || e['name'] is! String || e['role'] is! String) {
+            errs.add('$where: needs "name" and "role"');
+            continue;
+          }
+          _checkText('$where.name', e['name'], 30, errs);
+          _checkText('$where.role', e['role'], 40, errs);
+          if (!names.add((e['name'] as String).toLowerCase())) {
+            errs.add('$where: duplicate name');
+          }
+          out.add(Pundit(e['name'] as String, e['role'] as String));
+        }
+        return out;
+      }
+
+      final l = side('left'), r = side('right'), w = side('weather');
+      for (final k in pj.keys) {
+        if (!const {'left', 'right', 'weather'}.contains(k)) {
+          errs.add('$punditsPath: unknown key "$k"');
+        }
+      }
+      if (l.isNotEmpty && r.isNotEmpty && w.isNotEmpty) {
+        pundits = PunditRoster(l, r, w);
+      }
+    } else if (pj != null) {
+      errs.add('$punditsPath: must be an object with "left", "right" and "weather"');
+    }
+  }
+
   final elJ = await load(index['election'] as String? ?? 'election.json');
   final cands = <String, Candidate>{};
   final winners = <String, List<String>>{};
@@ -332,6 +394,7 @@ Future<Content> parseContent(
   return Content(
     voices: voices,
     panels: panels,
+    pundits: pundits,
     candidates: cands,
     winners: winners,
     approval: approval,

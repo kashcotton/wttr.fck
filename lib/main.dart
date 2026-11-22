@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,6 +18,7 @@ Future<void> main() async {
   final prefs = await SharedPreferences.getInstance();
   final content = await ContentRepo.bundled();
   final state = AppState(prefs, content);
+  await state.loadSystemColors();
   runApp(WttrApp(state: state));
   state.refresh(silent: true);
 }
@@ -40,13 +42,14 @@ class WttrApp extends StatelessWidget {
       child: ListenableBuilder(
         listenable: state,
         builder: (context, _) {
-          final seed = seedFor(state.forecast);
+          final seed = state.seed;
+          final system = state.activeSystem;
           return MaterialApp(
             title: 'wttr.fck',
             debugShowCheckedModeBanner: false,
             themeMode: state.themeMode,
-            theme: buildTheme(seed, Brightness.light),
-            darkTheme: buildTheme(seed, Brightness.dark),
+            theme: buildTheme(seed, Brightness.light, system: system),
+            darkTheme: buildTheme(seed, Brightness.dark, system: system),
             themeAnimationDuration: const Duration(milliseconds: 600),
             themeAnimationCurve: Curves.easeOutCubic,
 
@@ -65,4 +68,18 @@ class WttrApp extends StatelessWidget {
       ),
     );
   }
+}
+
+class AppScrollBehavior extends MaterialScrollBehavior {
+  const AppScrollBehavior();
+
+  @override
+  Set<PointerDeviceKind> get dragDevices => const {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.stylus,
+        PointerDeviceKind.invertedStylus,
+        PointerDeviceKind.trackpad,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.unknown,
+      };
 }

@@ -37,6 +37,12 @@ void main() {
           for (final l in ls) ...[l.head, l.sub],
       for (final ps in content.panels.values)
         for (final p in ps) ...[p.left, p.right, p.weather],
+      for (final side in [
+        content.pundits.left,
+        content.pundits.right,
+        content.pundits.weather,
+      ])
+        for (final p in side) ...[p.name, p.role],
       for (final w in content.winners.values) ...w,
       for (final a in content.approval) a.text,
       ...content.loading,

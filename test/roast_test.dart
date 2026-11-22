@@ -37,7 +37,7 @@ void main() {
   test('parses forecast and starts hourly at the current hour', () {
     final f = fc();
     expect(f.hours.first.time.hour, 14);
-    expect(f.hours.length, 25);
+    expect(f.hours.length, 34);
     expect(f.days.length, 10);
     expect(f.current.visibility, 10000);
     expect(f.air, isNull);

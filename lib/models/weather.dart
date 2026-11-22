@@ -4,6 +4,8 @@ class Place {
   final String name;
   final String? region;
   final String? country;
+  final String? countryCode;
+  final List<String> areas;
   final double lat;
   final double lon;
 
@@ -11,6 +13,8 @@ class Place {
     required this.name,
     this.region,
     this.country,
+    this.countryCode,
+    this.areas = const [],
     required this.lat,
     required this.lon,
   });
@@ -24,6 +28,8 @@ class Place {
         'name': name,
         'region': region,
         'country': country,
+        if (countryCode != null) 'countryCode': countryCode,
+        if (areas.isNotEmpty) 'areas': areas,
         'lat': lat,
         'lon': lon,
       };
@@ -32,6 +38,8 @@ class Place {
         name: j['name'] as String,
         region: j['region'] as String?,
         country: j['country'] as String?,
+        countryCode: j['countryCode'] as String?,
+        areas: (j['areas'] as List?)?.whereType<String>().toList() ?? const [],
         lat: (j['lat'] as num).toDouble(),
         lon: (j['lon'] as num).toDouble(),
       );
@@ -121,6 +129,7 @@ class Current {
   final int windDir;
   final double uv;
   final double visibility;
+  final double? dewPoint;
 
   const Current({
     required this.time,
@@ -137,6 +146,7 @@ class Current {
     required this.windDir,
     required this.uv,
     required this.visibility,
+    this.dewPoint,
   });
 
   Sky get sky => skyFromCode(code);
@@ -148,7 +158,33 @@ class Hour {
   final int precipChance;
   final int code;
   final bool isDay;
-  const Hour(this.time, this.temp, this.precipChance, this.code, this.isDay);
+  final double precip;
+  final double wind;
+  final double gusts;
+  final int windDir;
+  final double? feels;
+  final int? humidity;
+  final double uv;
+  const Hour(
+    this.time,
+    this.temp,
+    this.precipChance,
+    this.code,
+    this.isDay, {
+    this.precip = 0,
+    this.wind = 0,
+    this.gusts = 0,
+    this.windDir = 0,
+    this.feels,
+    this.humidity,
+    this.uv = 0,
+  });
+}
+
+class Nowcast {
+  final DateTime time;
+  final double mm;
+  const Nowcast(this.time, this.mm);
 }
 
 class Day {
@@ -188,9 +224,12 @@ class Forecast {
   final Place place;
   final Current current;
   final List<Hour> hours;
+  final List<Hour> allHours;
   final List<Day> days;
   final AirQuality? air;
+  final List<Nowcast> nowcast;
   final DateTime fetchedAt;
+  final Duration? utcOffset;
 
   const Forecast({
     required this.place,
@@ -199,7 +238,24 @@ class Forecast {
     required this.days,
     required this.air,
     required this.fetchedAt,
+    this.allHours = const [],
+    this.nowcast = const [],
+    this.utcOffset,
   });
 
   Day get today => days.first;
+
+  DateTime localTime(DateTime t) {
+    final o = utcOffset;
+    if (o == null) return t.toLocal();
+    final u = t.toUtc().add(o);
+    return DateTime(u.year, u.month, u.day, u.hour, u.minute);
+  }
+
+  List<Hour> hoursOn(DateTime day) => allHours
+      .where((h) =>
+          h.time.year == day.year &&
+          h.time.month == day.month &&
+          h.time.day == day.day)
+      .toList();
 }
