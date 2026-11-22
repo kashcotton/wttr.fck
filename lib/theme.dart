@@ -5,12 +5,10 @@ import 'models/weather.dart';
 
 const fontFamily = 'GoogleSansFlex';
 
-/// The whole app re-tints itself to match the sky, Material 3 style:
-/// one seed colour per condition, tonal palettes do the rest.
 Color seedFor(Forecast? f) {
   if (f == null) return const Color(0xFF3B6EA8);
   final c = f.current;
-  if (c.feelsLike >= 32 && c.isDay) return const Color(0xFFD9622B); // heat
+  if (c.feelsLike >= 32 && c.isDay) return const Color(0xFFD9622B);
   switch (c.sky) {
     case Sky.clear:
     case Sky.partly:
@@ -29,9 +27,6 @@ Color seedFor(Forecast? f) {
   }
 }
 
-/// Google Sans Flex is a variable font: drive the weight axis explicitly so
-/// it renders the same on every platform, and use the roundness axis for
-/// the big friendly numbers.
 TextStyle flex(TextStyle? s, {double? weight, double round = 0}) {
   final base = s ?? const TextStyle();
   final w = weight ?? ((base.fontWeight ?? FontWeight.w400).value.toDouble());
@@ -67,10 +62,6 @@ TextTheme _textTheme(TextTheme t) => t.copyWith(
 
 final _themeCache = <(Color, Brightness), ThemeData>{};
 
-/// Themes are cached per (sky colour, brightness). Returning the *same*
-/// ThemeData object when nothing changed matters: a new-but-equal theme can
-/// make MaterialApp run its 600ms theme animation and rebuild every widget
-/// on every frame, which is what made the web version lag.
 ThemeData buildTheme(Color seed, Brightness b) =>
     _themeCache.putIfAbsent((seed, b), () => _buildTheme(seed, b));
 
@@ -80,8 +71,7 @@ ThemeData _buildTheme(Color seed, Brightness b) {
     brightness: b,
     dynamicSchemeVariant: DynamicSchemeVariant.tonalSpot,
   );
-  // Tonal spot rotates the tertiary hue ~60°, which turns blues into
-  // purple. Keep the palette honest: tertiary is a warm amber accent.
+
   final accent = ColorScheme.fromSeed(
     seedColor: const Color(0xFFE09A2C),
     brightness: b,
@@ -139,8 +129,6 @@ ThemeData _buildTheme(Color seed, Brightness b) {
   );
 }
 
-/// Turns a Material 3 Expressive spring into a [Curve] so implicit
-/// animations get the same bouncy-but-controlled feel.
 class SpringCurve extends Curve {
   SpringCurve(SpringDescription spring, {this.seconds = 0.6})
       : _sim = SpringSimulation(spring, 0, 1, 0);
@@ -154,8 +142,6 @@ class SpringCurve extends Curve {
 final springSpatial = SpringCurve(Springs.expressiveDefaultSpatial, seconds: 0.7);
 final springFast = SpringCurve(Springs.expressiveFastSpatial, seconds: 0.45);
 
-/// Each sky gets its own Material 3 Expressive shape. They morph into each
-/// other when the weather changes.
 RoundedPolygon shapeFor(Sky sky, bool isDay) => switch (sky) {
       Sky.clear => isDay ? MaterialShapes.sunny : MaterialShapes.cookie12Sided,
       Sky.partly => MaterialShapes.cookie9Sided,
@@ -188,8 +174,6 @@ IconData iconFor(int code, bool isDay) {
   }
 }
 
-/// Icon colour that reads as "the thing" (sun = amber, rain = blue) while
-/// still harmonising with the current scheme.
 Color iconTint(int code, bool isDay, ColorScheme s) {
   final sky = skyFromCode(code);
   final dark = s.brightness == Brightness.dark;

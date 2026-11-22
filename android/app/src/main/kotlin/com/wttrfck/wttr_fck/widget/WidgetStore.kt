@@ -5,14 +5,6 @@ import android.content.SharedPreferences
 import org.json.JSONObject
 import kotlin.random.Random
 
-/**
- * Everything the widget knows, stored in the same SharedPreferences file the
- * home_widget Flutter plugin writes to. The app (lib/services/widget_sync.dart)
- * and WidgetRefreshWorker both write here; the widget only reads.
- *
- * All values are strings so Dart and Kotlin never disagree about types.
- * Raw weather values are metric; formatting happens at render time.
- */
 class WidgetStore(context: Context) {
     val prefs: SharedPreferences =
         context.getSharedPreferences("HomeWidgetPreferences", Context.MODE_PRIVATE)
@@ -66,11 +58,6 @@ class WidgetStore(context: Context) {
         .putString("w_updated", "${System.currentTimeMillis()}")
         .apply()
 
-    /**
-     * Picks a fresh roast for the current weather from the pack the app
-     * saved (already in the user's voice and language level), fills in the
-     * numbers and stores it. Returns false if there's nothing to pick from.
-     */
     fun reroll(): Boolean {
         val w = weather ?: return false
         val pack = s("w_pack")?.let { runCatching { JSONObject(it) }.getOrNull() } ?: return false
@@ -80,7 +67,7 @@ class WidgetStore(context: Context) {
         val city = place
         val current = head
         var pick = lines.getJSONArray(Random.nextInt(lines.length()))
-        // Avoid showing the same line twice in a row when there's a choice.
+
         var tries = 0
         while (lines.length() > 1 && tries++ < 5 &&
             WeatherLogic.fill(pick.getString(0), w, u, city) == current

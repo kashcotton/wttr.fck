@@ -1,6 +1,3 @@
-// Validates everything in /content. This runs on every pull request, so if
-// you're adding roasts and this fails, the message tells you exactly what
-// to fix.
 import 'dart:convert';
 import 'dart:io';
 
@@ -12,15 +9,11 @@ import 'package:wttr_fck/util/units.dart';
 
 import 'helpers.dart';
 
-// Words the Clean filter must fully remove. If you add a new swear word to a
-// roast, add it to lib/roasts/censor.dart too, or this test fails.
 final _swears = RegExp(
   r'\b(fuck\w*|\w*fuck\w*|shit\w*|bullshit|ass|asshole\w*|jackass|dumbass|damn|goddamn|hell|bitch\w*|bastard|piss\w*|crap|dick\w*|prick|bollocks|bloody|wtf|cock|twat|wank\w*|cunt\w*|slut\w*|whore\w*)\b',
   caseSensitive: false,
 );
 
-// Never allowed at any profanity level. This is a weather app, not a hate
-// forum: punch at the weather, never at groups of people.
 final _banned = RegExp(r'\b(cunt\w*|slut\w*|whore\w*|retard\w*|fag\w*|tranny)\b',
     caseSensitive: false);
 

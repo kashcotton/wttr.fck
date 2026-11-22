@@ -1,7 +1,5 @@
 ## What's this?
 
-<!-- New roasts? A new voice? A bug fix? -->
-
 ## Checklist (roasts)
 
 - [ ] Roasts the weather or the user, not groups of people

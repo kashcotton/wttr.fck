@@ -19,7 +19,7 @@ Map<String, dynamic> sample({
   });
   final days =
       List.generate(10, (i) => '2026-11-${(21 + i).toString().padLeft(2, '0')}');
-  // A gentle daily curve so the hourly chart has something to draw.
+
   final temps = List.generate(48, (i) => temp + 4 * (1 - ((i % 24) - 15).abs() / 12));
   return {
     'current': {
@@ -43,7 +43,7 @@ Map<String, dynamic> sample({
       'weather_code': List.filled(48, code),
       'is_day': List.filled(48, isDay),
       'uv_index': List.filled(48, 3.0),
-      'visibility': List.filled(48, null), // nulls happen in the wild
+      'visibility': List.filled(48, null),
     },
     'daily': {
       'time': days,

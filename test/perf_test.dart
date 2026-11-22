@@ -1,5 +1,3 @@
-// Performance guard rails: an idle page must not repaint, or the web
-// version burns CPU and feels laggy.
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -16,7 +14,6 @@ import 'helpers.dart';
 
 int _paints = 0;
 
-/// Counts every render object painted between [start] and [stop].
 void _startCounting() {
   _paints = 0;
   debugProfilePaintsEnabled = true;
@@ -48,7 +45,7 @@ void main() {
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
     await tester.pumpWidget(WttrApp(state: state));
-    // Let entrance animations finish.
+
     for (var i = 0; i < 120; i++) {
       await tester.pump(const Duration(milliseconds: 16));
     }
@@ -56,15 +53,13 @@ void main() {
   }
 
   testWidgets('idle sunny page does not repaint the content', (tester) async {
-    await pumpApp(tester, code: 0); // clear sky: the sun badge twists in
+    await pumpApp(tester, code: 0);
     _startCounting();
     for (var i = 0; i < 180; i++) {
-      await tester.pump(const Duration(milliseconds: 16)); // ~3 seconds
+      await tester.pump(const Duration(milliseconds: 16));
     }
     final paints = _stopCounting();
-    // Was ~200,000 before the fix (the whole page, every frame). An idle
-    // page must paint nothing at all: on the web, any never-ending
-    // animation makes the browser redraw the entire page 60 times a second.
+
     expect(paints, 0,
         reason: 'Something keeps animating while the page is idle');
     await tester.pumpWidget(const SizedBox());
@@ -78,7 +73,7 @@ void main() {
       await tester.pump(const Duration(milliseconds: 16));
     }
     final paints = _stopCounting();
-    // Was ~34,000 before the fix. Only cards whose text changes repaint now.
+
     expect(paints, lessThan(8000),
         reason: 'Re-rolling a roast repaints far more than the roast card');
     await tester.pumpWidget(const SizedBox());

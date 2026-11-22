@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Home-screen widget. Resizable, Material You, refreshes itself in the
-     background (see WidgetRefreshWorker). -->
+
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:description="@string/widget_description"
     android:initialLayout="@layout/widget_medium"

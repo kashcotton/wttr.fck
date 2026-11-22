@@ -39,7 +39,7 @@ void main() {
     expect(f.hours.first.time.hour, 14);
     expect(f.hours.length, 25);
     expect(f.days.length, 10);
-    expect(f.current.visibility, 10000); // null fallback
+    expect(f.current.visibility, 10000);
     expect(f.air, isNull);
   });
 
@@ -53,7 +53,7 @@ void main() {
     expect(m(0, 22), Mood.nice);
     expect(m(0, 18, 0), Mood.clearNight);
     expect(m(3, 15), Mood.meh);
-    expect(m(0, 13), Mood.nice); // clear and cool is still a nice day
+    expect(m(0, 13), Mood.nice);
   });
 
   test('misery is bounded', () {

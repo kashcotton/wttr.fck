@@ -1,5 +1,3 @@
-/// How filthy the app is allowed to be. Every line is written once at full
-/// strength and filtered down, so all three levels stay equally funny.
 enum Profanity { clean, salty, unhinged }
 
 extension ProfanityLabel on Profanity {
@@ -15,7 +13,6 @@ extension ProfanityLabel on Profanity {
       };
 }
 
-// Ordered longest-first so "motherfucker" wins over "fuck".
 const _clean = <String, String>{
   'motherfucking': 'mother-trucking',
   'motherfucker': 'mother-trucker',
@@ -60,7 +57,6 @@ const _clean = <String, String>{
   'crap': 'crud',
 };
 
-// Salty keeps the mild stuff and stars the big ones.
 const _salty = <String, String>{
   'motherfucking': 'motherf*cking',
   'motherfucker': 'motherf*cker',

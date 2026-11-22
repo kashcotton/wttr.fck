@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Widget palette for Android 11 and older. Android 12+ uses the
-     wallpaper-based Material You colors in values-v31. -->
+
 <resources>
     <color name="widget_surface">#FFF7F9FF</color>
     <color name="widget_on_surface">#FF181C20</color>

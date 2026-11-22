@@ -1,7 +1,3 @@
-/// Community content: every roast, panel and joke lives in /content as JSON
-/// so anyone can add their own through a pull request. The app ships with a
-/// bundled copy and quietly pulls the latest from GitHub, so merged roasts
-/// reach people without an app update.
 library;
 
 import 'dart:convert';
@@ -26,7 +22,7 @@ enum Mood {
 }
 
 const placeholders = {
-  'temp', 'feels', 'high', 'low', 'wind', 'gusts', 'pop', 'city', 'uv', 'vis', //
+  'temp', 'feels', 'high', 'low', 'wind', 'gusts', 'pop', 'city', 'uv', 'vis',
 };
 
 const candidates = ['sun', 'rain', 'clouds', 'wind', 'snow'];
@@ -103,16 +99,12 @@ class Content {
       };
 }
 
-/// Thrown with every problem found, so contributors can fix them all at once.
 class ContentError implements Exception {
   final List<String> problems;
   ContentError(this.problems);
   @override
   String toString() => 'Content problems:\n- ${problems.join('\n- ')}';
 }
-
-// ---------------------------------------------------------------------------
-// Parsing + validation (shared by the app and the CI tests)
 
 final _idRe = RegExp(r'^[a-z0-9][a-z0-9_-]{0,29}$');
 final _ghRe = RegExp(r'^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$');
@@ -206,8 +198,6 @@ VoicePack? parseVoice(String file, Object? j, List<String> errs) {
   );
 }
 
-/// Builds and validates a full [Content] from a file reader.
-/// Throws [ContentError] listing every problem.
 Future<Content> parseContent(
   Future<String> Function(String path) read, {
   bool fromNetwork = false,
@@ -246,7 +236,6 @@ Future<Content> parseContent(
     }
   }
 
-  // Panels
   final panelsJ = await load(index['panels'] as String? ?? 'panels.json');
   final panels = <Mood, List<PanelLine>>{};
   if (panelsJ is Map<String, dynamic>) {
@@ -281,7 +270,6 @@ Future<Content> parseContent(
     errs.add('panels.json: must be an object keyed by mood');
   }
 
-  // Election
   final elJ = await load(index['election'] as String? ?? 'election.json');
   final cands = <String, Candidate>{};
   final winners = <String, List<String>>{};
@@ -329,7 +317,6 @@ Future<Content> parseContent(
     errs.add('election.json: must be an object');
   }
 
-  // Loading lines
   final loadJ = await load(index['loading'] as String? ?? 'loading.json');
   final loading = <String>[];
   if (loadJ is List && loadJ.isNotEmpty) {
@@ -353,9 +340,6 @@ Future<Content> parseContent(
   );
 }
 
-// ---------------------------------------------------------------------------
-// Loading: bundled assets, cached remote copy, live remote refresh.
-
 class ContentRepo {
   static const repo = 'kashcotton/wttr.fck';
   static const remoteBase =
@@ -364,9 +348,6 @@ class ContentRepo {
   static Future<Content> bundled() =>
       parseContent((p) => rootBundle.loadString('content/$p'));
 
-  /// Downloads every content file. Returns the raw files so they can be
-  /// cached, plus the parsed result. Returns null on any failure: a broken
-  /// remote must never break the app.
   static Future<(Map<String, String>, Content)?> fetchRemote(
       http.Client client) async {
     try {

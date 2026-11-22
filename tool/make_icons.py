@@ -11,7 +11,6 @@ BG = (31, 52, 77, 255)
 FG = (244, 246, 248, 255)
 SUN = (242, 165, 22, 255)
 
-
 def font(size, weight=800):
     f = ImageFont.truetype(FONT, size)
     try:
@@ -23,7 +22,6 @@ def font(size, weight=800):
         except Exception:
             pass
     return f
-
 
 def art(d, S, ox=0, oy=0, scale=1.0, text=True):
     def p(x, y):
@@ -40,7 +38,6 @@ def art(d, S, ox=0, oy=0, scale=1.0, text=True):
         tw = d.textlength(t, font=f)
         d.text((ox + (S * scale - tw) / 2, oy + 0.665 * S * scale), t, font=f, fill=FG)
 
-
 def icon(n, shape='rounded', text=True, safe=1.0):
     S = n * 4
     im = Image.new('RGBA', (S, S), (0, 0, 0, 0))
@@ -53,17 +50,12 @@ def icon(n, shape='rounded', text=True, safe=1.0):
     art(d, S, off, off, safe, text)
     return im.resize((n, n), Image.LANCZOS)
 
-
-# Android home-screen widget icons, extracted from Flutter's Material Icons
-# font so they match the app exactly. Codepoints come from Flutter's
-# Icons class (e.g. Icons.wb_sunny_rounded).
 WIDGET_ICONS = {
     'ic_w_sun': 0xf02ae, 'ic_w_moon': 0xe42f, 'ic_w_partly': 0xf02aa,
     'ic_w_partly_night': 0xf0008, 'ic_w_cloud': 0xf650, 'ic_w_fog': 0xf0505,
     'ic_w_drizzle': 0xf7bc, 'ic_w_rain': 0xf03b4, 'ic_w_snow': 0xf516,
     'ic_w_storm': 0xf0823, 'ic_refresh': 0xf00e9, 'ic_near_me': 0xf8f8,
 }
-
 
 def widget_icons():
     import os
@@ -77,18 +69,16 @@ def widget_icons():
     for name, cp in WIDGET_ICONS.items():
         g = gs[cmap[cp]]
         pen = SVGPathPen(gs)
-        # Flip Y: font coordinates go up, Android vector coordinates go down.
+
         g.draw(TransformPen(pen, (1, 0, 0, -1, 0, asc)))
         with open(f'android/app/src/main/res/drawable/{name}.xml', 'w') as out:
             out.write(f'''<?xml version="1.0" encoding="utf-8"?>
-<!-- Generated from the Material Icons font (Apache 2.0) by tool/make_icons.py. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp" android:height="24dp"
     android:viewportWidth="{g.width}" android:viewportHeight="{asc - desc}">
   <path android:fillColor="#FFFFFFFF" android:pathData="{pen.getCommands()}"/>
 </vector>
 ''')
-
 
 def main():
     for name, n in {'mdpi': 48, 'hdpi': 72, 'xhdpi': 96, 'xxhdpi': 144, 'xxxhdpi': 192}.items():
@@ -98,12 +88,11 @@ def main():
     icon(512).save('assets/icon.png')
     icon(192).save('web/icons/Icon-192.png')
     icon(512).save('web/icons/Icon-512.png')
-    # Maskable icons keep the art inside the 80% safe zone.
+
     icon(192, 'square', safe=0.78).save('web/icons/Icon-maskable-192.png')
     icon(512, 'square', safe=0.78).save('web/icons/Icon-maskable-512.png')
     icon(64, text=False).save('web/favicon.png')
 
-    # Social preview, 1200x630.
     W, H = 1200, 630
     og = Image.new('RGBA', (W, H), BG)
     d = ImageDraw.Draw(og)
@@ -113,7 +102,6 @@ def main():
     d.text((524, 410), 'Free weather. Zero chill.', font=font(40, 400), fill=FG)
     og.convert('RGB').save('web/og.png')
     widget_icons()
-
 
 if __name__ == '__main__':
     main()

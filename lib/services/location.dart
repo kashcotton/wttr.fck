@@ -4,8 +4,6 @@ import 'package:geolocator/geolocator.dart';
 import '../models/weather.dart';
 import 'weather_api.dart';
 
-/// Tries real device location first (Android, Windows, browsers), then falls
-/// back to IP geolocation (Linux, or when permission is denied).
 class LocationService {
   LocationService(this.api);
   final WeatherApi api;
@@ -21,7 +19,7 @@ class LocationService {
         final pos = await _gps();
         if (pos != null) return await api.reverse(pos.latitude, pos.longitude);
       } catch (_) {
-        // fall through to IP
+
       }
     }
     return api.ipLocation();
@@ -37,8 +35,7 @@ class LocationService {
         perm == LocationPermission.deniedForever) {
       return null;
     }
-    // City-level accuracy is plenty for weather and is kinder to batteries
-    // and privacy.
+
     return Geolocator.getCurrentPosition(
       locationSettings: const LocationSettings(
         accuracy: LocationAccuracy.low,

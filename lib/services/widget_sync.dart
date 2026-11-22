@@ -8,12 +8,6 @@ import '../roasts/censor.dart';
 import '../state/app_state.dart';
 import '../util/units.dart';
 
-/// Keeps the Android home-screen widget in sync with the app.
-///
-/// The widget itself is native Android (android/.../widget/). It reads what
-/// we save here, and refreshes the weather on its own in the background,
-/// picking new roasts from the pack we hand it. Every value is a String so
-/// Dart and Kotlin never disagree about types.
 class WidgetSync {
   static const provider = 'com.wttrfck.wttr_fck.widget.WeatherWidget';
 
@@ -29,9 +23,6 @@ class WidgetSync {
       final c = f.current;
       final roast = e.roast(s.voice, s.roastSeed);
 
-      // Every mood, in the user's voice (falling back to Classic), already
-      // filtered to their language level. Placeholders stay in so the
-      // widget can fill them with fresh numbers later.
       final pack = <String, List<List<String>>>{
         for (final m in Mood.values)
           m.name: [
@@ -68,7 +59,7 @@ class WidgetSync {
       ]);
       await HomeWidget.updateWidget(qualifiedAndroidName: provider);
     } catch (_) {
-      // No widget plugin (tests, unsupported launcher): nothing to do.
+
     }
   }
 

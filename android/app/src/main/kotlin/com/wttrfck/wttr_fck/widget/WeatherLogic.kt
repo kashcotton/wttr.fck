@@ -3,11 +3,6 @@ package com.wttrfck.wttr_fck.widget
 import com.wttrfck.wttr_fck.R
 import kotlin.math.roundToInt
 
-/**
- * Mirrors lib/roasts/engine.dart (moodFor, fill) and lib/models/weather.dart
- * (describeCode) so the widget says exactly what the app would.
- * If you change the rules there, change them here too.
- */
 object WeatherLogic {
     enum class Sky { CLEAR, PARTLY, CLOUDY, FOG, DRIZZLE, RAIN, SNOW, STORM }
 
@@ -23,7 +18,6 @@ object WeatherLogic {
         else -> Sky.CLOUDY
     }
 
-    /** Same buckets and thresholds as moodFor() in engine.dart. */
     fun mood(w: Weather): String {
         val s = sky(w.code)
         return when {
@@ -98,7 +92,6 @@ object WeatherLogic {
         }
     }
 
-    /** Fills {placeholders} the same way RoastEngine.fill() does. */
     fun fill(s: String, w: Weather, u: Units, city: String): String = s
         .replace("{temp}", u.deg(w.temp))
         .replace("{feels}", u.deg(w.feels))
@@ -111,7 +104,6 @@ object WeatherLogic {
         .replace("{vis}", u.distance(w.vis))
         .replace("{city}", city)
 
-    /** Material icon + a tint that reads as the weather itself. */
     fun icon(code: Int, isDay: Boolean): Pair<Int, Int> = when (sky(code)) {
         Sky.CLEAR -> if (isDay) R.drawable.ic_w_sun to SUN else R.drawable.ic_w_moon to MOON
         Sky.PARTLY -> if (isDay) R.drawable.ic_w_partly to SUN else R.drawable.ic_w_partly_night to MOON

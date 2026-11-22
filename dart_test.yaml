@@ -1,5 +1,4 @@
 tags:
   screenshots:
-    # Renders the real UI to PNGs in docs/screenshots. Run locally with:
-    #   flutter test --tags screenshots --update-goldens
+
     skip: false

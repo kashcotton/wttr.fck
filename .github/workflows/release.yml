@@ -1,7 +1,5 @@
 name: Release
 
-# Push a tag like v1.2.0 to build every platform and publish a GitHub release.
-# Run manually from the Actions tab to get build artifacts without a release.
 on:
   push:
     tags: ['v*']
