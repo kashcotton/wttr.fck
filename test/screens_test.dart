@@ -90,6 +90,7 @@ void main() {
       SharedPreferences.setMockInitialValues({
         'cache': jsonEncode(raw.toJson()),
         'onboarded': true,
+        'panelSeed': 7,
         'themeMode': c.theme.index,
         'profanity': c.profanity,
         'voiceId': c.voice,

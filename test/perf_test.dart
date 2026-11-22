@@ -38,6 +38,7 @@ void main() {
     SharedPreferences.setMockInitialValues({
       'cache': jsonEncode(raw.toJson()),
       'onboarded': true,
+      'panelSeed': 7,
     });
     final state = AppState(await SharedPreferences.getInstance(), content,
         fetchContent: false);

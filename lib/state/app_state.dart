@@ -201,9 +201,12 @@ class AppState extends ChangeNotifier {
     alertsCovered = WarningsService.covered(place);
     final found = await warnings.official(place);
     if (forecast?.place.id != place.id) return;
+    final changed = found.length != alerts.length ||
+        [for (var i = 0; i < found.length; i++) found[i].key != alerts[i].key]
+            .any((d) => d);
     alerts = found;
     _alertsFor = place.id;
-    notifyListeners();
+    if (changed) notifyListeners();
   }
 
   List<WeatherAlert> get shownAlerts {
